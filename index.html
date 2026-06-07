@@ -353,9 +353,11 @@ header h1 span {
   background: var(--deep);
 }
 .card-back-face img {
-  width: 100%;
+  width: 200%;
   height: 100%;
   object-fit: cover;
+  object-position: right center;
+  margin-left: -100%;
   border-radius: var(--card-r);
 }
 /* Placeholder back if image missing */
@@ -388,9 +390,10 @@ header h1 span {
   background: var(--deep);
 }
 .card-front-face img {
-  width: 100%;
+  width: 200%;
   height: 100%;
   object-fit: cover;
+  object-position: left center;
   border-radius: var(--card-r);
 }
 .card-front-face .placeholder-front {
@@ -979,7 +982,7 @@ function doReading() {
               ? `<img src="${card.file}"
                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
                   alt="${card.name}"
-                  style="${card.reversed ? 'transform:rotate(180deg)' : ''}">
+                  style="${card.reversed ? 'transform:rotate(180deg);transform-origin:25% center;' : ''}">
                  <div class="placeholder-front" style="display:none">
                    <div class="card-animal">🌲</div>
                    <div class="card-name-text">${card.name}</div>
