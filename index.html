@@ -353,11 +353,9 @@ header h1 span {
   background: var(--deep);
 }
 .card-back-face img {
-  width: 200%;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: right center;
-  margin-left: -100%;
   border-radius: var(--card-r);
 }
 /* Placeholder back if image missing */
@@ -390,10 +388,9 @@ header h1 span {
   background: var(--deep);
 }
 .card-front-face img {
-  width: 200%;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: left center;
   border-radius: var(--card-r);
 }
 .card-front-face .placeholder-front {
@@ -969,7 +966,7 @@ function doReading() {
       <div class="card-wrap" id="cardwrap-${index}" style="animation-delay:${index * 0.12}s" onclick="flipCard(${index})">
         <div class="card-inner">
           <div class="card-face card-back-face">
-            <img src="card 21 end card.png"
+            <img src="card 21 back of card.png"
               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
               alt="Card back">
             <div class="placeholder-back" style="display:none">
