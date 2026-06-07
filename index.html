@@ -30,8 +30,8 @@
   --f-title:   'Cinzel', serif;
   --f-body:    'EB Garamond', serif;
 
-  --card-w: 200px;
-  --card-h: 420px;
+  --card-w: 220px;
+  --card-h: 360px;
   --card-r: 14px;
 }
 
@@ -571,7 +571,7 @@ footer span { color: var(--gold-dim); }
 
 /* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
-  :root { --card-w: 150px; --card-h: 315px; }
+  :root { --card-w: 160px; --card-h: 262px; }
   .meaning-card { padding: 24px 20px; }
   .meaning-card-name { font-size: 20px; }
   .spread-layout { gap: 16px; }
@@ -966,7 +966,7 @@ function doReading() {
       <div class="card-wrap" id="cardwrap-${index}" style="animation-delay:${index * 0.12}s" onclick="flipCard(${index})">
         <div class="card-inner">
           <div class="card-face card-back-face">
-            <img src="card 21 back of card.png"
+            <img src="cards/card 21 end card.png"
               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
               alt="Card back">
             <div class="placeholder-back" style="display:none">
@@ -976,10 +976,10 @@ function doReading() {
           </div>
           <div class="card-face card-front-face">
             ${card.type === 'oracle'
-              ? `<img src="${card.file}"
+              ? `<img src="cards/${card.file}"
                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
                   alt="${card.name}"
-                  style="${card.reversed ? 'transform:rotate(180deg);transform-origin:25% center;' : ''}">
+                  style="${card.reversed ? 'transform:rotate(180deg)' : ''}">
                  <div class="placeholder-front" style="display:none">
                    <div class="card-animal">🌲</div>
                    <div class="card-name-text">${card.name}</div>
