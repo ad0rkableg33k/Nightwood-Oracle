@@ -966,7 +966,7 @@ function doReading() {
       <div class="card-wrap" id="cardwrap-${index}" style="animation-delay:${index * 0.12}s" onclick="flipCard(${index})">
         <div class="card-inner">
           <div class="card-face card-back-face">
-            <img src="cards/card 21 end card.png"
+            <img src="card 21 end card.png"
               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
               alt="Card back">
             <div class="placeholder-back" style="display:none">
@@ -976,7 +976,7 @@ function doReading() {
           </div>
           <div class="card-face card-front-face">
             ${card.type === 'oracle'
-              ? `<img src="cards/${card.file}"
+              ? `<img src="${card.file}"
                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
                   alt="${card.name}"
                   style="${card.reversed ? 'transform:rotate(180deg)' : ''}">
