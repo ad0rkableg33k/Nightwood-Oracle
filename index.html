@@ -427,6 +427,14 @@ header h1 span {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Reversed card front face - rotate the entire face, not just the image */
+.card-front-face.card-reversed {
+  transform: rotateY(180deg) rotate(180deg);
+}
+.card-wrap.flipped .card-front-face.card-reversed {
+  transform: rotateY(180deg) rotate(180deg);
+}
+
 /* Reversed card indicator */
 .card-wrap.reversed .card-inner {
   /* will show upside down on front face */
@@ -966,7 +974,7 @@ function doReading() {
       <div class="card-wrap" id="cardwrap-${index}" style="animation-delay:${index * 0.12}s" onclick="flipCard(${index})">
         <div class="card-inner">
           <div class="card-face card-back-face">
-            <img src="card 21 back of card reversed.png"
+            <img src="${card.reversed ? 'card 21 back of card reversed.png' : 'card 21 back of card.png'}"
               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
               alt="Card back">
             <div class="placeholder-back" style="display:none">
@@ -974,12 +982,11 @@ function doReading() {
               <span>Nightwood</span>
             </div>
           </div>
-          <div class="card-face card-front-face">
+          <div class="card-face card-front-face${card.reversed ? ' card-reversed' : ''}">
             ${card.type === 'oracle'
               ? `<img src="${card.file}"
                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-                  alt="${card.name}"
-                  style="${card.reversed ? 'transform:rotate(180deg);transform-origin:25% center;' : ''}">
+                  alt="${card.name}">
                  <div class="placeholder-front" style="display:none">
                    <div class="card-animal">🌲</div>
                    <div class="card-name-text">${card.name}</div>
