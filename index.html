@@ -911,7 +911,6 @@ let flippedCount = 0;
 // ── INIT ───────────────────────────────────────────────────────────────────
 function init() {
   spawnParticles();
-  renderModes();
   renderSpreads();
 }
 
@@ -966,19 +965,8 @@ function setDeck(deck) {
     document.querySelector('.skulls').style.opacity='';
     document.querySelector('.fireflies').style.opacity='';
   }
-  renderModes();
   renderSpreads();
   clearReading(true);
-}
-
-function renderModes() {
-  const container = document.getElementById('modeTabs');
-  container.innerHTML = '';
-  // For both decks, just one mode (no sub-modes needed since combo is a spread)
-  const label = currentDeck==='cutesy' ? '🐙 Draw Cards' : '🌲 Draw Cards';
-  const btn = document.createElement('button');
-  btn.className='mode-tab active'; btn.textContent=label;
-  container.appendChild(btn);
 }
 
 function renderSpreads() {
