@@ -17,6 +17,9 @@
   --f-body:'EB Garamond',serif; --f-chaos:'Rye',cursive;
   --f-chaos-sub:'Fredoka One',cursive;
   --card-w:300px; --card-h:523px; --card-r:14px;
+  --rainbow-1:#ff2d8a; --rainbow-2:#ff8c00; --rainbow-3:#ffe600;
+  --rainbow-4:#00e676; --rainbow-5:#00cfff; --rainbow-6:#a259ff;
+  --cc-pink:#ff2d8a; --cc-purple:#a259ff; --cc-teal:#00cfff;
 }
 html { scroll-behavior:smooth; }
 body { background:var(--ink); color:var(--cream); font-family:var(--f-body);
@@ -36,6 +39,24 @@ body::before { content:''; position:fixed; inset:0;
     linear-gradient(180deg,#050008 0%,#080010 50%,#030005 100%); }
 body.chaos-mode .forest-bg { opacity:0; }
 body.chaos-mode .chaos-bg  { opacity:1; }
+.cc-bg { position:fixed; inset:0; z-index:0; opacity:0; transition:opacity 0.8s;
+  background: radial-gradient(ellipse 70% 50% at 10% 30%,rgba(255,45,138,0.18) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 70%,rgba(0,207,255,0.14) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 10%,rgba(162,89,255,0.12) 0%,transparent 60%),
+    linear-gradient(180deg,#030008 0%,#050010 50%,#020008 100%); }
+body.cc-mode .forest-bg { opacity:0; }
+body.cc-mode .chaos-bg  { opacity:0; }
+body.cc-mode .cc-bg     { opacity:1; }
+.rainbow-sparks { position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0; transition:opacity 0.8s; }
+body.cc-mode .rainbow-sparks { opacity:1; }
+body.cc-mode .fireflies { opacity:0; }
+body.cc-mode .skulls    { opacity:0; }
+.spark { position:absolute; width:4px; height:4px; border-radius:50%; opacity:0;
+  animation:sparkDrift var(--dur,9s) ease-in-out infinite var(--delay,0s); }
+@keyframes sparkDrift {
+  0%{opacity:0;transform:translate(0,0) scale(0.4)} 20%{opacity:1}
+  50%{opacity:0.6;transform:translate(var(--tx,30px),var(--ty,-40px)) scale(1.2)}
+  80%{opacity:0.8} 100%{opacity:0;transform:translate(var(--tx2,60px),var(--ty2,-80px)) scale(0.3)} }
 
 /* PARTICLES */
 .fireflies,.skulls { position:fixed; inset:0; z-index:1; pointer-events:none; }
@@ -246,6 +267,40 @@ footer { text-align:center; padding:40px 20px; border-top:1px solid rgba(201,168
 footer span { color:var(--gold-dim); }
 body.chaos-mode footer { border-top-color:rgba(255,45,138,0.1); }
 body.chaos-mode footer span { color:var(--hot-pink); }
+/* CC MODE STYLES */
+body.cc-mode header h1 {
+  font-family:'Fredoka One',cursive;
+  background: linear-gradient(90deg,var(--rainbow-1),var(--rainbow-2),var(--rainbow-3),var(--rainbow-4),var(--rainbow-5),var(--rainbow-6));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 0 20px rgba(255,45,138,0.5)); }
+body.cc-mode .header-rune { color:var(--cc-teal); font-family:'Fredoka One',cursive; letter-spacing:3px; }
+body.cc-mode .header-divider span { color:var(--cc-pink); }
+body.cc-mode .mode-tabs { border-color:rgba(0,207,255,0.25); }
+body.cc-mode .mode-tab.active { background:linear-gradient(135deg,var(--cc-purple),var(--cc-teal));
+  box-shadow:0 0 20px rgba(0,207,255,0.3); color:white; }
+body.cc-mode .spread-btn.active { border-color:var(--cc-teal); color:var(--cc-teal);
+  background:rgba(0,207,255,0.08); box-shadow:0 0 14px rgba(0,207,255,0.15); }
+body.cc-mode .draw-btn { border-color:var(--cc-teal); color:var(--cc-teal); font-family:'Fredoka One',cursive; }
+body.cc-mode .draw-btn::before { background:linear-gradient(135deg,var(--cc-purple),var(--cc-teal)); }
+body.cc-mode .draw-btn:hover { color:white; box-shadow:0 0 30px rgba(0,207,255,0.5); }
+body.cc-mode .slot-label { color:var(--cc-teal); font-family:'Fredoka One',cursive; font-size:13px; }
+body.cc-mode .card-face { box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(0,207,255,0.25),
+  0 0 20px rgba(0,207,255,0.08); }
+body.cc-mode .deck-banner.active { border-color:var(--cc-teal);
+  box-shadow:0 0 30px rgba(0,207,255,0.4), 0 0 60px rgba(0,207,255,0.15); }
+body.cc-mode .deck-banner.active::after { color:var(--cc-teal); }
+body.cc-mode .meaning-card { border-color:rgba(0,207,255,0.2); }
+body.cc-mode .meaning-card::before { background:linear-gradient(90deg,transparent,var(--cc-purple),var(--cc-teal),transparent); }
+body.cc-mode .meaning-card-name {
+  font-family:'Fredoka One',cursive; font-size:28px;
+  background:linear-gradient(90deg,var(--cc-pink),var(--cc-purple),var(--cc-teal));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+body.cc-mode .meaning-subtitle { color:var(--cc-teal); }
+body.cc-mode .keyword { border-color:rgba(0,207,255,0.3); color:var(--cc-teal); font-family:'Fredoka One',cursive; letter-spacing:1px; }
+body.cc-mode footer { border-top-color:rgba(0,207,255,0.12); }
+body.cc-mode footer span { color:var(--cc-teal); }
+.banner-cc { background:rgba(0,207,255,0.08); color:var(--cc-teal);
+  font-family:'Fredoka One',cursive; font-size:18px; }
 @media(max-width:600px){
   :root{--card-w:150px;--card-h:262px;}
   .meaning-card{padding:24px 20px;}
@@ -257,8 +312,10 @@ body.chaos-mode footer span { color:var(--hot-pink); }
 <body>
 <div class="forest-bg"></div>
 <div class="chaos-bg"></div>
+<div class="cc-bg"></div>
 <div class="fireflies" id="fireflies"></div>
 <div class="skulls" id="skulls"></div>
+<div class="rainbow-sparks" id="rainbowSparks"></div>
 
 <div class="app">
   <header>
@@ -277,6 +334,10 @@ body.chaos-mode footer span { color:var(--hot-pink); }
     <div class="deck-banner" id="bannerCutesy" onclick="setDeck('cutesy')">
       <img src="cutesy_chaos_banner.png" onload="this.classList.add('loaded')" onerror="this.style.display='none'" alt="Cutesy Chaos Tarot">
       <div class="banner-fallback banner-chaos">🐙 &nbsp; CUTESY CHAOS TAROT &nbsp; 💀</div>
+    </div>
+    <div class="deck-banner" id="bannerCC" onclick="setDeck('cc')">
+      <img src="CC_banner.png" onload="this.classList.add('loaded')" onerror="this.style.display='none'" alt="Colorful Creatures Tarot">
+      <div class="banner-fallback banner-cc">🦊 &nbsp; COLORFUL CREATURES &nbsp; 🌈</div>
     </div>
   </div>
 
@@ -886,6 +947,105 @@ const CUTESY_MINOR = [
 
 const CUTESY_CARDS = [...CUTESY_MAJOR, ...CUTESY_MINOR];
 
+// ── COLORFUL CREATURES ORACLE ──────────────────────────────────────────────
+const CC_CARDS = [
+  {id:"cc_wolf",name:"Wolf",file:"CC_Wolf.png",type:"cc",subtitle:"The Loyal Path",
+   keywords:["instinct","loyalty","pack","belonging","independence"],
+   meaning:`The Wolf knows exactly where home is — and still runs. This card holds the beautiful tension between independence and devotion, between the lone howl and the pack that answers. Your instincts are finely tuned right now, sharper than usual, and they are worth trusting. But Wolf doesn't just run alone for the thrill of it. The greatest freedom is knowing you have somewhere to return to. Ask yourself: who are your people? Are you showing up for them the way you expect them to show up for you? Trust what your gut says about someone or something in your life. And when the run is over, let yourself come home.`},
+  {id:"cc_bear",name:"Bear",file:"CC_Bear.png",type:"cc",subtitle:"The Gentle Strength",
+   keywords:["rest","power","softness","restoration","sovereignty"],
+   meaning:`Bear does not prove its strength to anyone. It doesn't need to. The most powerful thing Bear does is rest — fully, deeply, without apology — and emerge transformed. You may be in a season where the brave thing isn't pushing harder but letting yourself stop. Power doesn't evaporate when you rest. It gathers. There is a kind of quiet that regenerates everything. If you've been white-knuckling through exhaustion, Bear is asking you to put it down. Softness is not a detour from strength. It is where strength lives between efforts. What would you be capable of if you gave yourself permission to stop?`},
+  {id:"cc_owl",name:"Owl",file:"CC_Owl.png",type:"cc",subtitle:"The Clear Sight",
+   keywords:["patience","clarity","perception","truth","stillness"],
+   meaning:`Owl does not chase what it cannot see clearly. It waits. It watches. It lets the picture come into focus before it moves. There is something in your life right now that looks confusing or complicated, but that is largely because you are too close to it or moving too fast through it. The mystery isn't permanent — it's just waiting for you to be still long enough to let it resolve. Patience is not passivity. It is the discipline of not acting on incomplete information. Sit with what you don't know yet. Let it become clear on its own schedule. The answer is closer than it feels.`},
+  {id:"cc_butterfly",name:"Butterfly",file:"CC_Butterfly.png",type:"cc",subtitle:"The Joyful Becoming",
+   keywords:["transformation","becoming","change","upgrade","release"],
+   meaning:`The caterpillar doesn't mourn its old life. It dissolves entirely and becomes something it couldn't have imagined while it was still crawling. That's the promise this card carries: not a small improvement but a genuine becoming. What you're leaving behind was never the point — it was just the cocoon. The grief of changing is real. You are allowed to feel it. But this card reminds you that on the other side of every transformation you've ever been through, you found more of yourself, not less. You are not losing something. You are being upgraded. Let the old form go.`},
+  {id:"cc_penguin",name:"Penguin",file:"CC_Penguin.png",type:"cc",subtitle:"The Steady Heart",
+   keywords:["perseverance","warmth","community","steadiness","endurance"],
+   meaning:`Penguin survives the impossible because it doesn't do it alone. In the coldest conditions on earth, penguins rotate — everyone takes a turn at the cold edge, everyone gets time in the warm center. This is a card about the kind of endurance that is only possible in community. You don't have to weather everything alone. Who is in your huddle? Who have you been letting stand at the cold edge for too long without relief? And where in your life are you refusing help when the warmth of others is right there? Stay true to yourself. Stay steady. And let your people keep you warm when it counts.`},
+  {id:"cc_fox",name:"Fox",file:"CC_Fox.png",type:"cc",subtitle:"The Playful Strategist",
+   keywords:["wit","warmth","strategy","cleverness","adaptability"],
+   meaning:`Fox doesn't win by brute force. It wins by seeing the angle no one else noticed and moving through it with a grin. There is nothing cold or calculating about this — Fox is charming precisely because its intelligence is paired with genuine warmth. You are being called to bring both right now: the clever mind and the warm heart working together instead of in opposition. The situation in front of you doesn't need aggression. It needs lateral thinking. It needs the playful question, the unexpected approach, the willingness to find the fun in figuring it out. Be clever. Be kind about it. The grin is part of the strategy.`},
+  {id:"cc_elephant",name:"Elephant",file:"CC_Elephant.png",type:"cc",subtitle:"The Living Memory",
+   keywords:["wisdom","memory","heritage","ancestral knowledge","integration"],
+   meaning:`Elephant never forgets — not as a burden, but as a gift. Every experience you have ever had, every lesson that cost you something, every moment of grace you almost missed — all of it is in you. You carry more wisdom than you recognize on an ordinary day. This card appears when your history is trying to be useful to you, when the pattern you've lived through before is showing up again in a new costume. You've been here. You know more than you think you know. Let the past guide you the way a map guides a traveler — with information, not weight. You earned this wisdom. Use it.`},
+  {id:"cc_dragon",name:"Dragon",file:"CC_Dragon.png",type:"cc",subtitle:"The Inner Fire",
+   keywords:["creativity","power","imagination","boldness","responsibility"],
+   meaning:`Dragon doesn't ask permission to burn. It simply chooses what to illuminate and what to leave in shadow — and that choice is everything. You have a creative force inside you that is genuinely extraordinary. Not the polished, safe kind of creativity that fits in boxes, but the kind that makes something from nothing, that sees impossible things and builds toward them anyway. This card is a call to use that power boldly and with intention. Your imagination is not decoration. It is a force that shapes reality. The only question is whether you're willing to take it seriously. Light something up. Choose carefully what gets the fire.`},
+  {id:"cc_lion",name:"Lion",file:"CC_Lion.png",type:"cc",subtitle:"The Open-Hearted Leader",
+   keywords:["leadership","generosity","confidence","openness","courage"],
+   meaning:`The lion that rules with dominance creates subjects. The lion that leads with generosity creates a pride that would follow it anywhere. True confidence doesn't need to diminish anyone else to feel tall. It has room — room for other people's ideas, room for mistakes, room to say "I don't know, let's find out." You are being called to lead right now — not necessarily in a formal way, but to take up the space you've been shrinking from. Lead from your heart. Let your generosity be the most powerful thing about you. That's the kind of leadership that actually changes things.`},
+  {id:"cc_bat",name:"Bat",file:"CC_Bat.png",type:"cc",subtitle:"The Trust in the Dark",
+   keywords:["navigation","trust","intuition","echolocation","faith"],
+   meaning:`Bat moves through complete darkness at full speed — not despite the dark, but because of an extraordinary inner sense that converts tiny signals into reliable guidance. You don't need to see the whole path. You don't need the lights on. What you need is to trust the signal that's already coming back to you — the small hunch, the quiet knowing, the thing that keeps pinging even when you try to ignore it. The dark is not the enemy here. Uncertainty is not the problem. The problem is only if you freeze instead of moving. Send out a signal. Listen for the echo. Move.`},
+  {id:"cc_whale",name:"Whale",file:"CC_Whale.png",type:"cc",subtitle:"The Deep Peace",
+   keywords:["depth","peace","slowness","vastness","presence"],
+   meaning:`Whale lives in a world that is 95% silence and depth, surfacing only when it chooses to. Beneath every loud, noisy surface situation in your life, there is this: a vast, undisturbed calm that has always been there and will still be there when the noise passes. You are being invited down. Not to escape what's happening, but to remember how deep you are — how much of you exists below the thing that's currently causing turbulence. The peace you're looking for is not somewhere you have to get to. It is somewhere you have to descend into. Slow down. Go deeper. It is already there.`},
+  {id:"cc_dolphin",name:"Dolphin",file:"CC_Dolphin.png",type:"cc",subtitle:"The Shared Joy",
+   keywords:["play","connection","joy","community","lightness"],
+   meaning:`Dolphin plays not despite the work of survival but as part of it — joy is not the reward after the real stuff, it is woven into the whole life. There is intelligence in delight. There is wisdom in choosing lightness. This card appears when you've been taking something too seriously, or when you've been too isolated from the people who genuinely fill you up. Happiness shared is happiness multiplied. Who haven't you laughed with lately? Where have you forgotten that play is not the opposite of meaning — it is often how meaning is made? Leap. Connect. Let yourself be ridiculous in good company.`},
+  {id:"cc_deer",name:"Deer",file:"CC_Deer.png",type:"cc",subtitle:"The Gentle Courage",
+   keywords:["sensitivity","gentleness","awareness","courage","grace"],
+   meaning:`Deer is not afraid — Deer is awake. Every flicker of motion, every shift in the air, every subtle change in the environment registers because Deer has learned that awareness is survival. Your sensitivity is not a flaw to be managed. It is precision. It is the thing that lets you read rooms, feel undercurrents, notice what others walk right past. The gentle courage here is in staying open anyway — in not armoring up just because being soft sometimes hurts. A soft step is not a timid step. It is a careful one. Move through this with your awareness intact and your heart open.`},
+  {id:"cc_panda",name:"Panda",file:"CC_Panda.png",type:"cc",subtitle:"The Simple Delight",
+   keywords:["simplicity","enough","contentment","joy","presence"],
+   meaning:`Panda finds bamboo. Panda eats bamboo. Panda is extremely satisfied with bamboo. There is something radical happening here — a creature fully content with exactly what is already available. In a world that insists you should always want more, do more, optimize more, Panda sits in the middle of enough and just enjoys it. This card asks: what do you already have that you're not fully appreciating? What is right in front of you that would be plenty if you just let it be? The joy you're looking for might not require acquisition. It might just require noticing.`},
+  {id:"cc_giraffe",name:"Giraffe",file:"CC_Giraffe.png",type:"cc",subtitle:"The Higher View",
+   keywords:["perspective","vision","elevation","clarity","overview"],
+   meaning:`Giraffe sees the whole savanna. Not because it's looking for trouble, but because the view from up there reveals patterns that are invisible at ground level. You are in the middle of something right now, and the middle is always the hardest place to see clearly. What would happen if you stepped back — way back — and looked at the whole picture? Not to escape it, but to understand it. The detail work matters. And sometimes the detail work becomes clearer once you've seen where it fits in the larger shape. Get your head up. The clutter resolves from a distance.`},
+  {id:"cc_unicorn",name:"Unicorn",file:"CC_Unicorn.png",type:"cc",subtitle:"The Honest Magic",
+   keywords:["uniqueness","authenticity","magic","rarity","self-trust"],
+   meaning:`The unicorn doesn't try to pass as a horse. It wouldn't even know how. The thing that makes you singular — the specific, unusual combination of gifts and perspectives and ways of moving through the world that is entirely yours — is not a liability. It's not too much or too strange or too niche. It's just rare, and rare things have their own kind of gravity. The invitation here is to stop apologizing for being the particular thing you are, and to start trusting that your uniqueness is the very thing someone is looking for. Your magic is not imaginary. It's just not everyone's frequency.`},
+  {id:"cc_spider",name:"Spider",file:"CC_Spider.png",type:"cc",subtitle:"The Creative Weaver",
+   keywords:["creation","connection","patience","craft","design"],
+   meaning:`Spider begins with a single thread — not a web. The whole magnificent structure builds from that one starting point, strand by strand, with patience and geometric precision. What you're building right now may not look like much yet. That's fine. That's how webs work. Every thread you lay today connects to the threads you'll lay tomorrow, and eventually the whole pattern will become visible. Your creative work is not isolated effort — it is infrastructure. What you make creates the conditions for more making. Keep going. The web is still becoming.`},
+  {id:"cc_capybara",name:"Capybara",file:"CC_Capybara.png",type:"cc",subtitle:"The Calm Companion",
+   keywords:["peace","ease","acceptance","companionship","calm"],
+   meaning:`Capybara has somehow become friends with every other animal in the known world — not through strategy but through the simple practice of being completely, genuinely unbothered. There is a peace that is contagious, and you have access to it. In the middle of collective anxiety, in the middle of a tense situation, in the middle of people who are spinning — you have the option to be the still thing. Not because you've checked out, but because you've decided that your calmness is a gift you can offer. Be the chill. The people around you will thank you later.`},
+  {id:"cc_turtle",name:"Turtle",file:"CC_Turtle.png",type:"cc",subtitle:"The Steady Journey",
+   keywords:["persistence","steadiness","pace","endurance","arrival"],
+   meaning:`Turtle doesn't sprint and collapse. It moves at a pace it can maintain indefinitely, and it always arrives. What you are working toward is real, and the pace you're going is fine. The comparison to faster-moving things is irrelevant — they're running a different race on a different terrain. Turtle's secret is not speed. It's consistency and the wisdom to carry its home on its back, which means it is always already where it needs to be. Progress measured in small, steady increments is still progress. You are further along than you think. Keep moving.`},
+  {id:"cc_scorpion",name:"Scorpion",file:"CC_Scorpion.png",type:"cc",subtitle:"The Clear Boundary",
+   keywords:["boundaries","protection","precision","self-respect","clarity"],
+   meaning:`Scorpion doesn't sting out of aggression. It stings because it has decided what it will not tolerate, and it means it. The sting is not the threat — the boundary is. Clear limits, stated plainly, are one of the most self-respecting things a person can offer. Where in your life have you been fuzzy about what you need, what you'll accept, what is genuinely not okay? Precision is kindness — to yourself, and ultimately to everyone else who gets a clear map of how to be around you. You don't owe anyone infinite access. Protect your energy without apology.`},
+  {id:"cc_horse",name:"Horse",file:"CC_Horse.png",type:"cc",subtitle:"The Free Momentum",
+   keywords:["freedom","momentum","direction","power","movement"],
+   meaning:`Horse at full gallop is one of the most powerful things in nature — and it's moving toward something, not away from something. That's the distinction this card is drawing. There's a difference between momentum born from vision and momentum born from panic. Both feel fast. One is exhilarating; the other is exhausting. Where are you running right now, and why? If there's genuine purpose behind the movement, let yourself go. If you've been running because standing still feels unbearable, it might be time to find direction before you find speed. Freedom loves purpose. Point yourself somewhere.`},
+  {id:"cc_rabbit",name:"Rabbit",file:"CC_Rabbit.png",type:"cc",subtitle:"The Gentle Opportunity",
+   keywords:["new beginnings","opportunity","curiosity","fertility","quickness"],
+   meaning:`Rabbit doesn't wait for the perfect moment to multiply. It meets every new opening with instinctive curiosity and remarkable speed. There are opportunities around you right now — maybe small, maybe quiet, maybe not what you expected them to look like. The question is whether you'll meet them with openness or with the careful cynicism that's been protecting you from disappointment. Fear closes doors before they're even fully open. Curiosity walks through them. What beginning is asking to be born? What new thing is waiting for you to stop being afraid of it and just say yes?`},
+  {id:"cc_phoenix",name:"Phoenix",file:"CC_Pheonix.png",type:"cc",subtitle:"The Bright Return",
+   keywords:["resurrection","transformation","fire","renewal","triumph"],
+   meaning:`You have burned before. You know this. And here you are — present tense, still here, having made it through something that you were not at all sure you would make it through. Phoenix doesn't rise despite the fire. It rises specifically because of the fire. The ash is the material. The heat is the catalyst. What you've survived has changed the composition of who you are, and what's emerging now is not a reconstruction of the old version — it's something new that the old version couldn't have been. The return is bright because you brought the light back with you. Rise.`},
+  {id:"cc_panther",name:"Panther",file:"CC_Panther.png",type:"cc",subtitle:"The Quiet Confidence",
+   keywords:["confidence","power","stillness","presence","mystery"],
+   meaning:`Panther doesn't announce itself. It doesn't need to. Power without performance is one of the rarest and most compelling things there is. You don't have to prove what you're capable of to anyone who isn't paying attention. The right people already feel it. This card is a reminder that your worth is not a volume contest — that the most grounded version of you doesn't need validation to feel solid. Stop shrinking to avoid discomfort and stop performing to compensate for doubt. Just be what you are, fully and without apology. It is already felt by everyone who matters.`},
+  {id:"cc_octopus",name:"Octopus",file:"CC_Octopus.png",type:"cc",subtitle:"The Flexible Genius",
+   keywords:["adaptability","intelligence","multitasking","flexibility","problem-solving"],
+   meaning:`Octopus has nine brains — one central and one in each arm — which means every part of it is capable of independent thought and action. This is distributed intelligence at its most elegant. You have more capacity than you're using, and the way you're trying to use it might be the problem. Not everything needs to be managed from the center. Not everything needs to be controlled. Some of what you're juggling is capable of managing itself if you trust the distributed parts of your life to do their jobs. Be flexible. Think sideways. The solution is probably more creative than you've been allowing yourself to consider.`},
+  {id:"cc_coyote",name:"Coyote",file:"CC_Coyote.png",type:"cc",subtitle:"The Sacred Trickster",
+   keywords:["humor","trickster","wisdom","disruption","laughter"],
+   meaning:`Coyote appears when things have gotten too serious — when the story you're telling yourself has calcified into something that's stopped being useful. The trickster doesn't break things for the sake of breaking them. It breaks the thing that was never as solid as it seemed, so something truer can grow in its place. Laughter is not avoidance. A perfectly placed joke can dissolve a belief structure that ten serious conversations couldn't budge. Where in your life has the thinking gotten too rigid? Where have you stopped questioning your own assumptions because they've been around so long they feel like facts? Let Coyote in. Things are about to get interesting.`},
+  {id:"cc_dragonfly",name:"Dragonfly",file:"CC_Dragonfly.png",type:"cc",subtitle:"The Lightness of Being",
+   keywords:["presence","lightness","wonder","joy","iridescence"],
+   meaning:`Dragonfly lives most of its life underwater, and then one day it bursts into the air and becomes iridescent. It flies for the sheer improbable joy of it. This is not a card about analyzing the flight. It's about being in it. You are in the middle of something extraordinary right now, and the overthinking is pulling you out of it. The miracle doesn't require your commentary. It requires your presence. Stop processing long enough to experience. There will be time for understanding later. Right now the wings are working and the light is catching and this specific moment will not come again. Be here.`},
+  {id:"cc_eagle",name:"Eagle",file:"CC_Eagle.png",type:"cc",subtitle:"The Clear Intention",
+   keywords:["focus","intention","clarity","vision","precision"],
+   meaning:`Eagle does not strike at everything that moves. It chooses its target with absolute clarity and moves toward it with complete commitment. Diffused attention produces diffused results. Where in your life have you been spreading yourself across too many directions, moving toward too many things at once, hoping something sticks? This card is an invitation to choose. Really choose — not as a closing of doors but as a honoring of what actually matters most right now. Clarity is not limitation. It's the thing that makes movement meaningful. What are you actually aiming for? Go there. Everything else can wait.`},
+  {id:"cc_raven",name:"Raven",file:"CC_Raven.png",type:"cc",subtitle:"The Bright Mystery",
+   keywords:["mystery","creativity","magic","unknown","messages"],
+   meaning:`Raven collects bright things. It is drawn to what glitters, to what is unusual, to the object that doesn't quite fit. The unknown, to Raven, is not threatening — it's interesting. It's the place where the next shiny thing might be hidden. There is creative potential waiting in the thing you don't understand yet, in the situation that doesn't resolve into a neat story, in the question that keeps opening instead of closing. The mystery is not an obstacle. It's an invitation. What are you curious about? What have you been afraid to follow into the dark? Raven says the dark is where the interesting things are.`},
+  {id:"cc_raccoon",name:"Raccoon",file:"CC_Raccoon.png",type:"cc",subtitle:"The Resourceful Joy",
+   keywords:["resourcefulness","creativity","adaptability","curiosity","delight"],
+   meaning:`Raccoon makes something out of whatever is available and seems genuinely delighted by the whole process. It doesn't wait for perfect conditions or perfect materials. It finds the treasure in the trash heap and builds something fun from what everyone else walked past. You have more to work with than you're giving yourself credit for. The resources aren't missing — they might just be in unexpected forms. What's around you right now that you've been overlooking? What could you make from what's already here? The joy isn't in acquiring. It's in the inventive, slightly chaotic, completely satisfying act of figuring out what's possible with what you've got.`},
+  {id:"cc_giraffe2",name:"Giraffe",file:"CC_Giraffe.png",type:"cc",subtitle:"The Higher View",
+   keywords:["perspective","vision","elevation","clarity","overview"],
+   meaning:`Giraffe sees the whole savanna. Not because it's looking for trouble, but because the view from up there reveals patterns that are invisible at ground level. You are in the middle of something right now, and the middle is always the hardest place to see clearly. What would happen if you stepped back — way back — and looked at the whole picture? Not to escape it, but to understand it. The detail work matters. And sometimes the detail work becomes clearer once you've seen where it fits in the larger shape. Get your head up. The clutter resolves from a distance.`}
+];
+// Remove duplicate giraffe (only needed 30 unique cards)
+CC_CARDS.splice(CC_CARDS.findIndex(c=>c.id==='cc_giraffe2'),1);
+
 // ── SPREADS ────────────────────────────────────────────────────────────────
 const ORACLE_SPREADS = [
   {id:"single",name:"Single Card",desc:"One card. One message. The forest speaks directly.",positions:["The Message"],count:1},
@@ -900,6 +1060,12 @@ const CUTESY_SPREADS = [
   {id:"heart",name:"Heart Check",desc:"Head · Heart · What the universe is screaming at you. 💕",positions:["Your Head","Your Heart","The Universe 📣"],count:3},
   {id:"five",name:"Full Chaos Spread",desc:"The whole picture, all the feelings, zero chill. 🐉",positions:["The Root","The Heart","The Path","The Obstacle","The Wildcard"],count:5},
   {id:"combo",name:"Tarot + Oracle",desc:"One Cutesy Chaos card sets the stage, one Nightwood Oracle brings the wisdom. 🌲🐙",positions:["Cutesy Chaos: The Energy","Nightwood Oracle: The Wisdom"],tarotCount:1,oracleCount:1,combo:true},
+];
+const CC_SPREADS = [
+  {id:"single",name:"One Creature",desc:"One animal, one message. What spirit is with you today? 🦊",positions:["Your Creature"],count:1},
+  {id:"three",name:"Past · Present · Path",desc:"Three creatures illuminate your journey. 🌈",positions:["Where You've Been","Where You Are","Where You're Going"],count:3},
+  {id:"heart",name:"Mind · Body · Spirit",desc:"Three creatures for your whole self. 🦋",positions:["Your Mind","Your Heart","Your Spirit"],count:3},
+  {id:"five",name:"Full Creature Spread",desc:"Five creatures, the whole wild picture. 🐉",positions:["The Foundation","The Challenge","The Gift","The Shadow","The Invitation"],count:5},
 ];
 
 // ── STATE ──────────────────────────────────────────────────────────────────
@@ -941,9 +1107,11 @@ function setDeck(deck) {
   currentDeck = deck;
   document.getElementById('bannerNightwood').classList.toggle('active', deck==='nightwood');
   document.getElementById('bannerCutesy').classList.toggle('active', deck==='cutesy');
+  document.getElementById('bannerCC').classList.toggle('active', deck==='cc');
 
   if(deck==='cutesy') {
     document.body.classList.add('chaos-mode');
+    document.body.classList.remove('cc-mode');
     document.getElementById('headerRune').textContent='✦  embrace the chaos, it\'s adorable  ✦';
     document.getElementById('headerTitle').childNodes[0].textContent='Cutesy Chaos Tarot';
     document.getElementById('headerSub').textContent='A Chaotic Little Divination Deck 🐙';
@@ -953,8 +1121,22 @@ function setDeck(deck) {
     document.getElementById('footerTag').textContent='embrace the chaos, it\'s adorable 🐙';
     document.querySelector('.skulls').style.opacity='';
     document.querySelector('.fireflies').style.opacity='';
+  } else if(deck==='cc') {
+    document.body.classList.add('cc-mode');
+    document.body.classList.remove('chaos-mode');
+    document.getElementById('headerRune').textContent='✦  Cute. Chaotic. Magical.  ✦';
+    document.getElementById('headerTitle').childNodes[0].textContent='Colorful Creatures';
+    document.getElementById('headerSub').textContent='An Oracle Deck 🌈';
+    document.getElementById('headerIcon').textContent='🦊';
+    document.getElementById('drawBtnText').textContent='🌈  Draw Your Creature  🌈';
+    document.getElementById('footerDeck').textContent='Colorful Creatures Oracle';
+    document.getElementById('footerTag').textContent='Every creature has a message for you 🦋';
+    document.querySelector('.skulls').style.opacity='';
+    document.querySelector('.fireflies').style.opacity='';
+    spawnRainbowSparks();
   } else {
     document.body.classList.remove('chaos-mode');
+    document.body.classList.remove('cc-mode');
     document.getElementById('headerRune').textContent='✦   The Cards Know   ✦';
     document.getElementById('headerTitle').childNodes[0].textContent='Nightwood Oracle';
     document.getElementById('headerSub').textContent='A Forest Divination Deck';
@@ -970,7 +1152,7 @@ function setDeck(deck) {
 }
 
 function renderSpreads() {
-  const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : ORACLE_SPREADS;
+  const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : currentDeck==='cc' ? CC_SPREADS : ORACLE_SPREADS;
   const container = document.getElementById('spreadOptions');
   container.innerHTML='';
   spreads.forEach((s,i)=>{
@@ -989,6 +1171,22 @@ function selectSpread(spread) {
     b.classList.toggle('active',b.textContent===spread.name);
   });
   document.getElementById('spreadDesc').textContent=spread.desc;
+}
+
+function spawnRainbowSparks() {
+  const rs = document.getElementById('rainbowSparks');
+  if(rs.children.length > 0) return; // already spawned
+  const colors=['#ff2d8a','#ff8c00','#ffe600','#00e676','#00cfff','#a259ff'];
+  for(let i=0;i<28;i++){
+    const f=document.createElement('div'); f.className='spark';
+    const color=colors[Math.floor(Math.random()*colors.length)];
+    f.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;
+      background:${color};box-shadow:0 0 6px 2px ${color}88;
+      --dur:${7+Math.random()*9}s;--delay:${-Math.random()*12}s;
+      --tx:${(Math.random()-0.5)*90}px;--ty:${-20-Math.random()*70}px;
+      --tx2:${(Math.random()-0.5)*130}px;--ty2:${-40-Math.random()*90}px;`;
+    rs.appendChild(f);
+  }
 }
 
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -1011,7 +1209,7 @@ function doReading() {
     const oc=shuffle(ORACLE_CARDS).slice(0,1).map(c=>({...c,position:currentSpread.positions[1],reversed:Math.random()<0.15}));
     cards=[...tc,...oc];
   } else {
-    const pool=currentDeck==='cutesy'?CUTESY_CARDS:ORACLE_CARDS;
+    const pool=currentDeck==='cutesy'?CUTESY_CARDS:currentDeck==='cc'?CC_CARDS:ORACLE_CARDS;
     const shuffled=shuffle(pool);
     cards=shuffled.slice(0,currentSpread.count).map((c,i)=>({
       ...c, position:currentSpread.positions[i], reversed:Math.random()<0.22
@@ -1021,6 +1219,7 @@ function doReading() {
 
   const backFile = (card) => {
     if(card.type==='oracle') return card.reversed?'card 21 back of card reversed.png':'card 21 back of card.png';
+    if(card.type==='cc') return card.reversed?'CC_Back.png':'CC_Back.png';
     return 'tarot_cutesy_chaos_back.png';
   };
 
@@ -1033,7 +1232,7 @@ function doReading() {
         <div class="card-inner">
           <div class="card-face card-back-face">
             <img src="${backFile(card)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Card back">
-            <div class="placeholder-back" style="display:none"><span style="font-size:48px;opacity:0.6">${card.type==='oracle'?'🌿':'🐙'}</span><span style="font-family:var(--f-title);font-size:11px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase">${card.type==='oracle'?'Nightwood':'Cutesy Chaos'}</span></div>
+            <div class="placeholder-back" style="display:none"><span style="font-size:48px;opacity:0.6">${card.type==='oracle'?'🌿':card.type==='cc'?'🦊':'🐙'}</span><span style="font-family:var(--f-title);font-size:11px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase">${card.type==='oracle'?'Nightwood':card.type==='cc'?'Colorful Creatures':'Cutesy Chaos'}</span></div>
           </div>
           <div class="card-face card-front-face${card.reversed?' card-reversed':''}">
             <img src="${card.file}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="${card.name}">
@@ -1071,8 +1270,11 @@ function showMeaning(index){
   for(let el of panel.querySelectorAll('.meaning-card')){if(el.dataset.cardIndex==index)return;}
 
   const isChaos=card.type==='cutesy';
+  const isCC=card.type==='cc';
   const typeTag=isChaos
     ?`<span style="background:rgba(255,45,138,0.15);border:1px solid var(--hot-pink);color:var(--hot-pink);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--f-chaos-sub);letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🐙 Cutesy Chaos</span>`
+    :isCC
+    ?`<span style="background:rgba(0,207,255,0.1);border:1px solid var(--cc-teal);color:var(--cc-teal);padding:3px 10px;border-radius:20px;font-size:10px;font-family:'Fredoka One',cursive;letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🦊 Colorful Creatures</span>`
     :`<span style="background:rgba(201,168,76,0.1);border:1px solid var(--gold-dim);color:var(--gold-dim);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--f-title);letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🌲 Oracle</span>`;
 
   const reversedNote=card.reversed
@@ -1096,7 +1298,7 @@ function showMeaning(index){
   if(flippedCount===drawnCards.length&&drawnCards.length>1){
     const note=document.createElement('div');
     note.className='tarot-combo-note';
-    const msg=currentDeck==='cutesy'?'💀 All cards have spoken. Embrace what emerged. 💕':'✦ All cards have spoken. Sit with what has emerged. The reading is complete.';
+    const msg=currentDeck==='cutesy'?'💀 All cards have spoken. Embrace what emerged. 💕':currentDeck==='cc'?'🌈 All creatures have spoken. Carry their wisdom with you. 🦊':'✦ All cards have spoken. Sit with what has emerged. The reading is complete.';
     note.innerHTML=`<strong>${msg}</strong>`;
     panel.appendChild(note);
   }
