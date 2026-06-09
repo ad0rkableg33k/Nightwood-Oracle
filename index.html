@@ -1059,13 +1059,32 @@ const CUTESY_SPREADS = [
   {id:"three",name:"Past · Now · Next",desc:"Three cards, maximum chaos, minimum overthinking. 💀",positions:["Past Chaos","Current Chaos","Incoming Chaos"],count:3},
   {id:"heart",name:"Heart Check",desc:"Head · Heart · What the universe is screaming at you. 💕",positions:["Your Head","Your Heart","The Universe 📣"],count:3},
   {id:"five",name:"Full Chaos Spread",desc:"The whole picture, all the feelings, zero chill. 🐉",positions:["The Root","The Heart","The Path","The Obstacle","The Wildcard"],count:5},
-  {id:"combo",name:"Tarot + Oracle",desc:"One Cutesy Chaos card sets the stage, one Nightwood Oracle brings the wisdom. 🌲🐙",positions:["Cutesy Chaos: The Energy","Nightwood Oracle: The Wisdom"],tarotCount:1,oracleCount:1,combo:true},
+  {id:"combo",name:"Tarot + Oracle",desc:"One Cutesy Chaos card sets the energy — one oracle card (Nightwood or Colorful Creatures, randomly chosen) brings the deeper wisdom. 🌲🐙🦊",
+   positions:["Cutesy Chaos: The Energy","Oracle: The Wisdom"],combo:true,
+   pools:[{src:'cutesy',count:1},{src:'oracle_random',count:1}]},
+  {id:"three_deck",name:"All Three Decks",desc:"One card from each deck — chaos sets the stage, a creature shows the way, the forest holds the truth. 🐙🦊🌲",
+   positions:["Cutesy Chaos: The Energy","Colorful Creatures: The Way","Nightwood Oracle: The Truth"],combo:true,
+   pools:[{src:'cutesy',count:1},{src:'cc',count:1},{src:'oracle',count:1}]},
 ];
 const CC_SPREADS = [
   {id:"single",name:"One Creature",desc:"One animal, one message. What spirit is with you today? 🦊",positions:["Your Creature"],count:1},
   {id:"three",name:"Past · Present · Path",desc:"Three creatures illuminate your journey. 🌈",positions:["Where You've Been","Where You Are","Where You're Going"],count:3},
   {id:"heart",name:"Mind · Body · Spirit",desc:"Three creatures for your whole self. 🦋",positions:["Your Mind","Your Heart","Your Spirit"],count:3},
   {id:"five",name:"Full Creature Spread",desc:"Five creatures, the whole wild picture. 🐉",positions:["The Foundation","The Challenge","The Gift","The Shadow","The Invitation"],count:5},
+  {id:"combo_oracle",name:"Creature + Oracle",desc:"A creature shows you the energy — a Nightwood Oracle card reveals what the forest knows underneath it. 🦊🌲",
+   positions:["Colorful Creatures: The Energy","Nightwood Oracle: The Wisdom"],combo:true,
+   pools:[{src:'cc',count:1},{src:'oracle',count:1}]},
+  {id:"three_deck",name:"All Three Decks",desc:"One from each world — chaos, creature, forest. The full picture. 🐙🦊🌲",
+   positions:["Cutesy Chaos: The Fire","Colorful Creatures: The Way","Nightwood Oracle: The Root"],combo:true,
+   pools:[{src:'cutesy',count:1},{src:'cc',count:1},{src:'oracle',count:1}]},
+];
+const ORACLE_SPREADS_EXTRA = [
+  {id:"combo_cc",name:"Forest + Creature",desc:"A Nightwood Oracle card anchors you — a Colorful Creature shows the spirit energy alongside it. 🌲🦊",
+   positions:["Nightwood Oracle: The Anchor","Colorful Creatures: The Spirit"],combo:true,
+   pools:[{src:'oracle',count:1},{src:'cc',count:1}]},
+  {id:"three_deck",name:"All Three Decks",desc:"The forest speaks, a creature appears, chaos adds the wildcard. The whole truth. 🌲🦊🐙",
+   positions:["Nightwood Oracle: The Root","Colorful Creatures: The Path","Cutesy Chaos: The Wildcard"],combo:true,
+   pools:[{src:'oracle',count:1},{src:'cc',count:1},{src:'cutesy',count:1}]},
 ];
 
 // ── STATE ──────────────────────────────────────────────────────────────────
@@ -1152,7 +1171,7 @@ function setDeck(deck) {
 }
 
 function renderSpreads() {
-  const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : currentDeck==='cc' ? CC_SPREADS : ORACLE_SPREADS;
+  const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : currentDeck==='cc' ? CC_SPREADS : [...ORACLE_SPREADS, ...ORACLE_SPREADS_EXTRA];
   const container = document.getElementById('spreadOptions');
   container.innerHTML='';
   spreads.forEach((s,i)=>{
@@ -1194,7 +1213,7 @@ function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Mat
 function doReading() {
   try {
   if(!currentSpread || !currentSpread.positions) {
-    const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : ORACLE_SPREADS;
+    const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : currentDeck==='cc' ? CC_SPREADS : [...ORACLE_SPREADS, ...ORACLE_SPREADS_EXTRA];
     selectSpread(spreads[0]);
   }
   clearReading(true);
@@ -1203,11 +1222,23 @@ function doReading() {
   layout.innerHTML='';
 
   let cards=[];
-  if(currentSpread.combo) {
-    // Tarot + Oracle combo
-    const tc=shuffle(CUTESY_CARDS).slice(0,1).map(c=>({...c,position:currentSpread.positions[0],reversed:Math.random()<0.25}));
-    const oc=shuffle(ORACLE_CARDS).slice(0,1).map(c=>({...c,position:currentSpread.positions[1],reversed:Math.random()<0.15}));
-    cards=[...tc,...oc];
+  if(currentSpread.combo && currentSpread.pools) {
+    // Multi-deck combo: each pool entry specifies src + count
+    let posIndex=0;
+    currentSpread.pools.forEach(pool=>{
+      let src = pool.src;
+      // oracle_random: randomly pick nightwood or cc
+      if(src==='oracle_random') src = Math.random()<0.5 ? 'oracle' : 'cc';
+      const poolCards = src==='cutesy' ? CUTESY_CARDS : src==='cc' ? CC_CARDS : ORACLE_CARDS;
+      const reversedChance = src==='cutesy' ? 0.25 : 0.18;
+      const drawn = shuffle(poolCards).slice(0, pool.count).map((c,i)=>({
+        ...c,
+        position: currentSpread.positions[posIndex+i],
+        reversed: Math.random()<reversedChance
+      }));
+      cards.push(...drawn);
+      posIndex+=pool.count;
+    });
   } else {
     const pool=currentDeck==='cutesy'?CUTESY_CARDS:currentDeck==='cc'?CC_CARDS:ORACLE_CARDS;
     const shuffled=shuffle(pool);
