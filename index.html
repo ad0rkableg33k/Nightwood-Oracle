@@ -108,11 +108,17 @@ body.chaos-mode .deck-banner.active { border-color:var(--hot-pink);
 body.chaos-mode .deck-banner.active::after { color:var(--hot-pink); }
 
 /* CHAOS HEADER */
-body.chaos-mode header h1 { color:#d4608a;
+body.chaos-mode header h1 { color:#1a0212;
   font-family:var(--f-chaos);
-  text-shadow:0 0 15px rgba(180,60,110,0.5), 2px 2px 0 rgba(80,20,60,0.8); }
-body.chaos-mode .header-rune { color:#9b6b8a; font-family:var(--f-chaos-sub); }
-body.chaos-mode .header-divider span { color:#d4608a; }
+  -webkit-text-stroke: 1px #6b0a35;
+  text-shadow:
+    0 0 8px #ff2d8a,
+    0 0 16px #ff2d8a,
+    0 0 30px rgba(255,45,138,0.7),
+    0 0 60px rgba(255,45,138,0.3),
+    0 0 100px rgba(180,20,80,0.2); }
+body.chaos-mode .header-rune { color:#7a4060; font-family:var(--f-chaos-sub); }
+body.chaos-mode .header-divider span { color:#8b1a4a; }
 
 /* MODE TABS */
 .mode-section { max-width:900px; margin:0 auto; padding:20px 20px 0; text-align:center; }
