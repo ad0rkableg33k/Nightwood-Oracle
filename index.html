@@ -280,11 +280,6 @@ body.chaos-mode footer span { color:var(--hot-pink); }
     </div>
   </div>
 
-  <div class="mode-section">
-    <h2 id="modeLabel">Choose Your Path</h2>
-    <div class="mode-tabs" id="modeTabs"></div>
-  </div>
-
   <div class="spread-section">
     <h2>Choose Your Spread</h2>
     <div class="spread-options" id="spreadOptions"></div>
@@ -1011,6 +1006,11 @@ function selectSpread(spread) {
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function doReading() {
+  try {
+  if(!currentSpread || !currentSpread.positions) {
+    const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : ORACLE_SPREADS;
+    selectSpread(spreads[0]);
+  }
   clearReading(true);
   drawnCards=[]; flippedCount=0;
   const layout=document.getElementById('spreadLayout');
@@ -1063,6 +1063,10 @@ function doReading() {
   document.getElementById('clearBtn').style.display='block';
   document.getElementById('meaningPanel').classList.remove('visible');
   document.getElementById('meaningPanel').innerHTML='';
+  } catch(e) {
+    console.error('doReading error:', e);
+    document.getElementById('spreadLayout').innerHTML=`<div style="color:#ff2d8a;font-family:sans-serif;padding:20px;text-align:center;">Error: ${e.message}</div>`;
+  }
 }
 
 function flipCard(index){
