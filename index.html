@@ -3,1089 +3,1090 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nightwood Oracle</title>
+<title>Nightwood Oracle & Cutesy Chaos Tarot</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Creepster&family=Fredoka+One&display=swap" rel="stylesheet">
 <style>
-/* ── ROOT & RESET ─────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --ink:       #0a0a0f;
-  --deep:      #0d1117;
-  --bark:      #1a1409;
-  --moss:      #1c2918;
-  --gold:      #c9a84c;
-  --gold-dim:  #7a6230;
-  --gold-glow: #e8c96a;
-  --teal:      #2d6e6e;
-  --teal-lit:  #4db8b8;
-  --cream:     #f0e8d5;
-  --mist:      #a89f8c;
-  --fog:       #5c5650;
-  --white:     #faf7f0;
-  --red-dim:   #6b2020;
-
-  --f-display: 'Cinzel Decorative', serif;
-  --f-title:   'Cinzel', serif;
-  --f-body:    'EB Garamond', serif;
-
-  --card-w: 300px;
-  --card-h: 523px;
-  --card-r: 14px;
+  --ink:#0a0a0f; --deep:#0d1117; --gold:#c9a84c; --gold-dim:#7a6230;
+  --gold-glow:#e8c96a; --teal-lit:#4db8b8; --cream:#f0e8d5;
+  --mist:#a89f8c; --fog:#5c5650; --red-dim:#6b2020;
+  --hot-pink:#ff2d8a; --purple:#7b2fd4; --lavender:#c084fc;
+  --f-display:'Cinzel Decorative',serif; --f-title:'Cinzel',serif;
+  --f-body:'EB Garamond',serif; --f-chaos:'Creepster',cursive;
+  --f-chaos-sub:'Fredoka One',cursive;
+  --card-w:300px; --card-h:523px; --card-r:14px;
 }
+html { scroll-behavior:smooth; }
+body { background:var(--ink); color:var(--cream); font-family:var(--f-body);
+  font-size:17px; line-height:1.7; min-height:100vh; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:9999; opacity:0.6; }
 
-html { scroll-behavior: smooth; }
+/* BACKGROUNDS */
+.forest-bg { position:fixed; inset:0; z-index:0; transition:opacity 0.8s;
+  background: radial-gradient(ellipse 60% 50% at 50% 100%,#0d2210 0%,transparent 70%),
+    radial-gradient(ellipse 100% 60% at 50% 110%,#060e04 0%,transparent 60%),
+    linear-gradient(180deg,#050508 0%,#080d06 40%,#040804 100%); }
+.chaos-bg { position:fixed; inset:0; z-index:0; opacity:0; transition:opacity 0.8s;
+  background: radial-gradient(ellipse 80% 50% at 20% 20%,rgba(123,47,212,0.4) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%,rgba(255,45,138,0.25) 0%,transparent 60%),
+    linear-gradient(180deg,#080010 0%,#0d0018 50%,#050008 100%); }
+body.chaos-mode .forest-bg { opacity:0; }
+body.chaos-mode .chaos-bg  { opacity:1; }
 
-body {
-  background: var(--ink);
-  color: var(--cream);
-  font-family: var(--f-body);
-  font-size: 17px;
-  line-height: 1.7;
-  min-height: 100vh;
-  overflow-x: hidden;
-  cursor: default;
-}
-
-/* ── NOISE TEXTURE OVERLAY ───────────────────────────────────────────────── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.6;
-}
-
-/* ── FOREST BACKGROUND ───────────────────────────────────────────────────── */
-.forest-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 100%, #0d2210 0%, transparent 70%),
-    radial-gradient(ellipse 100% 60% at 50% 110%, #060e04 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 20% 80%, #0a1a08 0%, transparent 50%),
-    radial-gradient(ellipse 40% 30% at 80% 80%, #0a1a08 0%, transparent 50%),
-    linear-gradient(180deg, #050508 0%, #080d06 40%, #040804 100%);
-}
-
-/* Firefly particles */
-.fireflies {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-.firefly {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--gold-glow);
-  box-shadow: 0 0 6px 2px rgba(232,201,106,0.6);
-  animation: drift var(--dur, 8s) ease-in-out infinite var(--delay, 0s);
-  opacity: 0;
-}
+/* PARTICLES */
+.fireflies,.skulls { position:fixed; inset:0; z-index:1; pointer-events:none; }
+.firefly { position:absolute; width:3px; height:3px; border-radius:50%;
+  background:var(--gold-glow); box-shadow:0 0 6px 2px rgba(232,201,106,0.6);
+  animation:drift var(--dur,8s) ease-in-out infinite var(--delay,0s); opacity:0; }
+.skull-p { position:absolute; font-size:var(--sz,14px); opacity:0;
+  animation:floatUp var(--dur,8s) ease-in infinite var(--delay,0s); }
 @keyframes drift {
-  0%   { opacity:0; transform: translate(0,0) scale(0.5); }
-  20%  { opacity:0.8; }
-  50%  { opacity:0.4; transform: translate(var(--tx,20px), var(--ty,-30px)) scale(1); }
-  80%  { opacity:0.7; }
-  100% { opacity:0; transform: translate(var(--tx2,40px), var(--ty2,-60px)) scale(0.3); }
-}
+  0%{opacity:0;transform:translate(0,0) scale(0.5)} 20%{opacity:0.8}
+  50%{opacity:0.4;transform:translate(var(--tx,20px),var(--ty,-30px)) scale(1)}
+  80%{opacity:0.7} 100%{opacity:0;transform:translate(var(--tx2,40px),var(--ty2,-60px)) scale(0.3)} }
+@keyframes floatUp {
+  0%{opacity:0;transform:translateY(100vh) rotate(0deg)} 10%{opacity:0.4}
+  90%{opacity:0.2} 100%{opacity:0;transform:translateY(-20vh) rotate(360deg)} }
 
-/* ── LAYOUT ──────────────────────────────────────────────────────────────── */
-.app { position: relative; z-index: 2; min-height: 100vh; }
+.app { position:relative; z-index:2; min-height:100vh; }
 
-/* ── HEADER ──────────────────────────────────────────────────────────────── */
-header {
-  text-align: center;
-  padding: 60px 20px 40px;
-  position: relative;
-}
-.header-rune {
-  font-size: 11px;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: var(--gold-dim);
-  font-family: var(--f-title);
-  margin-bottom: 16px;
-  display: block;
-}
-header h1 {
-  font-family: var(--f-display);
-  font-size: clamp(32px, 6vw, 64px);
-  font-weight: 900;
-  color: var(--gold);
-  text-shadow:
-    0 0 40px rgba(201,168,76,0.4),
-    0 0 80px rgba(201,168,76,0.15);
-  line-height: 1.1;
-  letter-spacing: 2px;
-}
-header h1 span {
-  display: block;
-  font-size: 0.45em;
-  font-weight: 400;
-  color: var(--mist);
-  letter-spacing: 8px;
-  margin-top: 6px;
-  font-family: var(--f-title);
-}
-.header-divider {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  max-width: 400px;
-  margin: 24px auto 0;
-}
-.header-divider::before,
-.header-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-dim));
-}
-.header-divider::after {
-  background: linear-gradient(90deg, var(--gold-dim), transparent);
-}
-.header-divider span {
-  color: var(--gold);
-  font-size: 18px;
-}
+/* HEADER */
+header { text-align:center; padding:60px 20px 40px; position:relative; }
+.header-rune { font-size:11px; letter-spacing:6px; text-transform:uppercase;
+  color:var(--gold-dim); font-family:var(--f-title); margin-bottom:16px; display:block; }
+header h1 { font-family:var(--f-display); font-size:clamp(32px,6vw,64px);
+  font-weight:900; color:var(--gold);
+  text-shadow:0 0 40px rgba(201,168,76,0.4),0 0 80px rgba(201,168,76,0.15);
+  line-height:1.1; letter-spacing:2px; transition:all 0.5s; }
+header h1 span { display:block; font-size:0.45em; font-weight:400; color:var(--mist);
+  letter-spacing:8px; margin-top:6px; font-family:var(--f-title); }
+.header-divider { display:flex; align-items:center; gap:16px;
+  max-width:400px; margin:24px auto 0; }
+.header-divider::before,.header-divider::after { content:''; flex:1; height:1px; }
+.header-divider::before { background:linear-gradient(90deg,transparent,var(--gold-dim)); }
+.header-divider::after  { background:linear-gradient(90deg,var(--gold-dim),transparent); }
+.header-divider span { color:var(--gold); font-size:18px; }
 
-/* ── MODE SELECTOR ───────────────────────────────────────────────────────── */
-.mode-section {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px 20px 0;
-  text-align: center;
-}
-.mode-section h2 {
-  font-family: var(--f-title);
-  font-size: 13px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--fog);
-  margin-bottom: 16px;
-}
-.mode-tabs {
-  display: inline-flex;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(201,168,76,0.15);
-  border-radius: 50px;
-  padding: 4px;
-  gap: 4px;
-}
-.mode-tab {
-  padding: 10px 24px;
-  border-radius: 40px;
-  border: none;
-  background: transparent;
-  color: var(--fog);
-  font-family: var(--f-title);
-  font-size: 13px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.mode-tab:hover { color: var(--cream); }
-.mode-tab.active {
-  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
-  color: var(--ink);
-  font-weight: 600;
-  box-shadow: 0 0 20px rgba(201,168,76,0.3);
-}
+/* DECK BANNERS */
+.deck-banners { display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
+  max-width:1000px; margin:0 auto 30px; padding:0 20px; }
+.deck-banner { border-radius:10px; overflow:hidden; cursor:pointer;
+  border:2px solid transparent; transition:all 0.3s; opacity:0.7; }
+.deck-banner.active { border-color:var(--gold); opacity:1;
+  box-shadow:0 0 20px rgba(201,168,76,0.3); }
+.deck-banner img { width:100%; max-width:440px; height:60px; object-fit:cover;
+  object-position:center; display:block; }
+body.chaos-mode .deck-banner.active { border-color:var(--hot-pink);
+  box-shadow:0 0 20px rgba(255,45,138,0.4); }
 
-/* ── SPREAD SELECTOR ─────────────────────────────────────────────────────── */
-.spread-section {
-  max-width: 900px;
-  margin: 30px auto 0;
-  padding: 0 20px;
-  text-align: center;
-}
-.spread-section h2 {
-  font-family: var(--f-title);
-  font-size: 13px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--fog);
-  margin-bottom: 16px;
-}
-.spread-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-.spread-btn {
-  padding: 10px 22px;
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 6px;
-  background: rgba(255,255,255,0.02);
-  color: var(--mist);
-  font-family: var(--f-title);
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.spread-btn:hover {
-  border-color: var(--gold-dim);
-  color: var(--cream);
-  background: rgba(201,168,76,0.06);
-}
-.spread-btn.active {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: rgba(201,168,76,0.1);
-  box-shadow: 0 0 14px rgba(201,168,76,0.15);
-}
-.spread-desc {
-  margin-top: 12px;
-  font-style: italic;
-  color: var(--fog);
-  font-size: 14px;
-  min-height: 22px;
-}
+/* CHAOS HEADER */
+body.chaos-mode header h1 { color:var(--hot-pink);
+  font-family:var(--f-chaos);
+  text-shadow:0 0 20px rgba(255,45,138,0.8),0 0 60px rgba(255,45,138,0.3),
+    3px 3px 0 var(--purple); }
+body.chaos-mode .header-rune { color:var(--lavender); font-family:var(--f-chaos-sub); }
+body.chaos-mode .header-divider span { color:var(--hot-pink); }
 
-/* ── DRAW BUTTON ─────────────────────────────────────────────────────────── */
-.draw-section {
-  text-align: center;
-  padding: 30px 20px 10px;
-}
-.draw-btn {
-  position: relative;
-  padding: 18px 52px;
-  background: transparent;
-  border: 1px solid var(--gold);
-  border-radius: 4px;
-  color: var(--gold);
-  font-family: var(--f-display);
-  font-size: 15px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.4s;
-  overflow: hidden;
-}
-.draw-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.draw-btn:hover::before { opacity: 1; }
-.draw-btn:hover { color: var(--ink); box-shadow: 0 0 30px rgba(201,168,76,0.4); }
-.draw-btn span { position: relative; z-index: 1; }
-.draw-btn:active { transform: scale(0.97); }
+/* MODE TABS */
+.mode-section { max-width:900px; margin:0 auto; padding:20px 20px 0; text-align:center; }
+.mode-section h2 { font-family:var(--f-title); font-size:13px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--fog); margin-bottom:16px; }
+.mode-tabs { display:inline-flex; background:rgba(255,255,255,0.03);
+  border:1px solid rgba(201,168,76,0.15); border-radius:50px; padding:4px; gap:4px; }
+body.chaos-mode .mode-tabs { border-color:rgba(255,45,138,0.2); }
+.mode-tab { padding:10px 24px; border-radius:40px; border:none; background:transparent;
+  color:var(--fog); font-family:var(--f-title); font-size:13px; letter-spacing:2px;
+  text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
+.mode-tab:hover { color:var(--cream); }
+.mode-tab.active { background:linear-gradient(135deg,var(--gold-dim),var(--gold));
+  color:var(--ink); font-weight:600; box-shadow:0 0 20px rgba(201,168,76,0.3); }
+body.chaos-mode .mode-tab.active { background:linear-gradient(135deg,var(--purple),var(--hot-pink));
+  box-shadow:0 0 20px rgba(255,45,138,0.3); }
 
-/* ── READING AREA ────────────────────────────────────────────────────────── */
-.reading-area {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 0 20px 60px;
-}
+/* SPREADS */
+.spread-section { max-width:900px; margin:30px auto 0; padding:0 20px; text-align:center; }
+.spread-section h2 { font-family:var(--f-title); font-size:13px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--fog); margin-bottom:16px; }
+.spread-options { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.spread-btn { padding:10px 22px; border:1px solid rgba(201,168,76,0.2); border-radius:6px;
+  background:rgba(255,255,255,0.02); color:var(--mist); font-family:var(--f-title);
+  font-size:12px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.25s; }
+.spread-btn:hover { border-color:var(--gold-dim); color:var(--cream); background:rgba(201,168,76,0.06); }
+.spread-btn.active { border-color:var(--gold); color:var(--gold);
+  background:rgba(201,168,76,0.1); box-shadow:0 0 14px rgba(201,168,76,0.15); }
+body.chaos-mode .spread-btn.active { border-color:var(--hot-pink); color:var(--hot-pink);
+  background:rgba(255,45,138,0.1); box-shadow:0 0 14px rgba(255,45,138,0.15); }
+.spread-desc { margin-top:12px; font-style:italic; color:var(--fog); font-size:14px; min-height:22px; }
 
-/* ── SPREAD LAYOUT ───────────────────────────────────────────────────────── */
-.spread-layout {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-  margin-bottom: 50px;
-}
+/* DRAW BUTTON */
+.draw-section { text-align:center; padding:30px 20px 10px; }
+.draw-btn { position:relative; padding:18px 52px; background:transparent;
+  border:1px solid var(--gold); border-radius:4px; color:var(--gold);
+  font-family:var(--f-display); font-size:15px; letter-spacing:3px;
+  text-transform:uppercase; cursor:pointer; transition:all 0.4s; overflow:hidden; }
+.draw-btn::before { content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,var(--gold-dim),var(--gold)); opacity:0; transition:opacity 0.4s; }
+.draw-btn:hover::before { opacity:1; }
+.draw-btn:hover { color:var(--ink); box-shadow:0 0 30px rgba(201,168,76,0.4); }
+.draw-btn span { position:relative; z-index:1; }
+body.chaos-mode .draw-btn { border-color:var(--hot-pink); color:var(--hot-pink);
+  font-family:var(--f-chaos-sub); }
+body.chaos-mode .draw-btn::before { background:linear-gradient(135deg,var(--purple),var(--hot-pink)); }
+body.chaos-mode .draw-btn:hover { color:white; box-shadow:0 0 30px rgba(255,45,138,0.5); }
 
-/* ── CARD SLOT ───────────────────────────────────────────────────────────── */
-.card-slot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-.slot-label {
-  font-family: var(--f-title);
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold-dim);
-  text-align: center;
-}
+/* READING AREA */
+.reading-area { max-width:1100px; margin:40px auto; padding:0 20px 60px; }
+.spread-layout { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; margin-bottom:50px; }
+.card-slot { display:flex; flex-direction:column; align-items:center; gap:14px; }
+.slot-label { font-family:var(--f-title); font-size:11px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--gold-dim); text-align:center; }
+body.chaos-mode .slot-label { color:var(--lavender); font-family:var(--f-chaos-sub); font-size:13px; }
 
-/* ── THE CARD ────────────────────────────────────────────────────────────── */
-.card-wrap {
-  width: var(--card-w);
-  height: var(--card-h);
-  perspective: 1000px;
-  cursor: pointer;
-}
-.card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: var(--card-r);
-}
-.card-wrap.flipped .card-inner {
-  transform: rotateY(180deg);
-}
-.card-face {
-  position: absolute;
-  inset: 0;
-  border-radius: var(--card-r);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  overflow: hidden;
-  box-shadow:
-    0 8px 32px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(201,168,76,0.15),
-    0 0 20px rgba(201,168,76,0.05);
-}
-.card-back-face {
-  background: var(--deep);
-}
-.card-back-face img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--card-r);
-}
-/* Placeholder back if image missing */
-.card-back-face .placeholder-back {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #0d1a2e, #1a0d2e);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 12px;
-  border: 1px solid rgba(201,168,76,0.3);
-  border-radius: var(--card-r);
-}
-.placeholder-back .card-sigil {
-  font-size: 48px;
-  opacity: 0.6;
-}
-.placeholder-back span {
-  font-family: var(--f-title);
-  font-size: 11px;
-  letter-spacing: 4px;
-  color: var(--gold-dim);
-  text-transform: uppercase;
-}
+/* CARDS */
+.card-wrap { width:var(--card-w); height:var(--card-h); perspective:1000px;
+  cursor:pointer; opacity:0; transform:translateY(20px);
+  animation:dealIn 0.5s ease forwards; }
+@keyframes dealIn { to{opacity:1;transform:translateY(0)} }
+.card-inner { width:100%; height:100%; position:relative; transform-style:preserve-3d;
+  transition:transform 0.7s cubic-bezier(0.4,0,0.2,1); border-radius:var(--card-r); }
+.card-wrap.flipped .card-inner { transform:rotateY(180deg); }
+.card-face { position:absolute; inset:0; border-radius:var(--card-r);
+  backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(201,168,76,0.15); }
+body.chaos-mode .card-face { box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(255,45,138,0.2),
+  0 0 20px rgba(255,45,138,0.1); }
+.card-back-face { background:var(--deep); }
+.card-back-face img,.card-front-face img { width:100%; height:100%;
+  object-fit:cover; border-radius:var(--card-r); }
+.card-back-face .placeholder-back { width:100%; height:100%;
+  background:linear-gradient(135deg,#0d1a2e,#1a0d2e); display:flex;
+  align-items:center; justify-content:center; flex-direction:column; gap:12px;
+  border:1px solid rgba(201,168,76,0.3); border-radius:var(--card-r); }
+.card-front-face { transform:rotateY(180deg); background:var(--deep); }
+.card-front-face.card-reversed { transform:rotateY(180deg) rotate(180deg); }
+.card-wrap.flipped .card-front-face.card-reversed { transform:rotateY(180deg) rotate(180deg); }
+.placeholder-front { width:100%; height:100%;
+  background:linear-gradient(160deg,#0d1a0d,#1a130d); display:flex;
+  align-items:center; justify-content:center; flex-direction:column;
+  padding:20px; text-align:center; border-radius:var(--card-r); }
+.reversed-tag { font-family:var(--f-title); font-size:10px; letter-spacing:2px;
+  color:var(--red-dim); text-transform:uppercase; display:none; }
+.card-slot.is-reversed .reversed-tag { display:block; }
 
-.card-front-face {
-  transform: rotateY(180deg);
-  background: var(--deep);
-}
-.card-front-face img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--card-r);
-}
-.card-front-face .placeholder-front {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(160deg, #0d1a0d, #1a130d);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 20px;
-  text-align: center;
-  border-radius: var(--card-r);
-}
-.placeholder-front .card-animal {
-  font-size: 52px;
-  margin-bottom: 12px;
-}
-.placeholder-front .card-name-text {
-  font-family: var(--f-title);
-  font-size: 16px;
-  letter-spacing: 3px;
-  color: var(--gold);
-  text-transform: uppercase;
-}
+/* MEANING PANEL */
+.meaning-panel { max-width:700px; margin:0 auto; display:none; }
+.meaning-panel.visible { display:block; animation:fadeUp 0.5s ease forwards; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.meaning-card { background:rgba(255,255,255,0.025); border:1px solid rgba(201,168,76,0.2);
+  border-radius:12px; padding:36px 40px; margin-bottom:20px; position:relative; overflow:hidden; }
+.meaning-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+body.chaos-mode .meaning-card { border-color:rgba(255,45,138,0.2); }
+body.chaos-mode .meaning-card::before { background:linear-gradient(90deg,transparent,var(--hot-pink),var(--lavender),transparent); }
+.meaning-header { display:flex; align-items:baseline; gap:14px; margin-bottom:6px; }
+.meaning-position { font-family:var(--f-title); font-size:10px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--teal-lit); }
+.meaning-card-name { font-family:var(--f-display); font-size:26px; color:var(--gold); font-weight:700; }
+body.chaos-mode .meaning-card-name { font-family:var(--f-chaos); color:var(--hot-pink);
+  text-shadow:0 0 15px rgba(255,45,138,0.4); }
+.meaning-subtitle { font-style:italic; color:var(--gold-dim); font-size:15px; margin-bottom:18px; }
+body.chaos-mode .meaning-subtitle { color:var(--lavender); }
+.meaning-divider { height:1px; background:linear-gradient(90deg,var(--gold-dim),transparent);
+  margin-bottom:18px; opacity:0.4; }
+.meaning-body { color:var(--cream); font-size:16px; line-height:1.8; }
+.meaning-keywords { margin-top:18px; display:flex; flex-wrap:wrap; gap:8px; }
+.keyword { padding:4px 12px; border:1px solid rgba(201,168,76,0.25); border-radius:20px;
+  font-family:var(--f-title); font-size:11px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--gold-dim); }
+body.chaos-mode .keyword { border-color:rgba(255,45,138,0.25); color:var(--lavender);
+  font-family:var(--f-chaos-sub); }
 
-/* Card deal animation */
-.card-wrap {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: dealIn 0.5s ease forwards;
-}
-@keyframes dealIn {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Reversed card front face - rotate the entire face, not just the image */
-.card-front-face.card-reversed {
-  transform: rotateY(180deg) rotate(180deg);
-}
-.card-wrap.flipped .card-front-face.card-reversed {
-  transform: rotateY(180deg) rotate(180deg);
-}
-
-/* Reversed card indicator */
-.card-wrap.reversed .card-inner {
-  /* will show upside down on front face */
-}
-.reversed-tag {
-  font-family: var(--f-title);
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--red-dim);
-  text-transform: uppercase;
-  display: none;
-}
-.card-slot.is-reversed .reversed-tag { display: block; }
-
-/* ── CARD MEANING PANEL ──────────────────────────────────────────────────── */
-.meaning-panel {
-  max-width: 700px;
-  margin: 0 auto;
-  display: none;
-  animation: fadeUp 0.5s ease forwards;
-}
-.meaning-panel.visible { display: block; }
-@keyframes fadeUp {
-  from { opacity:0; transform: translateY(16px); }
-  to   { opacity:1; transform: translateY(0); }
-}
-
-.meaning-card {
-  background: rgba(255,255,255,0.025);
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 12px;
-  padding: 36px 40px;
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-}
-.meaning-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-}
-.meaning-header {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  margin-bottom: 6px;
-}
-.meaning-position {
-  font-family: var(--f-title);
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--teal-lit);
-}
-.meaning-card-name {
-  font-family: var(--f-display);
-  font-size: 26px;
-  color: var(--gold);
-  font-weight: 700;
-}
-.meaning-subtitle {
-  font-style: italic;
-  color: var(--gold-dim);
-  font-size: 15px;
-  margin-bottom: 18px;
-}
-.meaning-divider {
-  height: 1px;
-  background: linear-gradient(90deg, var(--gold-dim), transparent);
-  margin-bottom: 18px;
-  opacity: 0.4;
-}
-.meaning-body {
-  color: var(--cream);
-  font-size: 16px;
-  line-height: 1.8;
-}
-.meaning-keywords {
-  margin-top: 18px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.keyword {
-  padding: 4px 12px;
-  border: 1px solid rgba(201,168,76,0.25);
-  border-radius: 20px;
-  font-family: var(--f-title);
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold-dim);
-}
-
-/* ── TAROT COMBO SECTION ─────────────────────────────────────────────────── */
-.tarot-combo-note {
-  text-align: center;
-  padding: 20px;
-  font-style: italic;
-  color: var(--fog);
-  font-size: 15px;
-  border-top: 1px solid rgba(201,168,76,0.1);
-  margin-top: 20px;
-}
-.tarot-combo-note strong { color: var(--gold-dim); font-style: normal; }
-
-/* ── CLEAR BUTTON ────────────────────────────────────────────────────────── */
-.clear-btn {
-  display: block;
-  margin: 30px auto 0;
-  padding: 10px 30px;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 4px;
-  color: var(--fog);
-  font-family: var(--f-title);
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.clear-btn:hover { border-color: var(--fog); color: var(--mist); }
-
-/* ── FOOTER ──────────────────────────────────────────────────────────────── */
-footer {
-  text-align: center;
-  padding: 40px 20px;
-  border-top: 1px solid rgba(201,168,76,0.08);
-  color: var(--fog);
-  font-size: 13px;
-  font-family: var(--f-title);
-  letter-spacing: 2px;
-}
-footer span { color: var(--gold-dim); }
-
-/* ── SCROLL REVEAL ───────────────────────────────────────────────────────── */
-.hidden-section { opacity: 0; transition: opacity 0.6s ease; }
-.hidden-section.revealed { opacity: 1; }
-
-/* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
-@media (max-width: 600px) {
-  :root { --card-w: 150px; --card-h: 315px; }
-  .meaning-card { padding: 24px 20px; }
-  .meaning-card-name { font-size: 20px; }
-  .spread-layout { gap: 16px; }
+.tarot-combo-note { text-align:center; padding:20px; font-style:italic; color:var(--fog);
+  font-size:15px; border-top:1px solid rgba(201,168,76,0.1); margin-top:20px; }
+.clear-btn { display:block; margin:30px auto 0; padding:10px 30px; background:transparent;
+  border:1px solid rgba(255,255,255,0.1); border-radius:4px; color:var(--fog);
+  font-family:var(--f-title); font-size:11px; letter-spacing:3px;
+  text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
+.clear-btn:hover { border-color:var(--fog); color:var(--mist); }
+footer { text-align:center; padding:40px 20px; border-top:1px solid rgba(201,168,76,0.08);
+  color:var(--fog); font-size:13px; font-family:var(--f-title); letter-spacing:2px; }
+footer span { color:var(--gold-dim); }
+body.chaos-mode footer { border-top-color:rgba(255,45,138,0.1); }
+body.chaos-mode footer span { color:var(--hot-pink); }
+@media(max-width:600px){
+  :root{--card-w:150px;--card-h:262px;}
+  .meaning-card{padding:24px 20px;}
+  .meaning-card-name{font-size:20px;}
+  .spread-layout{gap:16px;}
 }
 </style>
 </head>
 <body>
-
 <div class="forest-bg"></div>
+<div class="chaos-bg"></div>
 <div class="fireflies" id="fireflies"></div>
+<div class="skulls" id="skulls"></div>
 
 <div class="app">
-
-  <!-- HEADER -->
   <header>
-    <span class="header-rune">✦ &nbsp; The Cards Know &nbsp; ✦</span>
-    <h1>Nightwood Oracle<span>A Forest Divination Deck</span></h1>
-    <div class="header-divider"><span>🌿</span></div>
+    <span class="header-rune" id="headerRune">✦ &nbsp; The Cards Know &nbsp; ✦</span>
+    <h1 id="headerTitle">Nightwood Oracle<span id="headerSub">A Forest Divination Deck</span></h1>
+    <div class="header-divider"><span id="headerIcon">🌿</span></div>
   </header>
 
-  <!-- MODE TABS -->
-  <div class="mode-section">
-    <h2>Choose Your Path</h2>
-    <div class="mode-tabs">
-      <button class="mode-tab active" data-mode="oracle" onclick="setMode('oracle')">Oracle Only</button>
-      <button class="mode-tab" data-mode="tarot" onclick="setMode('tarot')">Tarot + Oracle</button>
+  <!-- DECK SELECTOR BANNERS -->
+  <div class="deck-banners">
+    <div class="deck-banner active" id="bannerNightwood" onclick="setDeck('nightwood')">
+      <img src="nightwood_banner.png" onerror="this.parentElement.innerHTML='<div style='padding:10px 30px;background:rgba(201,168,76,0.1);border-radius:8px;color:#c9a84c;font-family:Cinzel,serif;letter-spacing:3px;font-size:14px;'>🌲 NIGHTWOOD ORACLE</div>'" alt="Nightwood Oracle">
+    </div>
+    <div class="deck-banner" id="bannerCutesy" onclick="setDeck('cutesy')">
+      <img src="cutesy_chaos_banner.png" onerror="this.parentElement.innerHTML='<div style='padding:10px 30px;background:rgba(255,45,138,0.1);border-radius:8px;color:#ff2d8a;font-family:Creepster,cursive;letter-spacing:3px;font-size:18px;'>🐙 CUTESY CHAOS TAROT</div>'" alt="Cutesy Chaos Tarot">
     </div>
   </div>
 
-  <!-- SPREAD SELECTOR -->
+  <div class="mode-section">
+    <h2 id="modeLabel">Choose Your Path</h2>
+    <div class="mode-tabs" id="modeTabs"></div>
+  </div>
+
   <div class="spread-section">
     <h2>Choose Your Spread</h2>
     <div class="spread-options" id="spreadOptions"></div>
     <div class="spread-desc" id="spreadDesc"></div>
   </div>
 
-  <!-- DRAW -->
   <div class="draw-section">
     <button class="draw-btn" onclick="doReading()">
-      <span>✦ &nbsp; Draw the Cards &nbsp; ✦</span>
+      <span id="drawBtnText">✦ &nbsp; Draw the Cards &nbsp; ✦</span>
     </button>
   </div>
 
-  <!-- READING AREA -->
   <div class="reading-area" id="readingArea">
     <div class="spread-layout" id="spreadLayout"></div>
     <div class="meaning-panel" id="meaningPanel"></div>
     <button class="clear-btn" id="clearBtn" style="display:none" onclick="clearReading()">✦ Clear Reading ✦</button>
   </div>
-
 </div>
 
 <footer>
-  <span>Nightwood Oracle</span> &nbsp;·&nbsp; The forest speaks to those who listen
+  <span id="footerDeck">Nightwood Oracle</span> &nbsp;·&nbsp;
+  <span id="footerShop">Unsolicited Deck Pics</span> &nbsp;·&nbsp;
+  <span id="footerTag">The forest speaks to those who listen</span>
 </footer>
 
 <script>
-// ── CARD DATA ──────────────────────────────────────────────────────────────
+// ── ORACLE CARDS ───────────────────────────────────────────────────────────
 const ORACLE_CARDS = [
-  {
-    id: 1, name: "The Wolf", file: "card 1.png",
-    subtitle: "Instinct · Pack · Wildness",
-    keywords: ["instinct","loyalty","shadow self","freedom","the pack"],
-    meaning: "The Wolf does not ask permission to exist. It moves through the world on instinct sharpened by survival, guided by something older than thought. When Wolf appears, you are being called back to your truest nature — to trust what you feel before you think it, to honor the wild intelligence that lives in your body. You may be navigating pack dynamics, chosen family, or questions of belonging. Wolf asks: are you running with the right people? Are you running at all? The shadows Wolf walks through are not dangers — they are the places where your most honest self was left behind. Go back for it."
+  {id:"card 1",name:"The Wolf",file:"card 1.png",type:"oracle",subtitle:"Trust Your Instincts",keywords:["instinct","loyalty","shadow self","freedom","the pack"],meaning:"The Wolf does not ask permission to exist. It moves through the world on instinct sharpened by survival, guided by something older than thought. When Wolf appears, you are being called back to your truest nature — to trust what you feel before you think it, to honor the wild intelligence that lives in your body. You may be navigating pack dynamics, chosen family, or questions of belonging. Wolf asks: are you running with the right people? Are you running at all?"},
+  {id:"card 2",name:"The Bear",file:"card 2.png",type:"oracle",subtitle:"Strength & Sovereignty",keywords:["inner strength","boundaries","hibernation","sovereignty","healing"],meaning:"Bear holds more power in stillness than most hold in motion. This is a card of sovereign strength — the kind that doesn't need to announce itself. Bear knows when to emerge and when to go inward. If this card has found you, there may be a season of retreat ahead, not in defeat but in restoration. Your strength needs tending. Hold your territory gently. Hold it firmly."},
+  {id:"card 3",name:"The Raven",file:"card 3.png",type:"oracle",subtitle:"Magic & Messages",keywords:["magic","messages","transformation","trickster","the unseen"],meaning:"Raven moves between worlds without apology. It is the trickster, the messenger, the keeper of secrets that were never meant to stay secrets. When Raven lands in your reading, pay attention to what you've been dismissing — a recurring thought, a strange coincidence, a dream that felt too real. Something is trying to get through. Magic is not elsewhere. It is in the ordinary moment turned sideways. Look again."},
+  {id:"card 4",name:"The Fox",file:"card 4.png",type:"oracle",subtitle:"Cunning & Adaptability",keywords:["cunning","strategy","adaptability","wit","perception"],meaning:"Fox doesn't fight what it cannot overcome — it outthinks it. There is no shame in cleverness. Fox sees angles that others miss and moves through complexity with playful intelligence. If Fox has come to you, a situation is calling for strategy over force. What do you know that you haven't used yet? Fox asks you to trust your own sharp mind."},
+  {id:"card 5",name:"The Owl",file:"card 5.png",type:"oracle",subtitle:"Wisdom & Truth",keywords:["wisdom","night vision","truth","the unspeakable","clarity"],meaning:"Owl sees what others refuse to see. It does not blink at darkness because darkness is simply where truth goes when the light is too harsh. This is a card of deep wisdom — not the kind you learn but the kind you uncover by sitting with discomfort long enough for it to become understanding. The truth you've been avoiding is not as devastating as the energy you're spending to avoid it. Owl says: look directly."},
+  {id:"card 6",name:"The Deer",file:"card 6.png",type:"oracle",subtitle:"Gentleness & Grace",keywords:["gentleness","grace","sensitivity","alertness","compassion"],meaning:"Deer is not fragile — Deer is finely tuned. There is a difference between vulnerability and weakness, and Deer knows it. This card arrives when you are being called to lead with your heart rather than your armor. Deer holds extraordinary awareness; its sensitivity is a form of intelligence. If you have been told you feel too much, Deer asks: perhaps the world simply doesn't feel enough."},
+  {id:"card 7",name:"The Squirrel",file:"card 7.png",type:"oracle",subtitle:"Preparation & Play",keywords:["preparation","resourcefulness","play","foresight","gathering"],meaning:"Squirrel knows something winter is coming does not cancel summer joy — it just means you dance and gather at the same time. Are you storing what you need? Are you hoarding what no longer serves? Squirrel is resourceful to the point of genius — it finds abundance where others see scarcity. What resources are already in your hands that you haven't recognized as wealth?"},
+  {id:"card 8",name:"The Hawk",file:"card 8.png",type:"oracle",subtitle:"Vision & Perspective",keywords:["perspective","clarity","focus","precision","the long view"],meaning:"Hawk doesn't panic because it can see the whole field. From this height, the thing you were tangled in resolves into pattern. You may be too close to something to understand its shape. Hawk's gift is perspective: the ability to hold the large view and the precise strike at once. What would shift if you saw your situation from above? Hawk asks you to rise before you move."},
+  {id:"card 9",name:"The Rabbit",file:"card 9.png",type:"oracle",subtitle:"Fear & Fertility",keywords:["fear","fertility","intuition","quickness","abundance"],meaning:"Rabbit holds the paradox of being both the most vulnerable and the most prolific creature in the wood. What you fear, you often draw toward you — not because you are cursed but because fear is a form of attention. This card also carries extraordinary fertile energy: new ideas, new life, new beginnings multiplying faster than expected. What would you create if you weren't afraid?"},
+  {id:"card 10",name:"The Snake",file:"card 10.png",type:"oracle",subtitle:"Transformation & Shedding",keywords:["transformation","shedding","rebirth","healing","cycles"],meaning:"Snake does not mourn its old skin — it was simply time. Something must be released entirely, not renegotiated. You have outgrown a version of yourself and holding onto it is costing you more than the fear of shedding it. Snake moves through the world low to the earth, intimate with the ground of being. After the shedding comes sensitivity: everything feels new, raw, vivid. That rawness is aliveness."},
+  {id:"card 11",name:"The Porcupine",file:"card 11.png",type:"oracle",subtitle:"Boundaries & Innocence",keywords:["boundaries","innocence","trust","protection","vulnerability"],meaning:"Porcupine is not aggressive — it simply makes the cost of careless approach very clear. The quills are not a wall, they are a boundary. Porcupine still moves through the world with curiosity and playfulness. Can you maintain innocence — the willingness to approach the world openly — while still knowing your own edges?"},
+  {id:"card 12",name:"The Moose",file:"card 12.png",type:"oracle",subtitle:"Pride & Presence",keywords:["pride","presence","self-worth","majesty","confidence"],meaning:"Moose is not subtle about its presence. It does not apologize for taking up space. True Moose energy is self-possessed without being self-absorbed: a settled dignity that doesn't need comparison. Walk into the room like you belong there — because you do. Stop making yourself small for people who are simply unused to your size."},
+  {id:"card 13",name:"The Butterfly",file:"card 13.png",type:"oracle",subtitle:"Transformation & Joy",keywords:["emergence","joy","change","lightness","becoming"],meaning:"Butterfly did not transform — it dissolved. Before the wings, there was the surrender of every familiar form. If you are in that dark formless stage, know it is not destruction — it is the necessary dissolution before something new can take shape. Butterfly asks: are you willing to stop being what you were in order to become what you are?"},
+  {id:"card 14",name:"The Beaver",file:"card 14.png",type:"oracle",subtitle:"Building & Determination",keywords:["building","vision","persistence","community","creation"],meaning:"Beaver changes the landscape. It doesn't find a place that suits it — it makes one. This is the energy of determined, visionary building: the willingness to do the slow, unglamorous work of creating something that will last. Beaver works with what is available, not what is ideal. The creek doesn't stop; the dam doesn't build itself. Pick up the branch."},
+  {id:"card 15",name:"The Eagle",file:"card 15.png",type:"oracle",subtitle:"Spirit & Freedom",keywords:["spirit","freedom","divine","leadership","vision"],meaning:"Eagle flies where nothing else can follow. This is a card of spiritual elevation — genuine contact with something larger than the personal. Eagle sees from a perspective that includes the sacred, the ancestral, the connected web of all things. When Eagle appears, you may be receiving a calling or a confirmation. There is a part of you that is vast and unhurried. Lead from there."},
+  {id:"card 16",name:"The Mouse",file:"card 16.png",type:"oracle",subtitle:"Detail & The Small Sacred",keywords:["attention","details","scrutiny","the overlooked","focus"],meaning:"Mouse lives in the intimate scale of things. While others look at the horizon, Mouse notices the crack in the floorboard, the crumb, the forgotten corner. There may be fine print in a contract, a pattern in a relationship, a symptom you've been waving away. Mouse asks you to slow down and look closely. The small things are not small — they are the foundation of everything larger."},
+  {id:"card 17",name:"The Cougar",file:"card 17.png",type:"oracle",subtitle:"Power & Decisiveness",keywords:["power","leadership","decisiveness","courage","action"],meaning:"Cougar does not second-guess itself at the moment of the leap. All of the patience, all of the watching — it comes down to this decisive instant where power is expressed cleanly. You know more than you're giving yourself credit for. You're ready for more than you're claiming. Cougar asks: what are you still waiting for permission to do?"},
+  {id:"card 18",name:"The Frog",file:"card 18.png",type:"oracle",subtitle:"Cleansing & Transition",keywords:["cleansing","rain","transition","abundance","emotion"],meaning:"Frog lives in two worlds and belongs to both. It knows water and earth, submersion and emergence. You are moving between states, between identities, between chapters. Frog also carries the energy of cleansing: what needs to be washed away? The tears you've been holding back are not weakness — they are the water that carries you to the other side."},
+  {id:"card 19",name:"The Turtle",file:"card 19.png",type:"oracle",subtitle:"Patience & Ancient Wisdom",keywords:["patience","groundedness","ancient wisdom","protection","timing"],meaning:"Turtle has been here longer than the panic you're in. This card carries the deep, unhurried wisdom of things that have survived every storm by having nowhere urgent to be. Something in your life is asking for patience: not passive waiting, but active trust in a natural timeline. You carry your home with you. You are more protected than you feel. Breathe. The earth holds you."},
+  {id:"card 20",name:"The Firefly",file:"card 20.png",type:"oracle",subtitle:"Hope & Light in Darkness",keywords:["hope","light","magic","inspiration","illumination"],meaning:"Firefly doesn't wait for the sun. It makes its own light, small and improbable and beautiful in the dark. This is the card of hope that doesn't require conditions — the light that shows up not because everything is fine but because something in you refuses to stop shining. You may not know how much your small light means to the people in your night."},
+];
+
+// ── CUTESY CHAOS MAJOR ARCANA ──────────────────────────────────────────────
+const CUTESY_MAJOR = [
+{
+    id:"tarot_00_the_fool", name:"The Fool", type:"cutesy",
+    file:"tarot_00_the_fool.png",
+    subtitle:"Chaos is Calling 🐾",
+    keywords:["new beginnings", "leap of faith", "chaos is calling", "trust the trip"],
+    meaning:`Oh sweetie, you absolute disaster — and we mean that with SO much love. The Fool is skipping off a cliff with a bindle and a tiny dog and zero regrets, and honestly? That's the vibe. Something new is beginning and it doesn't need your permission or your five-year plan. The universe has slipped you a note that says 'just go' and the only wrong move is standing still. Pack light. Bring snacks. The chaos ahead of you is way more fun than the comfort behind you. Your little dog believes in you. That's enough.`
   },
   {
-    id: 2, name: "The Bear", file: "card 2.png",
-    subtitle: "Strength · Solitude · Sovereignty",
-    keywords: ["inner strength","boundaries","hibernation","sovereignty","healing"],
-    meaning: "Bear holds more power in stillness than most hold in motion. This is a card of sovereign strength — the kind that doesn't need to announce itself. Bear knows when to emerge and when to go inward. If this card has found you, there may be a season of retreat ahead, not in defeat but in restoration. Your strength needs tending. You are not weak for needing quiet — you are wise. Bear also speaks to boundaries that are not walls but territories: the sacred ground of what you will and will not allow. Hold it gently. Hold it firmly."
+    id:"tarot_01_the_magician", name:"The Magician", type:"cutesy",
+    file:"tarot_01_the_magician.png",
+    subtitle:"You Have Everything You Need ✨",
+    keywords:["you literally have everything", "manifest it", "stop waiting", "main character energy"],
+    meaning:`Stop looking around for someone to give you permission. The Magician has every single tool on the table and knows exactly what to do with them — and so do you, you just keep pretending otherwise. The wand, the cup, the sword, the coin — magic, emotion, thought, and material reality — all available, all yours. The question isn't whether you're capable. It's whether you're going to stop doubting yourself long enough to actually try. Spoiler: you are. The glow-up starts the second you decide.`
   },
   {
-    id: 3, name: "The Raven", file: "card 3.png",
-    subtitle: "Magic · Messenger · Mystery",
-    keywords: ["magic","messages","transformation","trickster","the unseen"],
-    meaning: "Raven moves between worlds without apology. It is the trickster, the messenger, the keeper of secrets that were never meant to stay secrets. When Raven lands in your reading, pay attention to what you've been dismissing — a recurring thought, a strange coincidence, a dream that felt too real. Something is trying to get through. Raven carries both mischief and medicine; it delights in unraveling what you thought was fixed. Magic is not elsewhere. It is in the ordinary moment turned sideways. Look again."
+    id:"tarot_02_the_high_priestess", name:"The High Priestess", type:"cutesy",
+    file:"tarot_02_the_high_priestess.png",
+    subtitle:"Your Gut Already Knows 🌙",
+    keywords:["your gut knows", "sit with it", "mystery", "don't explain yourself"],
+    meaning:`She's not going to tell you what to do. She never does. The High Priestess keeps her secrets close and her intuition closer, and she wants you to do the same. You already know the answer — you've known it for a while — you've just been waiting for logic to catch up, or for someone else to confirm it, or for it to feel safer. None of that is coming. The knowing you have right now in your body? That's the reading. Stop googling. Go inward.`
   },
   {
-    id: 4, name: "The Fox", file: "card 4.png",
-    subtitle: "Cunning · Adaptability · Wit",
-    keywords: ["cunning","strategy","adaptability","wit","perception"],
-    meaning: "Fox doesn't fight what it cannot overcome — it outthinks it. There is no shame in cleverness; there is no honor in suffering when grace is available. Fox sees angles that others miss and moves through complexity with a kind of playful intelligence that looks effortless because it has been practiced. If Fox has come to you, a situation in your life may be calling for strategy over force. What do you know that you haven't used yet? Where have you been too direct when indirection would serve better? Fox asks you to trust your own sharp mind."
+    id:"tarot_03_the_empress", name:"The Empress", type:"cutesy",
+    file:"tarot_03_the_empress.png",
+    subtitle:"You Deserve Nice Things 🌸",
+    keywords:["abundance", "pleasure", "grow something", "you deserve nice things"],
+    meaning:`She is sitting in a field of flowers wearing a crown and honestly living her best life, and she would like you to join her. The Empress is the earth in full bloom — creative, abundant, sensual, and completely unbothered. What are you growing? What are you nourishing? More importantly — what have you been withholding from yourself under the guise of 'not yet' or 'when I earn it'? The Empress does not negotiate with scarcity. She tends the garden and trusts the harvest. Start tending.`
   },
   {
-    id: 5, name: "The Owl", file: "card 5.png",
-    subtitle: "Wisdom · Vision · Truth",
-    keywords: ["wisdom","night vision","truth","the unspeakable","clarity"],
-    meaning: "Owl sees what others refuse to see. It does not blink at darkness because darkness is simply where truth goes when the light is too harsh. This is a card of deep wisdom — not the kind you learn but the kind you uncover by sitting with discomfort long enough for it to become understanding. Owl may be pointing toward something you already know but have been circling. The truth you've been avoiding is not as devastating as the energy you're spending to avoid it. Owl says: look directly. What is actually there?"
+    id:"tarot_04_the_emperor", name:"The Emperor", type:"cutesy",
+    file:"tarot_04_the_emperor.png",
+    subtitle:"Build Something That Lasts 🏰",
+    keywords:["structure", "boundaries", "build the thing", "stop winging it"],
+    meaning:`The Emperor didn't build an empire by being chill about it. Sometimes the most radical act of self-love is making a plan and sticking to it. This card is asking where in your life you've been winging it when you need a foundation. Not rules for rules' sake — structure that actually serves you, boundaries that protect what matters, systems that let you grow without constantly starting over. The Emperor sits on the throne because he built the throne. What are you building?`
   },
   {
-    id: 6, name: "The Deer", file: "card 6.png",
-    subtitle: "Gentleness · Grace · Sensitivity",
-    keywords: ["gentleness","grace","sensitivity","alertness","compassion"],
-    meaning: "Deer is not fragile — Deer is finely tuned. There is a difference between vulnerability and weakness, and Deer knows it. This card arrives when you are being called to lead with your heart rather than your armor. The gentleness required here is not naive — it is chosen. Deer holds extraordinary awareness; its sensitivity is a form of intelligence, not a liability. If you have been told you feel too much, Deer asks you to consider: perhaps the world simply doesn't feel enough. Your tenderness is a gift. Use it with intention."
+    id:"tarot_05_the_hierophant", name:"The Hierophant", type:"cutesy",
+    file:"tarot_05_the_hierophant.png",
+    subtitle:"Which Rules Actually Serve You? 📚",
+    keywords:["tradition", "question everything", "which rules are yours", "learn from others"],
+    meaning:`The Hierophant is the keeper of tradition and established wisdom — and this card asks you to figure out which traditions you're keeping because they genuinely serve you and which ones you inherited by accident. There's real medicine in lineage, in teachers, in structures built by people who figured things out before you. And there are also rules you've been following for no reason. You get to decide which is which. The Hierophant holds the keys. You decide which doors they open.`
   },
   {
-    id: 7, name: "The Squirrel", file: "card 7.png",
-    subtitle: "Preparation · Play · Resourcefulness",
-    keywords: ["preparation","resourcefulness","play","foresight","gathering"],
-    meaning: "Squirrel knows something winter is coming does not cancel summer joy — it just means you dance and gather at the same time. This card carries the energy of playful preparation, of building toward something without losing the pleasure of the present. Are you storing what you need? Are you hoarding what no longer serves? Squirrel is resourceful to the point of genius — it finds abundance where others see scarcity. What resources, skills, or connections are already in your hands that you haven't recognized as wealth?"
+    id:"tarot_06_the_lovers", name:"The Lovers", type:"cutesy",
+    file:"tarot_06_the_lovers.png",
+    subtitle:"Choose What Actually Aligns 💕",
+    keywords:["alignment", "choose", "values check", "love yourself first"],
+    meaning:`Two little birds in love on a branch and that is extremely cute but The Lovers isn't just about romance — it's about alignment. It's the card of choosing what matches your actual values instead of what's convenient or familiar. Who and what are you choosing? And are you choosing with your whole self or just the part of yourself that's afraid of being alone or making the wrong call? Alignment feels different than compromise. You know which one this is. Choose accordingly.`
   },
   {
-    id: 8, name: "The Hawk", file: "card 8.png",
-    subtitle: "Vision · Clarity · Perspective",
-    keywords: ["perspective","clarity","focus","precision","the long view"],
-    meaning: "Hawk doesn't panic because it can see the whole field. From this height, the thing you were tangled in resolves into pattern. This card arrives when you need to pull back — not to detach, but to see more clearly. You may be too close to something to understand its shape. Hawk's gift is perspective: the ability to hold the large view and the precise strike at once. What would shift if you saw your situation from above? What patterns would become visible? Hawk asks you to rise before you move."
+    id:"tarot_07_the_chariot", name:"The Chariot", type:"cutesy",
+    file:"tarot_07_the_chariot.png",
+    subtitle:"Go Anyway 🌟",
+    keywords:["forward motion", "hold the reins", "conflicting feelings", "go anyway"],
+    meaning:`The Chariot is pulled by two creatures going in different directions — and it moves forward anyway through sheer force of will. You don't need to resolve every inner conflict before you move. You don't need to feel ready, aligned, or certain. You need to decide a direction and hold the reins. The victory doesn't come from having it all figured out. It comes from moving even when you don't. Point yourself forward. The chaos will catch up later.`
   },
   {
-    id: 9, name: "The Rabbit", file: "card 9.png",
-    subtitle: "Fertility · Fear · Quickness",
-    keywords: ["fear","fertility","intuition","quickness","abundance"],
-    meaning: "Rabbit holds the paradox of being both the most vulnerable and the most prolific creature in the wood. What you fear, you often draw toward you — not because you are cursed but because fear is a form of attention. Rabbit asks you to look honestly at what you've been fixating on under the guise of caution. This card also carries extraordinary fertile energy: new ideas, new life, new beginnings multiplying faster than expected. If you can shift from fear to curiosity, Rabbit's gifts become yours. What would you create if you weren't afraid?"
+    id:"tarot_08_strength", name:"Strength", type:"cutesy",
+    file:"tarot_08_strength.png",
+    subtitle:"Gentle Is Still Powerful 🖤",
+    keywords:["gentle power", "patience", "tame it with love", "you are stronger than you think"],
+    meaning:`The little creature holds the fearsome thing with soft hands and no force and the fearsome thing yields. That's the whole lesson. Strength is not the loudest thing in the room. It's not domination or performance or grinding until you break. It is the quiet, unwavering kind of power that meets the hard thing with an open heart and doesn't flinch. What in your life is asking to be met with softness instead of force? Try it. The surrender might surprise you.`
   },
   {
-    id: 10, name: "The Snake", file: "card 10.png",
-    subtitle: "Transformation · Shedding · Rebirth",
-    keywords: ["transformation","shedding","rebirth","healing","cycles"],
-    meaning: "Snake does not mourn its old skin — it was simply time. This is perhaps the most potent transformation card in the deck. Something must be released entirely, not renegotiated. You have outgrown a version of yourself — a belief, a relationship, an identity — and holding onto it is costing you more than the fear of shedding it. Snake moves through the world low to the earth, intimate with the ground of being. After the shedding comes sensitivity: everything feels new, raw, vivid. That rawness is not weakness. It is aliveness."
+    id:"tarot_09_the_hermit", name:"The Hermit", type:"cutesy",
+    file:"tarot_09_the_hermit.png",
+    subtitle:"The Answers Are Inside 🏮",
+    keywords:["go within", "you need alone time", "lantern in the dark", "wisdom incoming"],
+    meaning:`The Hermit climbs the mountain alone with a tiny lantern and that is somehow the most relatable thing in the deck. Not every question gets answered by asking someone else, googling it, or talking it through for the fifteenth time. Some things need silence. Some answers live in the quiet that happens after you stop distracting yourself. This card is not asking you to isolate forever — it's asking for a specific kind of intentional aloneness so you can hear the thing you already know. Go get quiet.`
   },
   {
-    id: 11, name: "The Porcupine", file: "card 11.png",
-    subtitle: "Boundaries · Innocence · Trust",
-    keywords: ["boundaries","innocence","trust","protection","vulnerability"],
-    meaning: "Porcupine is not aggressive — it simply makes the cost of careless approach very clear. There is a profound wisdom in this: the quills are not a wall, they are a boundary. Porcupine still moves through the world with curiosity and even playfulness. It has not let the need for protection collapse into isolation. This card asks you to examine your boundaries: are they proportionate? Are they protecting the tender heart inside or cutting you off from connection? Can you maintain the innocence that Porcupine carries — the willingness to approach the world openly — while still knowing your own edges?"
+    id:"tarot_10_wheel_of_fortune", name:"Wheel of Fortune", type:"cutesy",
+    file:"tarot_10_wheel_of_fortune.png",
+    subtitle:"The Wheel is Turning 🎡",
+    keywords:["cycles", "it's turning", "change incoming", "timing"],
+    meaning:`The Wheel of Fortune doesn't ask for your opinion. It just turns. You are at a point of change — a genuine turning point — and your job is not to stop the wheel but to figure out how to move with it. What's been stuck is loosening. What's been high might shift. What's been down might rise. The Wheel doesn't punish or reward — it cycles. The wisdom is in recognizing which part of the cycle you're in and working with it instead of white-knuckling your way against it.`
   },
   {
-    id: 12, name: "The Moose", file: "card 12.png",
-    subtitle: "Pride · Presence · Self-Esteem",
-    keywords: ["pride","presence","self-worth","majesty","confidence"],
-    meaning: "Moose is not subtle about its presence. It does not apologize for taking up space, for the weight of its own magnificence. This card arrives when your self-worth is being called into question — either you are shrinking when you shouldn't be, or pride has tipped into arrogance that's isolating you. True Moose energy is self-possessed without being self-absorbed: a settled dignity that doesn't need comparison. Walk into the room like you belong there — because you do. Stop making yourself small for people who are simply unused to your size."
+    id:"tarot_11_justice", name:"Justice", type:"cutesy",
+    file:"tarot_11_justice.png",
+    subtitle:"The Truth Will Balance It ⚖️",
+    keywords:["accountability", "truth", "cause and effect", "balance it out"],
+    meaning:`The snow leopard holds the scales and the sword and has absolutely no interest in your excuses — not because she's cruel but because truth is more efficient than comfort. Justice is the recognition that actions have consequences and the universe keeps receipts. Where you've acted with integrity, balance will be restored. Where you haven't, the correction is coming — and it will be fair. This isn't punishment, it's physics. Act accordingly, and if you've already acted, own it. The scales tip toward truth.`
   },
   {
-    id: 13, name: "The Butterfly", file: "card 13-1.png",
-    subtitle: "Transformation · Joy · Emergence",
-    keywords: ["emergence","joy","change","lightness","becoming"],
-    meaning: "Butterfly did not transform — it dissolved. Before the wings, there was the surrender of every familiar form. The chrysalis is not a waiting room; it is a place of complete unmaking. If you are in that dark formless stage, know it is not destruction — it is the necessary dissolution before something new can take shape. And when you emerge, there is joy in the emergence — a kind of levity and color that the caterpillar could never have imagined. Butterfly asks: are you willing to stop being what you were in order to become what you are?"
+    id:"tarot_12_the_hanged_man", name:"The Hanged Man", type:"cutesy",
+    file:"tarot_12_the_hanged_man.png",
+    subtitle:"Try a Different Angle 🦇",
+    keywords:["pause", "new perspective", "surrender", "hang upside down and see what changes"],
+    meaning:`The little bat is hanging upside down and looking extremely unbothered about it, and that is exactly the energy. The Hanged Man is the card of the deliberate, chosen pause — the moment you stop struggling and let the new perspective arrive. Everything looks different from this angle. The problem you've been attacking head-on might dissolve when you stop attacking it. The answer you can't find might appear when you stop looking so hard. Hang. Wait. Let the blood rush somewhere new.`
   },
   {
-    id: 14, name: "The Beaver", file: "card 14.png",
-    subtitle: "Building · Determination · Vision",
-    keywords: ["building","vision","persistence","community","creation"],
-    meaning: "Beaver changes the landscape. It doesn't find a place that suits it — it makes one. This is the energy of determined, visionary building: the willingness to do the slow, unglamorous work of creating something that will last. Beaver works with what is available, not what is ideal, and the result is a home that holds water, holds warmth, holds life. What are you building? Are you doing the actual work, or are you waiting for better conditions? The creek doesn't stop; the dam doesn't build itself. Beaver asks you to pick up the branch."
+    id:"tarot_13_death", name:"Death", type:"cutesy",
+    file:"tarot_13_death.png",
+    subtitle:"Let It Decompose Into Something Better 💀",
+    keywords:["ending", "transformation", "let it go", "something better is composting"],
+    meaning:`The little grim reaper is honestly kind of adorable and that is on purpose. Death in the cards is not the end — it's the composting. Something is over. Something has to be released completely and not renegotiated or dragged back out of the bin. The grief of this is real. Let it be real. And then let it go, because what grows after a proper ending is always more alive than what you were clinging to. You cannot carry a corpse into your next chapter. Put it down. Watch what blooms.`
   },
   {
-    id: 15, name: "The Eagle", file: "card 15.png",
-    subtitle: "Spirit · Freedom · Divine Connection",
-    keywords: ["spirit","freedom","divine","leadership","vision"],
-    meaning: "Eagle flies where nothing else can follow. This is a card of spiritual elevation — not escapism, but genuine contact with something larger than the personal. Eagle sees from a perspective that includes the sacred, the ancestral, the connected web of all things. When Eagle appears, you may be receiving a calling, a confirmation, or a reminder that you are not simply your circumstances. There is a part of you that is vast and unhurried. Lead from there. Act from that height. Eagle does not swoop without purpose — when it moves, it is certain."
+    id:"tarot_14_temperance", name:"Temperance", type:"cutesy",
+    file:"tarot_14_temperance.png",
+    subtitle:"Trust the Slow Blend 🌸",
+    keywords:["patience", "integration", "slow blend", "trust the process"],
+    meaning:`The little axolotl is pouring between vessels with absolute patience and the result is something neither vessel could have made alone — and that's the whole thing. Temperance is the card of integration, of the slow alchemical work of combining your contradictions into something new. You are in a blending process right now. Don't rush it. Don't dump everything at once. The patience IS the magic. The thing being made cannot be forced into being faster — it needs to be tended. Trust the pour.`
   },
   {
-    id: 16, name: "The Mouse", file: "card 16.png",
-    subtitle: "Detail · Scrutiny · The Small Sacred",
-    keywords: ["attention","details","scrutiny","the overlooked","focus"],
-    meaning: "Mouse lives in the intimate scale of things. While others look at the horizon, Mouse notices the crack in the floorboard, the crumb, the forgotten corner. This is a card of close attention — the reminder that the details you've been glossing over actually matter. There may be fine print in a contract, a pattern in a relationship, a symptom you've been waving away. Mouse asks you to slow down and look closely. The small things are not small. They are the foundation of everything larger, and right now they are asking for your full attention."
+    id:"tarot_15_the_devil", name:"The Devil", type:"cutesy",
+    file:"tarot_15_the_devil.png",
+    subtitle:"The Chains Are Looser Than You Think 😈",
+    keywords:["what are you attached to", "chosen chains", "shadow", "the exit is right there"],
+    meaning:`The little devil is very cute and the chains around those figures are very loose and that is extremely intentional. The Devil card is the mirror that shows you what you're choosing to stay bound to — the habit, the dynamic, the story, the comfort zone that stopped being comfortable two years ago. Nothing is keeping you there except the part of you that gets something from staying. What are you getting? What would you lose if you were free? The exit has always been right there. The question is whether you want to use it.`
   },
   {
-    id: 17, name: "The Cougar", file: "card 17-1.png",
-    subtitle: "Power · Leadership · Decisiveness",
-    keywords: ["power","leadership","decisiveness","courage","action"],
-    meaning: "Cougar does not second-guess itself at the moment of the leap. All of the patience, all of the watching, all of the waiting — it comes down to this decisive instant where power is expressed cleanly and completely. This card carries the energy of leadership that comes from genuine capability rather than hierarchy. You know more than you're giving yourself credit for. You're ready for more than you're claiming. Cougar asks: what are you still waiting for permission to do? The authority you're looking for outside yourself lives inside the moment you decide to act."
+    id:"tarot_16_the_tower", name:"The Tower", type:"cutesy",
+    file:"tarot_16_the_tower.png",
+    subtitle:"It Was Always Going to Fall ⚡",
+    keywords:["it's falling", "it was always unstable", "lightning clarity", "rebuild better"],
+    meaning:`The Tower falls because it was built on something that wasn't true, and the lightning didn't lie. This is the card no one wants to pull and also sometimes exactly the card you need. Something is collapsing — a belief, a plan, a relationship, an identity — and as terrifying as it feels, the collapse is the correction. What falls was never as solid as you thought. What remains after the Tower is what was actually real. You will rebuild. You will build it better this time. Let it fall.`
   },
   {
-    id: 18, name: "The Frog", file: "card 18.png",
-    subtitle: "Cleansing · Transition · Abundance",
-    keywords: ["cleansing","rain","transition","abundance","emotion"],
-    meaning: "Frog lives in two worlds and belongs to both. It knows water and earth, submersion and emergence, the underwater silence and the singing night chorus. This is a card of transition — you are moving between states, between identities, between chapters. Frog also carries the energy of cleansing: what needs to be washed away? What have you been carrying that the rain would dissolve if you'd only step outside? Emotional honesty is Frog's medicine. The tears you've been holding back are not weakness — they are the water that carries you to the other side."
+    id:"tarot_17_the_star", name:"The Star", type:"cutesy",
+    file:"tarot_17_the_star.png",
+    subtitle:"Hope Doesn't Need Proof 🌟",
+    keywords:["hope", "renewal", "it gets better", "you are loved by the universe"],
+    meaning:`After the Tower, a star. After the collapse, someone pouring gentle water in the dark with no audience and no fanfare, just because it's needed. The Star is the quietest card in the deck and somehow the most powerful. It doesn't promise everything is fine. It promises something real: that renewal is possible, that you are held by something larger than your worst moment, that hope doesn't need conditions to exist. Let yourself be replenished. The sky is full of light even when you can't see it.`
   },
   {
-    id: 19, name: "The Turtle", file: "card 19.png",
-    subtitle: "Patience · Groundedness · Ancient Wisdom",
-    keywords: ["patience","groundedness","ancient wisdom","protection","timing"],
-    meaning: "Turtle has been here longer than the panic you're in. This card carries the deep, unhurried wisdom of things that have survived every storm by having nowhere urgent to be. There is no rushing Turtle — not because it is slow, but because it understands that arriving in your own time is not a failure of speed, it is an act of integrity. If Turtle has come, something in your life is asking for patience: not passive waiting, but active trust in a natural timeline. You carry your home with you. You are more protected than you feel. Breathe. The earth holds you."
+    id:"tarot_18_the_moon", name:"The Moon", type:"cutesy",
+    file:"tarot_18_the_moon.png",
+    subtitle:"Not Everything You See Is Real 🌙",
+    keywords:["illusion", "anxiety", "not everything you see is real", "walk carefully"],
+    meaning:`The Moon illuminates things imperfectly and that's the whole problem — familiar shapes take on strange meanings, the path looks clear but shifts, and it's genuinely hard to know what's real and what's shadow. This card appears when anxiety is distorting your perception or when something is being concealed, even from yourself. Walk carefully. Stay with what you actually know, not what your fear is filling in the blanks with. Not everything you're seeing right now is accurate. Wait for better light before you decide.`
   },
   {
-    id: 20, name: "The Firefly", file: "card 20.png",
-    subtitle: "Hope · Light in Darkness · Magic",
-    keywords: ["hope","light","magic","inspiration","illumination"],
-    meaning: "Firefly doesn't wait for the sun. It makes its own light, small and improbable and beautiful in the dark. This is the card of hope that doesn't require conditions — the light that shows up not because everything is fine but because something in you refuses to stop shining. Firefly appears when you most need to remember: you are not without light. The darkness around you is not evidence of your darkness. Even one small true thing, one moment of genuine warmth, one honest connection — these are the flickers that others navigate by. You may not know how much your small light means to the people in your night."
+    id:"tarot_19_the_sun", name:"The Sun", type:"cutesy",
+    file:"tarot_19_the_sun.png",
+    subtitle:"Just Let It Be Good ☀️",
+    keywords:["joy", "clarity", "just let it be good", "warmth is real"],
+    meaning:`The little dragon is standing in sunflowers with a smiling sun above it and honestly this is just a good card, let it be a good card. The Sun is the return of clarity and warmth and uncomplicated joy — the kind that doesn't need a catch. Something is going right. You are allowed to feel good about it without waiting for the other shoe. You are allowed to stand in this warmth without cataloguing all the reasons it might not last. The Sun is real. The joy is real. Let it land.`
+  },
+  {
+    id:"tarot_20_judgement", name:"Judgement", type:"cutesy",
+    file:"tarot_20_judgement.png",
+    subtitle:"You Are Being Summoned 📯",
+    keywords:["wake up call", "rise", "answer the call", "you are being summoned"],
+    meaning:`The little angel dragon is blowing the horn and the call is for YOU. Judgement is not a verdict — it's a summons. Something in you is being called to rise, to answer, to show up as the version of yourself you've been putting off becoming. What have you been waiting for permission to do? What part of yourself have you been afraid to fully claim? The horn has sounded. The answer it's looking for is you — not a future version, not a fixed version, not a ready version. You, right now, saying yes.`
+  },
+  {
+    id:"tarot_21_the_world", name:"The World", type:"cutesy",
+    file:"tarot_21_the_world.png",
+    subtitle:"You Actually Did It 🌍",
+    keywords:["completion", "you did it", "full circle", "begin again"],
+    meaning:`The turtle carries the whole world and is completely serene about it because it has been here before and will be here again. The World is the card of completion — not an ending but a fulfillment, a cycle coming full circle, a genuine arrival at something you worked toward. Take a moment to actually feel this. You traveled a long way to get here. Something is genuinely, beautifully complete. And when you're ready — when you've actually rested in this arrival — the next cycle begins. But for now: you made it. The world is on your back and it fits perfectly.`
   }
 ];
 
-// ── TAROT CARDS (Major Arcana + Minor) ────────────────────────────────────
-const TAROT_CARDS = [
-  { name: "The Fool", number: "0", arcana: "Major", keywords: ["beginnings","spontaneity","leap of faith"], meaning: "The Fool stands at the precipice, unburdened by what has come before. This card heralds a new beginning, an invitation to take the leap before you're ready — because you will never be fully ready, and the universe is conspiring in your favor anyway. Trust the path even when you can't see it. Pack light. Go." },
-  { name: "The Magician", number: "I", arcana: "Major", keywords: ["will","skill","manifestation"], meaning: "All the tools you need are already on the table. The Magician does not wait for more resources — it transforms what is present through focused will and clear intention. You have more power than you're using. The gap between where you are and where you want to be is narrower than it appears, and you have the skill to cross it." },
-  { name: "The High Priestess", number: "II", arcana: "Major", keywords: ["intuition","mystery","inner knowing"], meaning: "The High Priestess guards what cannot be spoken — the deep knowing that lives below the rational mind. She asks you to stop seeking the answer outside yourself. Sit with the question. Let the answer surface from within. Your intuition is not imagination; it is intelligence in a language older than words." },
-  { name: "The Empress", number: "III", arcana: "Major", keywords: ["abundance","creativity","nurturing"], meaning: "The Empress is the earth in full bloom — generative, sensual, overflowing with life. This card calls you toward creativity, toward pleasure, toward the recognition that abundance is not something you earn but something you allow. What are you growing? What have you been withholding nourishment from, including yourself?" },
-  { name: "The Emperor", number: "IV", arcana: "Major", keywords: ["authority","structure","stability"], meaning: "The Emperor builds the container in which things can thrive. This is not power over — it is power that creates stability, that holds space, that builds structures worthy of what they protect. Where do you need more structure? Where has the absence of form been mistaken for freedom? A strong foundation is not a cage." },
-  { name: "The Hierophant", number: "V", arcana: "Major", keywords: ["tradition","belief","institution"], meaning: "The Hierophant holds the keys to established systems — tradition, institution, shared belief. This card asks you to examine your relationship with the structures that have shaped you. Are you drawing on their wisdom or bound by their limitations? There is medicine in tradition when it is chosen consciously." },
-  { name: "The Lovers", number: "VI", arcana: "Major", keywords: ["choice","union","values"], meaning: "The Lovers is not simply about romance — it is about the deepest choices of alignment. Who and what do you choose? This card arrives at crossroads where the path taken reflects your truest values. Love is not just who you love but how you love — with what integrity, what sacrifice, what wholeness." },
-  { name: "The Chariot", number: "VII", arcana: "Major", keywords: ["will","victory","direction"], meaning: "The Chariot moves forward through sheer force of directed will. The horses pull in different directions; the charioteer holds both. This is the card of mastering contradiction — moving forward not by eliminating tension but by channeling it. You have more momentum than you think. Keep going." },
-  { name: "Strength", number: "VIII", arcana: "Major", keywords: ["courage","patience","inner power"], meaning: "Strength is not the lion tamed — it is the lion held with such gentle confidence that it yields willingly. This card is about the power of compassion over domination, patience over force. The most difficult thing you are facing right now does not need to be fought. It needs to be met with an open, unwavering heart." },
-  { name: "The Hermit", number: "IX", arcana: "Major", keywords: ["solitude","inner guidance","wisdom"], meaning: "The Hermit climbs the mountain not to escape the world but to find the light that will guide others through the dark. This is the card of necessary solitude — the retreat that is not running away but going in. The answers you're seeking in the world are waiting for you in the quiet." },
-  { name: "Wheel of Fortune", number: "X", arcana: "Major", keywords: ["cycles","turning point","destiny"], meaning: "The Wheel turns whether you're on it or not. This card speaks to the great cycles of life — the seasons, the rises, the falls, the inevitable return. You are at a turning point. What goes up comes down; what has been down is due to rise. Work with the cycles, not against them. What are you ready to release to the turn?" },
-  { name: "Justice", number: "XI", arcana: "Major", keywords: ["fairness","truth","cause and effect"], meaning: "Justice holds the scales without sentiment. This card is not about punishment — it is about alignment with truth and the natural consequences of action. Where you have acted with integrity, balance will be restored. Where you have acted from fear or manipulation, the scales will correct. Truth is the most efficient path." },
-  { name: "The Hanged One", number: "XII", arcana: "Major", keywords: ["surrender","perspective","pause"], meaning: "The Hanged One has chosen suspension willingly. This is not defeat — it is the profound wisdom of the deliberate pause. Everything looks different from this angle. What you thought was a problem may be a doorway. What you thought was a loss may be an offering. Surrender is not weakness when it is conscious." },
-  { name: "Death", number: "XIII", arcana: "Major", keywords: ["endings","transformation","release"], meaning: "Death in the cards is rarely literal — it is the most honest transformation card in the deck. Something is ending, completely and irrevocably, and that is correct. You cannot take it with you. The grief of this ending is real; so is the necessity. What is dying was never as permanent as you believed. What comes after cannot yet be named." },
-  { name: "Temperance", number: "XIV", arcana: "Major", keywords: ["balance","patience","integration"], meaning: "Temperance pours between vessels with perfect patience, never spilling. This is the card of integration — the alchemical work of combining opposites into something new. You are in a process of balancing. Do not rush it. The integration taking place is more profound than it appears from the outside. Trust the slow work." },
-  { name: "The Devil", number: "XV", arcana: "Major", keywords: ["shadow","bondage","materialism"], meaning: "The chains in the Devil card are loose — the figures could slip free if they chose to. This is the card of what we choose to remain bound to: addictions, limiting beliefs, relationships built on fear. The Devil does not force you to stay. What would you lose if you were free? What are you getting from this cage?" },
-  { name: "The Tower", number: "XVI", arcana: "Major", keywords: ["upheaval","revelation","sudden change"], meaning: "The Tower falls because it was built on a false foundation. The lightning is not punishment — it is clarity arriving with force. What collapses was always unstable; you simply couldn't see it from inside. The fall is terrifying. The ground is real. What survives the Tower is what was always true." },
-  { name: "The Star", number: "XVII", arcana: "Major", keywords: ["hope","renewal","faith"], meaning: "After the Tower, the Star. After the upheaval, the gentle return of hope — not desperate hope but the quiet, steady kind that doesn't need proof. The Star pours healing water in the dark, alone, with no audience. It doesn't do this because things are fine. It does this because it knows they will be." },
-  { name: "The Moon", number: "XVIII", arcana: "Major", keywords: ["illusion","fear","the unconscious"], meaning: "The Moon illuminates, but imperfectly. In its light, familiar things take on strange shapes, and it is difficult to know what is real and what is shadow. This card asks you to walk carefully through uncertainty without pretending it is day. Your fears are active; your imagination is projecting. Not everything you're seeing is accurate. Stay with what you actually know." },
-  { name: "The Sun", number: "XIX", arcana: "Major", keywords: ["joy","vitality","clarity"], meaning: "The Sun brings warmth without condition, clarity without judgment, joy that simply is. This card needs no interpretation — it is the return of light, of energy, of the uncomplicated pleasure of being alive. Something is going right. Allow yourself to feel it without waiting for the catch. Joy is not naive. Joy is a radical act of presence." },
-  { name: "Judgement", number: "XX", arcana: "Major", keywords: ["reckoning","renewal","calling"], meaning: "The call of Judgement is not a verdict — it is a summons. Something in you is being called to rise, to answer, to show up as the fullest version of yourself. What have you been putting off because you didn't feel ready? What part of yourself have you been refusing to fully claim? The moment of reckoning is not punishment. It is invitation." },
-  { name: "The World", number: "XXI", arcana: "Major", keywords: ["completion","wholeness","integration"], meaning: "The World card is the completion of a great cycle — not an ending but a fulfillment. Something has come full circle. You have arrived, not at the finish line, but at a place of wholeness that was always the destination. What have you completed? What have you become in the process? Take a moment to acknowledge how far you've traveled before the next cycle begins." },
-  { name: "Ace of Wands", number: "Ace", arcana: "Wands", keywords: ["inspiration","potential","new fire"], meaning: "A spark arrives — pure creative potential, the first breath of a new creative fire. This is an invitation, not yet a promise. The Ace of Wands asks: what would you do if you weren't afraid of burning?" },
-  { name: "Ace of Cups", number: "Ace", arcana: "Cups", keywords: ["emotional new beginning","love","intuition"], meaning: "The cup overflows with clean water — a new emotional beginning, the opening of the heart. Something is ready to be felt, to be loved, to be received. Let it in." },
-  { name: "Ace of Swords", number: "Ace", arcana: "Swords", keywords: ["clarity","truth","breakthrough"], meaning: "The Ace of Swords cuts through what was obscuring the truth. Suddenly you can see clearly. Use this clarity with integrity — truth is a blade that can free or wound depending on how it's wielded." },
-  { name: "Ace of Pentacles", number: "Ace", arcana: "Pentacles", keywords: ["new opportunity","material beginning","abundance"], meaning: "A new material opportunity presents itself — a seed of practical abundance. This card asks you to ground your vision in action. The garden grows only if you plant." },
-  { name: "Three of Cups", number: "3", arcana: "Cups", keywords: ["celebration","community","friendship"], meaning: "Raise a glass. This is the card of genuine celebration — of community, chosen family, the joy of being seen and held by those who know you. Allow yourself to be celebrated. Allow yourself to celebrate others." },
-  { name: "Five of Pentacles", number: "5", arcana: "Pentacles", keywords: ["hardship","scarcity","seeking help"], meaning: "The warmth is inside; you are standing in the cold. This card speaks to hardship, to the feeling of being left out in the dark. But the light is available. The door can be knocked on. Asking for help is not defeat — it is the next right step." },
-  { name: "Ten of Pentacles", number: "10", arcana: "Pentacles", keywords: ["legacy","abundance","family"], meaning: "Everything you've built stands behind you, and those you love stand within it. This is the card of legacy — the long work that creates something lasting. You are building more than you know." },
-  { name: "Seven of Cups", number: "7", arcana: "Cups", keywords: ["fantasy","choices","illusion"], meaning: "The cups offer many visions — some real, some chimera. The Seven of Cups asks you to ground your dreaming. Which of these visions is actually calling you, and which is distraction dressed as desire?" },
-  { name: "Page of Pentacles", number: "Page", arcana: "Pentacles", keywords: ["study","curiosity","new skills"], meaning: "The Page holds the pentacle up to the light, studying it with wonder. You are in a learning phase — and this is not a lesser phase. Approach what you are building with beginner's mind and genuine curiosity." }
+// ── CUTESY CHAOS MINOR ARCANA ──────────────────────────────────────────────
+const CUTESY_MINOR = [
+{
+    id:"tarot_mushrooms_1", name:"Ace of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_1.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["new opportunity", "planted seed", "grounded beginning", "the potential is REAL"],
+    meaning:`Something is being planted. An Ace of Mushrooms is a seed of real, tangible potential — material, financial, physical, or creative. It doesn't bloom overnight. It asks for soil and water and time. But the seed is good. The ground is ready. The question is whether you'll tend it consistently enough to see what it becomes. Plant the thing.`
+  },
+  {
+    id:"tarot_mushrooms_2", name:"Two of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_2.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["balance the books", "two things at once", "juggling", "it's manageable"],
+    meaning:`You're holding two things and making it work, which is impressive, but the Two of Mushrooms asks how long you can actually keep this up. Not to stress you out — just to prompt the honest audit. What can be set down? What actually needs to stay in the air? Sustainable balance is different from impressive juggling. You're capable of both. Choose the one that serves you.`
+  },
+  {
+    id:"tarot_mushrooms_3", name:"Three of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_3.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["teamwork", "ask for help", "collaboration", "skills recognized"],
+    meaning:`The hedgehog and friends are figuring it out together and nobody had to do it alone. The Three of Mushrooms is the card of collaboration — the point where individual effort becomes something bigger through genuine partnership. You don't have to have every skill yourself. Who in your life has what you're missing? Ask. Collaborate. The thing you're building is bigger than one set of hands.`
+  },
+  {
+    id:"tarot_mushrooms_4", name:"Four of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_4.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["security", "protect what you have", "don't hoard", "savoring stability"],
+    meaning:`The bunnies are cozy and that is very valid. The Four of Mushrooms is the card of hard-won security — and it asks what you're doing with yours. Stability is worth protecting. It's also worth actually enjoying rather than just hoarding defensively. You built something solid. You're allowed to sit in it without clutching it so tightly you can't feel it.`
+  },
+  {
+    id:"tarot_mushrooms_5", name:"Five of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_5.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["hardship", "ask for help", "you're not alone", "the door is open"],
+    meaning:`The little creatures are cold and struggling and the warmth is literally right there — the door is open, the light is on. The Five of Mushrooms shows up when you're in a hard season and reminds you that help exists, that asking for it isn't failure, that the isolation you're choosing might be the most painful part of the difficulty. The door is open. Knock.`
+  },
+  {
+    id:"tarot_mushrooms_6", name:"Six of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_6.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["generosity", "give and receive", "fair exchange", "abundance shared"],
+    meaning:`The squirrels are sharing their acorns and everyone has what they need. The Six of Mushrooms is the card of generous exchange — giving from abundance rather than scarcity, receiving without guilt. Where can you share what you have? Where have you been refusing help you actually need? Abundance circulates. It doesn't accumulate. Let it move.`
+  },
+  {
+    id:"tarot_mushrooms_7", name:"Seven of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_7.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["patience", "tending", "slow growth", "not yet but it's coming"],
+    meaning:`The mushrooms are growing and it is taking exactly as long as it takes and there's nothing to be done about that. The Seven of Mushrooms is the card of tending through the slow middle — after the excitement of starting, before the satisfaction of finishing. What you're growing is growing. It cannot be rushed. Come back tomorrow. Water it again.`
+  },
+  {
+    id:"tarot_mushrooms_8", name:"Eight of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_8.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["mastery", "repetition", "skill-building", "practice practice practice"],
+    meaning:`Eight little owls learning their craft, each one getting slightly better with each repetition. The Eight of Mushrooms is the card of mastery through practice — the unglamorous, necessary, deeply satisfying work of getting genuinely good at something. There's no shortcut here. There is, however, a real and specific pleasure in doing the thing you're learning to do well. Put in the hours.`
+  },
+  {
+    id:"tarot_mushrooms_9", name:"Nine of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_9.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["almost there", "independent", "self-sufficiency", "you built this"],
+    meaning:`The Nine of Mushrooms is the garden tended, the skill practiced, the independence earned. You built this — not perfectly, not without difficulty, but with your own hands and sustained effort. Self-sufficiency has a particular satisfaction to it when it's genuinely been worked for. You're close to completion. What still needs tending before the harvest?`
+  },
+  {
+    id:"tarot_mushrooms_10", name:"Ten of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_10.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["abundance achieved", "legacy", "the harvest", "it was worth it"],
+    meaning:`The little frogs are surrounded by abundance and it is almost overwhelming — in the best way. The Ten of Mushrooms is the card of the full harvest, the completed cycle, the moment when the long work pays off in more ways than you expected. You built something that lasts. Something that can be shared. Something worth having. Rest in this for a moment before the next thing begins.`
+  },
+  {
+    id:"tarot_mushrooms_page", name:"Page of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_page.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["curious learner", "start studying", "beginner energy", "wonder at the ordinary"],
+    meaning:`The little deer is holding the mushroom up and looking at it with pure delight like it's the most interesting thing in the world — and in this moment, it is. The Page of Mushrooms brings beginner's mind to the material world: curiosity about how things work, wonder at resources and growth and the ordinary miracle of things existing. You're at the start of learning something. Stay curious. The ordinary is full of extraordinary if you look closely enough.`
+  },
+  {
+    id:"tarot_mushrooms_11", name:"Knight of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_11.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["steady progress", "slow and deliberate", "the long game", "patient pursuit"],
+    meaning:`The little snail dragon is going somewhere and will absolutely get there, just on snail dragon time. The Knight of Mushrooms doesn't rush. It doesn't need to. It has a plan, a direction, and the patience to follow through without burning out. Whatever you're pursuing right now, the sustainable pace will get you there. The frantic pace won't. Slow and deliberate beats fast and chaotic every single time.`
+  },
+  {
+    id:"tarot_mushrooms_12", name:"Queen of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_12.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["nurturing abundance", "generosity", "practical magic", "she provides"],
+    meaning:`The fox queen tends her kingdom with warmth and practical wisdom and everyone in it is fed and growing. The Queen of Mushrooms knows how to make things flourish — not through force but through steady, generous attention. She understands the seasons. She knows when to plant and when to harvest and when to let the ground rest. How can you bring this energy to what you're nurturing? Tend with love. Provide with wisdom.`
+  },
+  {
+    id:"tarot_mushrooms_13", name:"King of Mushrooms", type:"cutesy",
+    file:"tarot_mushrooms_13.png",
+    subtitle:"🍄 Grounded Energy",
+    keywords:["financial wisdom", "stability", "built to last", "provide and protect"],
+    meaning:`The bear king sits in abundance he actually earned and manages it wisely and that is the whole vibe. The King of Mushrooms knows the value of things without being controlled by them. He's built something solid and he knows how to keep it solid — through wisdom, generosity when it's warranted, and the refusal to make decisions from fear. What are you stewarding? Manage it like the king you are.`
+  },
+  {
+    id:"tarot_bones_1", name:"Ace of Bones", type:"cutesy",
+    file:"tarot_bones_1.png",
+    subtitle:"💀 Thoughts",
+    keywords:["breakthrough clarity", "truth incoming", "cut through it", "the mind wakes up"],
+    meaning:`Something becomes clear. The Ace of Bones is a sword of pure thought cutting through confusion — the moment when you suddenly see what's actually true, what actually needs to happen, what you've been avoiding knowing. This clarity might be uncomfortable. Truth usually is, at first. Use it anyway. The Ace of Bones doesn't give you comfortable clarity — it gives you the real kind.`
+  },
+  {
+    id:"tarot_bones_2", name:"Two of Bones", type:"cutesy",
+    file:"tarot_bones_2.png",
+    subtitle:"💀 Thoughts",
+    keywords:["decision needed", "stalemate", "you know what to do", "stop avoiding it"],
+    meaning:`The two birds are at an impasse and both options feel hard and you've been sitting here for a minute, haven't you. The Two of Bones is the card of the avoided decision — the fork in the road you keep pretending isn't a fork. Both paths have costs. Choosing has a cost. Not choosing also has a cost. You know which direction your gut leans. Put the blindfold down. Choose.`
+  },
+  {
+    id:"tarot_bones_3", name:"Three of Bones", type:"cutesy",
+    file:"tarot_bones_3.png",
+    subtitle:"💀 Thoughts",
+    keywords:["heartbreak", "grief is real", "let it hurt", "it passes"],
+    meaning:`Three little bats and a crescent moon and something that genuinely hurts — the Three of Bones doesn't try to make it better by pretending it isn't happening. Heartbreak, loss, betrayal, grief — these are real and they deserve to be felt rather than bypassed. This card gives you permission to let it hurt. It will pass. But it passes through, not around. Cry if you need to. The stars are still up there.`
+  },
+  {
+    id:"tarot_bones_4", name:"Four of Bones", type:"cutesy",
+    file:"tarot_bones_4.png",
+    subtitle:"💀 Thoughts",
+    keywords:["rest", "retreat", "you need to stop", "recovery is productive"],
+    meaning:`The little skeleton bunny needs a nap and so do you. The Four of Bones is the mandatory rest after effort — not laziness, but recovery that is genuinely necessary for the next phase to happen. You cannot think clearly from exhaustion. You cannot make good decisions from depletion. Rest is not giving up. Rest is the preparation for everything that comes next.`
+  },
+  {
+    id:"tarot_bones_5", name:"Five of Bones", type:"cutesy",
+    file:"tarot_bones_5.png",
+    subtitle:"💀 Thoughts",
+    keywords:["conflict", "choose your battles", "not worth it", "walk away"],
+    meaning:`The ghost creatures are squabbling and honestly does anyone even remember what it was about. The Five of Bones asks which battles are actually worth fighting and which ones you're continuing out of habit or pride. Winning an argument you didn't need to have is still losing something. What would it cost to walk away? What would it free?`
+  },
+  {
+    id:"tarot_bones_6", name:"Six of Bones", type:"cutesy",
+    file:"tarot_bones_6.png",
+    subtitle:"💀 Thoughts",
+    keywords:["moving on", "calmer waters", "transition", "the hard part is behind you"],
+    meaning:`The little creatures are moving somewhere calmer and the rough water is behind them. The Six of Bones is the transition card — the passage from difficulty to stability. You're not there yet but you're moving in the right direction and the movement itself is relief. Keep going. The calmer water is real.`
+  },
+  {
+    id:"tarot_bones_7", name:"Seven of Bones", type:"cutesy",
+    file:"tarot_bones_7.png",
+    subtitle:"💀 Thoughts",
+    keywords:["strategy", "not everything needs to be said", "clever maneuvering", "think it through"],
+    meaning:`Sometimes you share your whole plan and sometimes you keep your cards close. The Seven of Bones is the card of strategic thinking — knowing when to act openly and when to move quietly. Not deception, necessarily, but discernment. What does this situation actually require? Honesty or strategy? Sometimes both. Think before you speak. Plan before you act.`
+  },
+  {
+    id:"tarot_bones_8", name:"Eight of Bones", type:"cutesy",
+    file:"tarot_bones_8.png",
+    subtitle:"💀 Thoughts",
+    keywords:["self-imposed limitations", "the cage is unlocked", "you can leave", "mental prison"],
+    meaning:`The little skeleton creatures are surrounded by obstacles but the path out is right there — the restrictions are as much mental as physical. The Eight of Bones is the card of the cage you've half-built yourself through beliefs about what's possible or what you deserve. The obstacles are real AND overstated. Which limitations can you question today?`
+  },
+  {
+    id:"tarot_bones_9", name:"Nine of Bones", type:"cutesy",
+    file:"tarot_bones_9.png",
+    subtitle:"💀 Thoughts",
+    keywords:["anxiety", "3am thoughts", "it's worse in the dark", "morning will come"],
+    meaning:`It's 3am and the thoughts are bad and everything feels catastrophic — the Nine of Bones knows this exact feeling and offers no easy comfort, just company. Anxiety distorts. The darkness amplifies. What feels unsurvivable at 3am usually looks different in daylight. You don't have to solve everything right now. You just have to make it to morning. Morning always comes.`
+  },
+  {
+    id:"tarot_bones_10", name:"Ten of Bones", type:"cutesy",
+    file:"tarot_bones_10.png",
+    subtitle:"💀 Thoughts",
+    keywords:["rock bottom", "it ends here", "the worst is over", "you survived"],
+    meaning:`The Ten of Bones is the dramatic finale of a hard chapter — the full collapse, the rock bottom, the point of total exhaustion after too much. And here is the gift hidden in the dramatics: after the Ten, there's nowhere to go but up. This is the end of this particular difficulty. You survived it. That's not nothing. That's actually everything. Rest. Then rise.`
+  },
+  {
+    id:"tarot_bones_page", name:"Page of Bones", type:"cutesy",
+    file:"tarot_bones_page.png",
+    subtitle:"💀 Thoughts",
+    keywords:["curious thinker", "ask all the questions", "the mind wakes up", "truth-seeker"],
+    meaning:`The little reaper is writing things down and asking questions and that is exactly right. The Page of Bones brings intellectual curiosity to hard truths — the willingness to investigate, to ask uncomfortable questions, to follow the thread of truth wherever it leads. You're in a phase of gathering information. Ask everything. Assume nothing. Let the questions lead you somewhere real.`
+  },
+  {
+    id:"tarot_bones_11", name:"Knight of Bones", type:"cutesy",
+    file:"tarot_bones_11.png",
+    subtitle:"💀 Thoughts",
+    keywords:["charging ahead", "passionate pursuit", "slow down a little", "conviction"],
+    meaning:`The dragon knight is charging full tilt and very committed to the direction — the question is whether the direction is right. The Knight of Bones has conviction and momentum and sometimes needs to check whether those are being applied to the right cause. You're moving fast. Is it toward something true? The passion is an asset. Make sure it's aimed well.`
+  },
+  {
+    id:"tarot_bones_12", name:"Queen of Bones", type:"cutesy",
+    file:"tarot_bones_12.png",
+    subtitle:"💀 Thoughts",
+    keywords:["clear-eyed truth", "she will tell you the real thing", "sharp mind", "no nonsense"],
+    meaning:`The queen with the scepter and crown will absolutely tell you the truth and will not soften it to make you comfortable and she is doing this because she respects you. The Queen of Bones sees clearly and speaks honestly — not cruelly, but directly. Sometimes you need someone to stop agreeing with you and just tell you what's actually true. Be that person for yourself right now.`
+  },
+  {
+    id:"tarot_bones_13", name:"King of Bones", type:"cutesy",
+    file:"tarot_bones_13.png",
+    subtitle:"💀 Thoughts",
+    keywords:["fair authority", "just decision", "think before you act", "wise judgment"],
+    meaning:`The king thinks before he acts and weighs things carefully and doesn't let emotion override reason — and he also doesn't let reason override what's right. The King of Bones is the just mind, the fair judge, the authority that can be trusted because it operates from principle rather than preference. What decision is in front of you? Make it with this energy: clear, fair, unhurried, and grounded in truth.`
+  },
+  {
+    id:"tarot_stars_1", name:"Ace of Stars", type:"cutesy",
+    file:"tarot_stars_1.png",
+    subtitle:"⭐ Passion",
+    keywords:["spark", "creative ignition", "new passion", "the fire starts now"],
+    meaning:`A spark. That's all this is and that's everything this is. The Ace of Stars is the first moment of creative fire — the idea that arrived, the inspiration that landed, the passion that lit up. Don't overthink it yet. Don't plan it to death. Don't wait until you're ready. The spark is the invitation. Everything else comes after you say yes to it.`
+  },
+  {
+    id:"tarot_stars_2", name:"Two of Stars", type:"cutesy",
+    file:"tarot_stars_2.png",
+    subtitle:"⭐ Passion",
+    keywords:["planning", "two paths", "what do you actually want", "possibilities"],
+    meaning:`The Two of Stars holds two options and doesn't rush the decision — it's still in the planning phase, still holding the vision before committing to the path. This is a good moment to actually ask yourself what you want, not what makes sense or what looks responsible. What does your creative self actually want to make? Choose from that place.`
+  },
+  {
+    id:"tarot_stars_3", name:"Three of Stars", type:"cutesy",
+    file:"tarot_stars_3.png",
+    subtitle:"⭐ Passion",
+    keywords:["expansion", "things are moving", "look how far you've come", "growth happening"],
+    meaning:`The Three of Stars is the moment you look back and realize something has actually grown — the plan became a project, the spark became a flame, the hope became evidence. Things are moving. You've come further than you were giving yourself credit for. The expansion happening right now is real. Keep feeding it.`
+  },
+  {
+    id:"tarot_stars_4", name:"Four of Stars", type:"cutesy",
+    file:"tarot_stars_4.png",
+    subtitle:"⭐ Passion",
+    keywords:["celebration", "earned rest", "community", "enjoy this"],
+    meaning:`You did a thing and now it is time to actually celebrate instead of immediately moving to the next thing. The Four of Stars is the card of earned celebration — the gathering, the warmth, the specific pleasure of sharing what you've made with people you love. Rest in the community you've built. Enjoy what you've accomplished. The next thing will wait.`
+  },
+  {
+    id:"tarot_stars_5", name:"Five of Stars", type:"cutesy",
+    file:"tarot_stars_5.png",
+    subtitle:"⭐ Passion",
+    keywords:["creative conflict", "competition", "not everyone will get along", "it's just friction"],
+    meaning:`The little spirit creatures are at odds and that is fine and normal and doesn't have to mean everything is ruined. The Five of Stars is creative friction — the clash of visions, the competition that sharpens rather than destroys, the conflict that clarifies what you actually believe. Friction is not failure. Sometimes it's how things get refined.`
+  },
+  {
+    id:"tarot_stars_6", name:"Six of Stars", type:"cutesy",
+    file:"tarot_stars_6.png",
+    subtitle:"⭐ Passion",
+    keywords:["victory lap", "recognition", "share the win", "people see you"],
+    meaning:`The cats with their trophies are being celebrated and that is extremely correct because they earned it. The Six of Stars is the recognition card — the moment when your effort gets seen, your wins get acknowledged, your creative fire gets applauded. You're allowed to enjoy this. You're allowed to be proud. Take the victory lap. You ran the race.`
+  },
+  {
+    id:"tarot_stars_7", name:"Seven of Stars", type:"cutesy",
+    file:"tarot_stars_7.png",
+    subtitle:"⭐ Passion",
+    keywords:["defend your vision", "under pressure", "hold your ground", "believe in it"],
+    meaning:`The Seven of Stars asks you to defend what you believe in when it's being questioned, challenged, or undermined. Not every critique deserves to land. Not every doubt is true. Some things are worth holding ground for, and your vision — the genuine one, the one that came from your real creative fire — is worth standing behind. Defend it. Not aggressively, but firmly.`
+  },
+  {
+    id:"tarot_stars_8", name:"Eight of Stars", type:"cutesy",
+    file:"tarot_stars_8.png",
+    subtitle:"⭐ Passion",
+    keywords:["momentum", "moving fast", "focused action", "the current is with you"],
+    meaning:`The fish are moving and the current is with them and this is exactly the moment to move with it. The Eight of Stars is momentum — the phase where things are flowing and the right move is to match that energy rather than slow it down with overthinking. You're in a current. Swim with it. The speed available to you right now is a gift. Use it.`
+  },
+  {
+    id:"tarot_stars_9", name:"Nine of Stars", type:"cutesy",
+    file:"tarot_stars_9.png",
+    subtitle:"⭐ Passion",
+    keywords:["resilience", "not done yet", "battle-worn but standing", "you held up"],
+    meaning:`The Nine of Stars shows up for someone who has been through it and is still standing, which is an underrated kind of strength. You didn't get here without difficulty. You're still here anyway. That's resilience, not performance — the quiet, exhausted, real version. You're not done yet and you know it. Rest if you need to. Then keep going.`
+  },
+  {
+    id:"tarot_stars_10", name:"Ten of Stars", type:"cutesy",
+    file:"tarot_stars_10.png",
+    subtitle:"⭐ Passion",
+    keywords:["burnout warning", "too much", "put something down", "redistribute the load"],
+    meaning:`The Ten of Stars is too many things and you can feel it. Something has to be put down. The burden being carried right now is heavier than it needs to be — not because you're weak but because it's genuinely too much for one person to hold alone. What can be shared? What can be released? The fire doesn't burn brighter when you smother it. Put something down.`
+  },
+  {
+    id:"tarot_stars_page", name:"Page of Stars", type:"cutesy",
+    file:"tarot_stars_page.png",
+    subtitle:"⭐ Passion",
+    keywords:["beginner enthusiasm", "try it", "creative curiosity", "say yes and see what happens"],
+    meaning:`The little deer with the wand is ready to try everything and has not yet learned to be afraid of failure and that is the most powerful creative state there is. The Page of Stars brings enthusiasm and curiosity to creative beginnings — the 'I wonder what happens if I try this' energy. Say yes to the thing. Try it before you judge it. Enthusiasm is a superpower.`
+  },
+  {
+    id:"tarot_stars_11", name:"Knight of Stars", type:"cutesy",
+    file:"tarot_stars_11.png",
+    subtitle:"⭐ Passion",
+    keywords:["passionate action", "charge toward it", "bold move", "do it now"],
+    meaning:`The knight on the creature is going and there is no halfway about it. The Knight of Stars moves fast, acts boldly, pursues with full conviction. This is not the moment for hesitation or measured steps. The moment is for the bold move, the definitive action, the yes that commits to something. Charge toward it. Full speed. No apologies.`
+  },
+  {
+    id:"tarot_stars_12", name:"Queen of Stars", type:"cutesy",
+    file:"tarot_stars_12.png",
+    subtitle:"⭐ Passion",
+    keywords:["creative mastery", "fierce passion", "she knows what she wants", "inspire others"],
+    meaning:`The queen with wings knows exactly what she's doing and does it with full commitment and inspires everyone around her just by being completely herself in her creative power. The Queen of Stars has mastered the art of channeling passion into creation. She doesn't wait for the right conditions — she creates them. What would it look like to fully own your creative power today?`
+  },
+  {
+    id:"tarot_stars_13", name:"King of Stars", type:"cutesy",
+    file:"tarot_stars_13.png",
+    subtitle:"⭐ Passion",
+    keywords:["visionary", "lead with passion", "inspire the room", "creative authority"],
+    meaning:`The dragon king on the throne has a vision and can articulate it clearly and makes others want to make it real alongside him. The King of Stars is creative leadership — the ability to hold a vision so clearly and passionately that others catch fire from it. What vision are you holding? How clearly can you see it? How boldly can you share it?`
+  },
+  {
+    id:"tarot_hearts_1", name:"Ace of Hearts", type:"cutesy",
+    file:"tarot_hearts_1.png",
+    subtitle:"💕 Emotion",
+    keywords:["new love", "open heart", "emotional beginning", "receive it"],
+    meaning:`The Ace of Hearts is a cup overflowing with clean, pure emotional potential — a new beginning in the realm of feeling, love, or connection. Something wants to be felt. Something wants to be received. The question is whether you're open enough to let it in. Soften. The heart that's been guarded awhile might feel vulnerable opening — that's exactly when the opening matters most.`
+  },
+  {
+    id:"tarot_hearts_2", name:"Two of Hearts", type:"cutesy",
+    file:"tarot_hearts_2.png",
+    subtitle:"💕 Emotion",
+    keywords:["connection", "partnership", "mutual feeling", "it goes both ways"],
+    meaning:`The pandas are holding a heart together and that is the softest thing and the Two of Hearts is exactly that soft. Real connection, mutual care, the specific warmth of a relationship that actually goes both ways. This card celebrates genuine partnership — romantic, platonic, creative. Where in your life does this exist? Where does it want to exist?`
+  },
+  {
+    id:"tarot_hearts_3", name:"Three of Hearts", type:"cutesy",
+    file:"tarot_hearts_3.png",
+    subtitle:"💕 Emotion",
+    keywords:["celebration with friends", "your people", "joy shared", "community love"],
+    meaning:`The little creatures are celebrating together and everyone is full of warmth and that is the Three of Hearts — your people, your community, the specific joy of being known and loved and surrounded by others who are genuinely glad you exist. Where is your community right now? Are you letting them celebrate you? Let them.`
+  },
+  {
+    id:"tarot_hearts_4", name:"Four of Hearts", type:"cutesy",
+    file:"tarot_hearts_4.png",
+    subtitle:"💕 Emotion",
+    keywords:["boredom", "opportunity ignored", "what are you missing", "look again"],
+    meaning:`The bunnies seem unbothered but there's something being offered that isn't being seen. The Four of Hearts is the card of the emotional opportunity that's going unnoticed — the connection available if you'd look up, the feeling being suppressed out of habit or numbness. What are you missing because you're not paying attention? What's being offered that you keep not seeing?`
+  },
+  {
+    id:"tarot_hearts_5", name:"Five of Hearts", type:"cutesy",
+    file:"tarot_hearts_5.png",
+    subtitle:"💕 Emotion",
+    keywords:["grief", "what remains", "don't forget what's left", "loss and love"],
+    meaning:`Something was lost and that matters — but not everything was lost and that matters too. The Five of Hearts holds both the grief of what's gone and the reminder that something remains. Don't let the loss consume the rest. Feel it fully. And when you're ready, turn and see what's still standing behind you.`
+  },
+  {
+    id:"tarot_hearts_6", name:"Six of Hearts", type:"cutesy",
+    file:"tarot_hearts_6.png",
+    subtitle:"💕 Emotion",
+    keywords:["nostalgia", "past love", "sweet memory", "simpler times"],
+    meaning:`The little flying unicorn and friend are sharing something sweet and the Six of Hearts carries the gentle ache of nostalgia — the warmth of a past that was genuinely good, of simpler times, of love that existed even if it changed. Let yourself feel the sweetness of what was without letting it trap you in the past. The past is a gift to visit, not a home to live in.`
+  },
+  {
+    id:"tarot_hearts_7", name:"Seven of Hearts", type:"cutesy",
+    file:"tarot_hearts_7.png",
+    subtitle:"💕 Emotion",
+    keywords:["too many options", "which feeling is real", "ground yourself", "fantasy vs reality"],
+    meaning:`The octopus is surrounded by floating hearts and they're beautiful and confusing and the Seven of Hearts asks which one is real — which feeling, which desire, which vision actually connects to something true versus what's wishful thinking. Fantasy has its place. But not every dream is a direction. Which of these is actually calling you? Ground yourself and check.`
+  },
+  {
+    id:"tarot_hearts_8", name:"Eight of Hearts", type:"cutesy",
+    file:"tarot_hearts_8.png",
+    subtitle:"💕 Emotion",
+    keywords:["walk away", "something is missing", "move on", "what's gone is gone"],
+    meaning:`The little deer in the moonlight has decided to walk away from something and that decision took everything. The Eight of Hearts is the card of the emotional departure — the moment when you realize something you've invested in no longer fills you, and you choose to walk toward something that might, even though you don't know yet what that is. Walking away from what doesn't serve you is not failure. Sometimes it's the bravest thing.`
+  },
+  {
+    id:"tarot_hearts_9", name:"Nine of Hearts", type:"cutesy",
+    file:"tarot_hearts_9.png",
+    subtitle:"💕 Emotion",
+    keywords:["wish granted", "contentment", "what you wanted", "sit with the good"],
+    meaning:`The Nine of Hearts is the wish card — the moment when what you actually wanted arrives and you get to feel it landing. Satisfaction is an underrated emotion. Contentment is not settling — it's the genuine feeling of having what you need. What wish has been granted that you haven't fully let yourself feel? Sit in it. Let it be good.`
+  },
+  {
+    id:"tarot_hearts_10", name:"Ten of Hearts", type:"cutesy",
+    file:"tarot_hearts_10.png",
+    subtitle:"💕 Emotion",
+    keywords:["full happiness", "family", "emotional completion", "this is it"],
+    meaning:`The little dragons tangled in a heart of love — this is the Ten of Hearts, the fullness of emotional completion, the feeling of being exactly where you're supposed to be surrounded by the love you've built and chosen. This is the 'this is it' card. The whole picture. The family, the love, the home you made. Let yourself feel how full this actually is.`
+  },
+  {
+    id:"tarot_hearts_page", name:"Page of Hearts", type:"cutesy",
+    file:"tarot_hearts_page.png",
+    subtitle:"💕 Emotion",
+    keywords:["emotional curiosity", "wear your heart openly", "young love energy", "feel it all"],
+    meaning:`The little witch cat with the letter is feeling every feeling and not apologizing for any of them and that is exactly the Page of Hearts energy. Emotional openness. The willingness to feel things fully and express them honestly. You're in a phase of emotional discovery — let it be messy and genuine. The feelings are data. Let them tell you something.`
+  },
+  {
+    id:"tarot_hearts_11", name:"Knight of Hearts", type:"cutesy",
+    file:"tarot_hearts_11.png",
+    subtitle:"💕 Emotion",
+    keywords:["romantic pursuit", "follow the feeling", "emotionally driven", "leap for love"],
+    meaning:`The little red dragon knight is pursuing something with full emotional commitment and zero chill and the Knight of Hearts endorses this completely. Chase the feeling. Follow the love. Act from your heart. Not recklessly — but not carefully either. Some things are worth the leap. Your heart is pointing at one of them right now.`
+  },
+  {
+    id:"tarot_hearts_12", name:"Queen of Hearts", type:"cutesy",
+    file:"tarot_hearts_12.png",
+    subtitle:"💕 Emotion",
+    keywords:["emotional wisdom", "she holds space", "loving authority", "feel and lead"],
+    meaning:`The purple queen holds her heart and her authority with equal steadiness — she doesn't choose between feeling deeply and leading wisely, she does both. The Queen of Hearts is the person everyone brings their real feelings to because she can hold them without judgment and offer something true in return. Bring this energy to the relationships around you. Feel. And lead from that feeling.`
+  },
+  {
+    id:"tarot_hearts_13", name:"King of Hearts", type:"cutesy",
+    file:"tarot_hearts_13.png",
+    subtitle:"💕 Emotion",
+    keywords:["emotional maturity", "kind authority", "he leads with love", "steady heart"],
+    meaning:`The white dragon king sits in the warmth of his heart and rules from that place — not sentimentally, but with genuine emotional maturity and steady care. The King of Hearts is the father, the protector, the leader who never lets strength become coldness. Lead the people around you with this kind of warmth. Stability and love are not opposites. Hold both.`
+  }
 ];
+
+const CUTESY_CARDS = [...CUTESY_MAJOR, ...CUTESY_MINOR];
 
 // ── SPREADS ────────────────────────────────────────────────────────────────
 const ORACLE_SPREADS = [
-  {
-    id: "single",
-    name: "Single Card",
-    desc: "One card. One message. The forest speaks directly.",
-    positions: ["The Message"],
-    count: 1
-  },
-  {
-    id: "three",
-    name: "Three Card",
-    desc: "Past · Present · Future — the path through the wood.",
-    positions: ["The Root (Past)", "The Trunk (Present)", "The Branch (Future)"],
-    count: 3
-  },
-  {
-    id: "reflection",
-    name: "Reflection Spread",
-    desc: "What is · What is hidden · What is becoming.",
-    positions: ["What Is", "What Is Hidden", "What Is Becoming"],
-    count: 3
-  },
-  {
-    id: "shadow",
-    name: "Shadow & Light",
-    desc: "Your gift · Your shadow · The bridge between them.",
-    positions: ["Your Light", "Your Shadow", "The Bridge"],
-    count: 3
-  },
-  {
-    id: "five",
-    name: "Five Card Cross",
-    desc: "A deep reading — past, present, future, challenge, and guidance.",
-    positions: ["Past", "Present", "Future", "The Challenge", "The Guide"],
-    count: 5
-  }
+  {id:"single",name:"Single Card",desc:"One card. One message. The forest speaks directly.",positions:["The Message"],count:1},
+  {id:"three",name:"Three Card",desc:"Past · Present · Future — the path through the wood.",positions:["The Root (Past)","The Trunk (Present)","The Branch (Future)"],count:3},
+  {id:"reflection",name:"Reflection",desc:"What is · What is hidden · What is becoming.",positions:["What Is","What Is Hidden","What Is Becoming"],count:3},
+  {id:"shadow",name:"Shadow & Light",desc:"Your gift · Your shadow · The bridge between them.",positions:["Your Light","Your Shadow","The Bridge"],count:3},
+  {id:"five",name:"Five Card",desc:"Past, present, future, challenge, and guidance.",positions:["Past","Present","Future","The Challenge","The Guide"],count:5},
 ];
-
-const TAROT_COMBO_SPREADS = [
-  {
-    id: "tc_daily",
-    name: "Daily Compass",
-    desc: "One tarot card sets the energy. One oracle card speaks the deeper medicine.",
-    positions: ["Tarot: The Energy", "Oracle: The Medicine"],
-    tarotCount: 1, oracleCount: 1
-  },
-  {
-    id: "tc_three",
-    name: "Three Tarot + Oracle",
-    desc: "Three tarot cards read past · present · future, with an oracle card as your spiritual guide through it all.",
-    positions: ["Tarot: Past", "Tarot: Present", "Tarot: Future", "Oracle: The Guide"],
-    tarotCount: 3, oracleCount: 1
-  },
-  {
-    id: "tc_deep",
-    name: "Deep Weave",
-    desc: "Three tarot, three oracle — woven together for a full reading.",
-    positions: ["Tarot: Root", "Oracle: Root Spirit", "Tarot: Heart", "Oracle: Heart Spirit", "Tarot: Crown", "Oracle: Crown Spirit"],
-    tarotCount: 3, oracleCount: 3
-  }
+const CUTESY_SPREADS = [
+  {id:"single",name:"One Card",desc:"Just one chaotic little card. Embrace it. 🐙",positions:["The Chaos"],count:1},
+  {id:"three",name:"Past · Now · Next",desc:"Three cards, maximum chaos, minimum overthinking. 💀",positions:["Past Chaos","Current Chaos","Incoming Chaos"],count:3},
+  {id:"heart",name:"Heart Check",desc:"Head · Heart · What the universe is screaming at you. 💕",positions:["Your Head","Your Heart","The Universe 📣"],count:3},
+  {id:"five",name:"Full Chaos Spread",desc:"The whole picture, all the feelings, zero chill. 🐉",positions:["The Root","The Heart","The Path","The Obstacle","The Wildcard"],count:5},
+  {id:"combo",name:"Tarot + Oracle",desc:"One Cutesy Chaos card sets the stage, one Nightwood Oracle brings the wisdom. 🌲🐙",positions:["Cutesy Chaos: The Energy","Nightwood Oracle: The Wisdom"],tarotCount:1,oracleCount:1,combo:true},
 ];
 
 // ── STATE ──────────────────────────────────────────────────────────────────
-let currentMode = 'oracle';
+let currentDeck = 'nightwood';
 let currentSpread = ORACLE_SPREADS[0];
 let drawnCards = [];
 let flippedCount = 0;
 
 // ── INIT ───────────────────────────────────────────────────────────────────
 function init() {
-  spawnFireflies();
+  spawnParticles();
+  renderModes();
   renderSpreads();
-  selectSpread(ORACLE_SPREADS[0]);
 }
 
-function spawnFireflies() {
-  const container = document.getElementById('fireflies');
-  for (let i = 0; i < 22; i++) {
-    const f = document.createElement('div');
-    f.className = 'firefly';
-    f.style.cssText = `
-      left: ${Math.random()*100}%;
-      top: ${Math.random()*100}%;
-      --dur: ${6 + Math.random()*8}s;
-      --delay: ${-Math.random()*10}s;
-      --tx: ${(Math.random()-0.5)*80}px;
-      --ty: ${-20 - Math.random()*60}px;
-      --tx2: ${(Math.random()-0.5)*120}px;
-      --ty2: ${-40 - Math.random()*80}px;
-    `;
-    container.appendChild(f);
+function spawnParticles() {
+  // Fireflies for Nightwood
+  const ff = document.getElementById('fireflies');
+  for(let i=0;i<22;i++){
+    const f=document.createElement('div'); f.className='firefly';
+    f.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;
+      --dur:${6+Math.random()*8}s;--delay:${-Math.random()*10}s;
+      --tx:${(Math.random()-0.5)*80}px;--ty:${-20-Math.random()*60}px;
+      --tx2:${(Math.random()-0.5)*120}px;--ty2:${-40-Math.random()*80}px;`;
+    ff.appendChild(f);
+  }
+  // Skulls for Cutesy Chaos
+  const sk = document.getElementById('skulls');
+  const emojis=['💀','🦇','💕','⭐','🐙','🍄','💜','🌙','🐉'];
+  for(let i=0;i<20;i++){
+    const f=document.createElement('div'); f.className='skull-p';
+    f.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    f.style.cssText=`left:${Math.random()*100}%;--sz:${10+Math.random()*18}px;
+      --dur:${7+Math.random()*9}s;--delay:${-Math.random()*12}s;opacity:0;`;
+    sk.appendChild(f);
   }
 }
 
-function setMode(mode) {
-  currentMode = mode;
-  document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+function setDeck(deck) {
+  currentDeck = deck;
+  document.getElementById('bannerNightwood').classList.toggle('active', deck==='nightwood');
+  document.getElementById('bannerCutesy').classList.toggle('active', deck==='cutesy');
+
+  if(deck==='cutesy') {
+    document.body.classList.add('chaos-mode');
+    document.getElementById('headerRune').textContent='✦  embrace the chaos, it\'s adorable  ✦';
+    document.getElementById('headerTitle').childNodes[0].textContent='Cutesy Chaos Tarot';
+    document.getElementById('headerSub').textContent='A Chaotic Little Divination Deck 🐙';
+    document.getElementById('headerIcon').textContent='🐙';
+    document.getElementById('drawBtnText').textContent='💀  Draw the Cards  💀';
+    document.getElementById('footerDeck').textContent='Cutesy Chaos Tarot';
+    document.getElementById('footerTag').textContent='embrace the chaos, it\'s adorable 🐙';
+    document.querySelector('.skulls').style.opacity='1';
+    document.querySelector('.fireflies').style.opacity='0';
+  } else {
+    document.body.classList.remove('chaos-mode');
+    document.getElementById('headerRune').textContent='✦   The Cards Know   ✦';
+    document.getElementById('headerTitle').childNodes[0].textContent='Nightwood Oracle';
+    document.getElementById('headerSub').textContent='A Forest Divination Deck';
+    document.getElementById('headerIcon').textContent='🌿';
+    document.getElementById('drawBtnText').textContent='✦  Draw the Cards  ✦';
+    document.getElementById('footerDeck').textContent='Nightwood Oracle';
+    document.getElementById('footerTag').textContent='The forest speaks to those who listen';
+    document.querySelector('.skulls').style.opacity='0';
+    document.querySelector('.fireflies').style.opacity='1';
+  }
+  renderModes();
   renderSpreads();
-  clearReading();
+  clearReading(true);
+}
+
+function renderModes() {
+  const container = document.getElementById('modeTabs');
+  container.innerHTML = '';
+  // For both decks, just one mode (no sub-modes needed since combo is a spread)
+  const label = currentDeck==='cutesy' ? '🐙 Draw Cards' : '🌲 Draw Cards';
+  const btn = document.createElement('button');
+  btn.className='mode-tab active'; btn.textContent=label;
+  container.appendChild(btn);
 }
 
 function renderSpreads() {
-  const spreads = currentMode === 'oracle' ? ORACLE_SPREADS : TAROT_COMBO_SPREADS;
+  const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : ORACLE_SPREADS;
   const container = document.getElementById('spreadOptions');
-  container.innerHTML = '';
-  spreads.forEach((s, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'spread-btn' + (i === 0 ? ' active' : '');
-    btn.textContent = s.name;
-    btn.onclick = () => selectSpread(s);
+  container.innerHTML='';
+  spreads.forEach((s,i)=>{
+    const btn=document.createElement('button');
+    btn.className='spread-btn'+(i===0?' active':'');
+    btn.textContent=s.name;
+    btn.onclick=()=>selectSpread(s);
     container.appendChild(btn);
   });
   selectSpread(spreads[0]);
 }
 
 function selectSpread(spread) {
-  currentSpread = spread;
-  document.querySelectorAll('.spread-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent === spread.name);
+  currentSpread=spread;
+  document.querySelectorAll('.spread-btn').forEach(b=>{
+    b.classList.toggle('active',b.textContent===spread.name);
   });
-  document.getElementById('spreadDesc').textContent = spread.desc;
+  document.getElementById('spreadDesc').textContent=spread.desc;
 }
 
-// ── SHUFFLE & DRAW ─────────────────────────────────────────────────────────
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function doReading() {
   clearReading(true);
-  drawnCards = [];
-  flippedCount = 0;
+  drawnCards=[]; flippedCount=0;
+  const layout=document.getElementById('spreadLayout');
+  layout.innerHTML='';
 
-  const layout = document.getElementById('spreadLayout');
-  layout.innerHTML = '';
-
-  let positions, cards;
-
-  if (currentMode === 'oracle') {
-    const shuffled = shuffle(ORACLE_CARDS);
-    positions = currentSpread.positions;
-    cards = shuffled.slice(0, currentSpread.count).map((c, i) => ({
-      ...c,
-      type: 'oracle',
-      position: positions[i],
-      reversed: Math.random() < 0.25
-    }));
+  let cards=[];
+  if(currentSpread.combo) {
+    // Tarot + Oracle combo
+    const tc=shuffle(CUTESY_CARDS).slice(0,1).map(c=>({...c,position:currentSpread.positions[0],reversed:Math.random()<0.25}));
+    const oc=shuffle(ORACLE_CARDS).slice(0,1).map(c=>({...c,position:currentSpread.positions[1],reversed:Math.random()<0.15}));
+    cards=[...tc,...oc];
   } else {
-    positions = currentSpread.positions;
-    const shuffledTarot = shuffle(TAROT_CARDS);
-    const shuffledOracle = shuffle(ORACLE_CARDS);
-    let ti = 0, oi = 0;
-    cards = positions.map((pos, i) => {
-      const isOracle = pos.toLowerCase().includes('oracle');
-      if (isOracle) {
-        return { ...shuffledOracle[oi++], type: 'oracle', position: pos, reversed: Math.random() < 0.2 };
-      } else {
-        return { ...shuffledTarot[ti++], type: 'tarot', position: pos, reversed: Math.random() < 0.3 };
-      }
-    });
+    const pool=currentDeck==='cutesy'?CUTESY_CARDS:ORACLE_CARDS;
+    const shuffled=shuffle(pool);
+    cards=shuffled.slice(0,currentSpread.count).map((c,i)=>({
+      ...c, position:currentSpread.positions[i], reversed:Math.random()<0.22
+    }));
   }
+  drawnCards=cards;
 
-  drawnCards = cards;
+  const backFile = (card) => {
+    if(card.type==='oracle') return card.reversed?'card 21 back of card reversed.png':'card 21 back of card.png';
+    return 'tarot_cutesy_chaos_back.png';
+  };
 
-  cards.forEach((card, index) => {
-    const slot = document.createElement('div');
-    slot.className = 'card-slot' + (card.reversed ? ' is-reversed' : '');
-    slot.innerHTML = `
+  cards.forEach((card,index)=>{
+    const slot=document.createElement('div');
+    slot.className='card-slot'+(card.reversed?' is-reversed':'');
+    slot.innerHTML=`
       <div class="slot-label">${card.position}</div>
-      <div class="card-wrap" id="cardwrap-${index}" style="animation-delay:${index * 0.12}s" onclick="flipCard(${index})">
+      <div class="card-wrap" id="cardwrap-${index}" style="animation-delay:${index*0.12}s" onclick="flipCard(${index})">
         <div class="card-inner">
           <div class="card-face card-back-face">
-            <img src="${card.reversed ? 'card 21 back of card reversed.png' : 'card 21 back of card.png'}"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-              alt="Card back">
-            <div class="placeholder-back" style="display:none">
-              <div class="card-sigil">🌿</div>
-              <span>Nightwood</span>
-            </div>
+            <img src="${backFile(card)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Card back">
+            <div class="placeholder-back" style="display:none"><span style="font-size:48px;opacity:0.6">${card.type==='oracle'?'🌿':'🐙'}</span><span style="font-family:var(--f-title);font-size:11px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase">${card.type==='oracle'?'Nightwood':'Cutesy Chaos'}</span></div>
           </div>
-          <div class="card-face card-front-face${card.reversed ? ' card-reversed' : ''}">
-            ${card.type === 'oracle'
-              ? `<img src="${card.file}"
-                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-                  alt="${card.name}">
-                 <div class="placeholder-front" style="display:none">
-                   <div class="card-animal">🌲</div>
-                   <div class="card-name-text">${card.name}</div>
-                 </div>`
-              : `<div class="placeholder-front" style="background: linear-gradient(160deg, #0d0d1a, #1a0d1a);">
-                   <div class="card-animal">${getTarotEmoji(card.arcana)}</div>
-                   <div class="card-name-text">${card.name}</div>
-                 </div>`
-            }
+          <div class="card-face card-front-face${card.reversed?' card-reversed':''}">
+            <img src="${card.file}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="${card.name}">
+            <div class="placeholder-front" style="display:none">
+              <div style="font-size:48px;margin-bottom:12px">${card.type==='oracle'?'🌲':'🐙'}</div>
+              <div style="font-family:var(--f-title);font-size:14px;letter-spacing:2px;color:var(--gold);text-transform:uppercase">${card.name}</div>
+            </div>
           </div>
         </div>
       </div>
-      ${card.reversed ? '<div class="reversed-tag">✦ Reversed</div>' : ''}
+      ${card.reversed?'<div class="reversed-tag">✦ Reversed</div>':''}
     `;
     layout.appendChild(slot);
   });
-
-  document.getElementById('clearBtn').style.display = 'block';
+  document.getElementById('clearBtn').style.display='block';
   document.getElementById('meaningPanel').classList.remove('visible');
-  document.getElementById('meaningPanel').innerHTML = '';
+  document.getElementById('meaningPanel').innerHTML='';
 }
 
-function getTarotEmoji(arcana) {
-  const map = { Major: '⭐', Wands: '🔥', Cups: '🌊', Swords: '⚔️', Pentacles: '🌕' };
-  return map[arcana] || '✨';
-}
-
-function flipCard(index) {
-  const wrap = document.getElementById(`cardwrap-${index}`);
-  if (wrap.classList.contains('flipped')) return;
+function flipCard(index){
+  const wrap=document.getElementById(`cardwrap-${index}`);
+  if(wrap.classList.contains('flipped'))return;
   wrap.classList.add('flipped');
   flippedCount++;
-
-  // Show meaning after short delay
-  setTimeout(() => showMeaning(index), 500);
+  setTimeout(()=>showMeaning(index),500);
 }
 
-function showMeaning(index) {
-  const card = drawnCards[index];
-  const panel = document.getElementById('meaningPanel');
+function showMeaning(index){
+  const card=drawnCards[index];
+  const panel=document.getElementById('meaningPanel');
+  for(let el of panel.querySelectorAll('.meaning-card')){if(el.dataset.cardIndex==index)return;}
 
-  const reversedNote = card.reversed
-    ? `<div style="color:var(--red-dim);font-size:13px;font-family:var(--f-title);letter-spacing:2px;margin-bottom:12px;">✦ REVERSED — energy turned inward</div>`
-    : '';
+  const isChaos=card.type==='cutesy';
+  const typeTag=isChaos
+    ?`<span style="background:rgba(255,45,138,0.15);border:1px solid var(--hot-pink);color:var(--hot-pink);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--f-chaos-sub);letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🐙 Cutesy Chaos</span>`
+    :`<span style="background:rgba(201,168,76,0.1);border:1px solid var(--gold-dim);color:var(--gold-dim);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--f-title);letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🌲 Oracle</span>`;
 
-  const typeTag = card.type === 'tarot'
-    ? `<span style="background:rgba(45,110,110,0.2);border:1px solid var(--teal);color:var(--teal-lit);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--f-title);letter-spacing:2px;text-transform:uppercase;margin-right:10px;">Tarot · ${card.arcana}</span>`
-    : `<span style="background:rgba(201,168,76,0.1);border:1px solid var(--gold-dim);color:var(--gold-dim);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--f-title);letter-spacing:2px;text-transform:uppercase;margin-right:10px;">Oracle</span>`;
+  const reversedNote=card.reversed
+    ?`<div style="color:var(--red-dim);font-size:13px;font-family:var(--f-title);letter-spacing:2px;margin-bottom:12px;">✦ REVERSED — energy turned inward</div>`:'' ;
 
-  const existingCards = panel.querySelectorAll('.meaning-card');
-  // Don't duplicate
-  for (let el of existingCards) {
-    if (el.dataset.cardIndex == index) return;
-  }
-
-  const mc = document.createElement('div');
-  mc.className = 'meaning-card';
-  mc.dataset.cardIndex = index;
-  mc.innerHTML = `
-    <div class="meaning-header">
-      ${typeTag}
-      <span class="meaning-position">${card.position}</span>
-    </div>
+  const mc=document.createElement('div');
+  mc.className='meaning-card'; mc.dataset.cardIndex=index;
+  mc.innerHTML=`
+    <div class="meaning-header">${typeTag}<span class="meaning-position">${card.position}</span></div>
     ${reversedNote}
     <div class="meaning-card-name">${card.name}</div>
-    <div class="meaning-subtitle">${card.subtitle || card.keywords?.join(' · ')}</div>
+    <div class="meaning-subtitle">${card.subtitle||''}</div>
     <div class="meaning-divider"></div>
-    <div class="meaning-body">${card.reversed
-      ? `<em style="color:var(--fog);display:block;margin-bottom:14px;">When reversed, this energy turns inward — the invitation becomes more personal, the work more internal.</em>` + card.meaning
-      : card.meaning}</div>
-    <div class="meaning-keywords">
-      ${(card.keywords||[]).map(k => `<span class="keyword">${k}</span>`).join('')}
-    </div>
+    <div class="meaning-body">${card.reversed?`<em style="color:var(--fog);display:block;margin-bottom:14px;">Reversed — this energy turns inward.</em>`:''}${card.meaning}</div>
+    <div class="meaning-keywords">${(card.keywords||[]).map(k=>`<span class="keyword">${k}</span>`).join('')}</div>
   `;
   panel.appendChild(mc);
   panel.classList.add('visible');
+  setTimeout(()=>mc.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
 
-  // Smooth scroll to meaning
-  setTimeout(() => mc.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
-
-  // If all cards flipped, show completion note
-  if (flippedCount === drawnCards.length && drawnCards.length > 1) {
-    const note = document.createElement('div');
-    note.className = 'tarot-combo-note';
-    note.innerHTML = `<strong>✦ All cards have spoken.</strong> Sit with what has emerged. The reading is complete.`;
+  if(flippedCount===drawnCards.length&&drawnCards.length>1){
+    const note=document.createElement('div');
+    note.className='tarot-combo-note';
+    const msg=currentDeck==='cutesy'?'💀 All cards have spoken. Embrace what emerged. 💕':'✦ All cards have spoken. Sit with what has emerged. The reading is complete.';
+    note.innerHTML=`<strong>${msg}</strong>`;
     panel.appendChild(note);
   }
 }
 
-function clearReading(silent) {
-  document.getElementById('spreadLayout').innerHTML = '';
-  document.getElementById('meaningPanel').innerHTML = '';
+function clearReading(silent){
+  document.getElementById('spreadLayout').innerHTML='';
+  document.getElementById('meaningPanel').innerHTML='';
   document.getElementById('meaningPanel').classList.remove('visible');
-  document.getElementById('clearBtn').style.display = 'none';
-  drawnCards = [];
-  flippedCount = 0;
+  document.getElementById('clearBtn').style.display='none';
+  drawnCards=[]; flippedCount=0;
 }
 
-window.onload = init;
+window.onload=init;
 </script>
 </body>
 </html>
