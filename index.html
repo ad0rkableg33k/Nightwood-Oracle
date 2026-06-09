@@ -78,16 +78,8 @@ header h1 span { display:block; font-size:0.45em; font-weight:400; color:var(--m
   border:2px solid transparent; transition:all 0.3s; opacity:0.7; }
 .deck-banner.active { border-color:var(--gold); opacity:1;
   box-shadow:0 0 20px rgba(201,168,76,0.3); }
-.deck-banner img { width:100%; max-width:500px; height:auto;
-  max-height:166px; object-fit:cover; object-position:center; display:block; border-radius:8px; }
-.banner-fallback { padding:14px 30px; text-align:center;
-  letter-spacing:3px; font-size:15px; border-radius:8px; display:block; }
-.banner-nightwood { background:rgba(201,168,76,0.1); color:#c9a84c;
-  font-family:'Cinzel',serif; }
-.banner-chaos { background:rgba(255,45,138,0.1); color:#ff2d8a;
-  font-family:'Creepster',cursive; font-size:20px; }
-.deck-banner img.loaded { display:block; }
-.deck-banner img.loaded ~ .banner-fallback { display:none; }
+.deck-banner img { width:100%; max-width:440px; height:60px; object-fit:cover;
+  object-position:center; display:block; }
 body.chaos-mode .deck-banner.active { border-color:var(--hot-pink);
   box-shadow:0 0 20px rgba(255,45,138,0.4); }
 
@@ -249,12 +241,10 @@ body.chaos-mode footer span { color:var(--hot-pink); }
   <!-- DECK SELECTOR BANNERS -->
   <div class="deck-banners">
     <div class="deck-banner active" id="bannerNightwood" onclick="setDeck('nightwood')">
-      <img src="nightwood_banner.png" onload="this.classList.add('loaded')" onerror="this.style.display='none'" alt="Nightwood Oracle">
-      <div class="banner-fallback banner-nightwood">🌲 &nbsp; NIGHTWOOD ORACLE &nbsp; 🌿</div>
+      <img src="nightwood_banner.png" onerror="this.parentElement.innerHTML='<div style='padding:10px 30px;background:rgba(201,168,76,0.1);border-radius:8px;color:#c9a84c;font-family:Cinzel,serif;letter-spacing:3px;font-size:14px;'>🌲 NIGHTWOOD ORACLE</div>'" alt="Nightwood Oracle">
     </div>
     <div class="deck-banner" id="bannerCutesy" onclick="setDeck('cutesy')">
-      <img src="cutesy_chaos_banner.png" onload="this.classList.add('loaded')" onerror="this.style.display='none'" alt="Cutesy Chaos Tarot">
-      <div class="banner-fallback banner-chaos">🐙 &nbsp; CUTESY CHAOS TAROT &nbsp; 💀</div>
+      <img src="cutesy_chaos_banner.png" onerror="this.parentElement.innerHTML='<div style='padding:10px 30px;background:rgba(255,45,138,0.1);border-radius:8px;color:#ff2d8a;font-family:Creepster,cursive;letter-spacing:3px;font-size:18px;'>🐙 CUTESY CHAOS TAROT</div>'" alt="Cutesy Chaos Tarot">
     </div>
   </div>
 
