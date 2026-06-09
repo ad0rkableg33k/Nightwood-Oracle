@@ -12,7 +12,7 @@
   --ink:#0a0a0f; --deep:#0d1117; --gold:#c9a84c; --gold-dim:#7a6230;
   --gold-glow:#e8c96a; --teal-lit:#4db8b8; --cream:#f0e8d5;
   --mist:#a89f8c; --fog:#5c5650; --red-dim:#6b2020;
-  --hot-pink:#ff2d8a; --purple:#7b2fd4; --lavender:#c084fc;
+  --hot-pink:#c0426e; --purple:#5a2299; --lavender:#9b6fb5;
   --f-display:'Cinzel Decorative',serif; --f-title:'Cinzel',serif;
   --f-body:'EB Garamond',serif; --f-chaos:'Rye',cursive;
   --f-chaos-sub:'Fredoka One',cursive;
@@ -31,9 +31,9 @@ body::before { content:''; position:fixed; inset:0;
     radial-gradient(ellipse 100% 60% at 50% 110%,#060e04 0%,transparent 60%),
     linear-gradient(180deg,#050508 0%,#080d06 40%,#040804 100%); }
 .chaos-bg { position:fixed; inset:0; z-index:0; opacity:0; transition:opacity 0.8s;
-  background: radial-gradient(ellipse 80% 50% at 20% 20%,rgba(123,47,212,0.4) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 80%,rgba(255,45,138,0.25) 0%,transparent 60%),
-    linear-gradient(180deg,#080010 0%,#0d0018 50%,#050008 100%); }
+  background: radial-gradient(ellipse 80% 50% at 20% 20%,rgba(80,20,140,0.25) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%,rgba(150,30,80,0.15) 0%,transparent 60%),
+    linear-gradient(180deg,#050008 0%,#080010 50%,#030005 100%); }
 body.chaos-mode .forest-bg { opacity:0; }
 body.chaos-mode .chaos-bg  { opacity:1; }
 
@@ -75,12 +75,24 @@ header h1 span { display:block; font-size:0.45em; font-weight:400; color:var(--m
 .header-divider span { color:var(--gold); font-size:18px; }
 
 /* DECK BANNERS */
-.deck-banners { display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
-  max-width:1000px; margin:0 auto 30px; padding:0 20px; }
-.deck-banner { border-radius:10px; overflow:hidden; cursor:pointer;
-  border:2px solid transparent; transition:all 0.3s; opacity:0.7; }
+.deck-banners { display:flex; flex-wrap:wrap; gap:16px; justify-content:center;
+  max-width:1100px; margin:0 auto 10px; padding:0 20px; }
+.deck-banners-label { text-align:center; font-family:var(--f-title); font-size:11px;
+  letter-spacing:4px; text-transform:uppercase; color:var(--fog); margin-bottom:12px; }
+.deck-banner { border-radius:12px; overflow:visible; cursor:pointer;
+  border:3px solid transparent; transition:all 0.35s; opacity:0.45;
+  position:relative; filter:saturate(0.4) brightness(0.7); }
+.deck-banner::after { content:'SELECT'; position:absolute; bottom:-26px; left:50%;
+  transform:translateX(-50%); font-family:var(--f-title); font-size:10px;
+  letter-spacing:3px; color:var(--fog); opacity:0; transition:opacity 0.3s; white-space:nowrap; }
+.deck-banner:hover { opacity:0.85; filter:saturate(0.8) brightness(0.9);
+  transform:translateY(-3px); }
+.deck-banner:hover::after { opacity:1; }
 .deck-banner.active { border-color:var(--gold); opacity:1;
-  box-shadow:0 0 20px rgba(201,168,76,0.3); }
+  box-shadow:0 0 30px rgba(201,168,76,0.4), 0 0 60px rgba(201,168,76,0.15);
+  filter:saturate(1) brightness(1); transform:none; }
+.deck-banner.active::after { content:'✦ ACTIVE'; color:var(--gold); opacity:1; }
+.deck-banner.active:hover { transform:none; }
 .deck-banner img { width:100%; max-width:500px; height:auto;
   max-height:166px; object-fit:cover; object-position:center; display:block; border-radius:8px; }
 .banner-fallback { padding:14px 30px; text-align:center;
@@ -92,15 +104,15 @@ header h1 span { display:block; font-size:0.45em; font-weight:400; color:var(--m
 .deck-banner img.loaded { display:block; }
 .deck-banner img.loaded ~ .banner-fallback { display:none; }
 body.chaos-mode .deck-banner.active { border-color:var(--hot-pink);
-  box-shadow:0 0 20px rgba(255,45,138,0.4); }
+  box-shadow:0 0 30px rgba(255,45,138,0.5), 0 0 60px rgba(255,45,138,0.2); }
+body.chaos-mode .deck-banner.active::after { color:var(--hot-pink); }
 
 /* CHAOS HEADER */
-body.chaos-mode header h1 { color:var(--hot-pink);
+body.chaos-mode header h1 { color:#d4608a;
   font-family:var(--f-chaos);
-  text-shadow:0 0 20px rgba(255,45,138,0.8),0 0 60px rgba(255,45,138,0.3),
-    3px 3px 0 var(--purple); }
-body.chaos-mode .header-rune { color:var(--lavender); font-family:var(--f-chaos-sub); }
-body.chaos-mode .header-divider span { color:var(--hot-pink); }
+  text-shadow:0 0 15px rgba(180,60,110,0.5), 2px 2px 0 rgba(80,20,60,0.8); }
+body.chaos-mode .header-rune { color:#9b6b8a; font-family:var(--f-chaos-sub); }
+body.chaos-mode .header-divider span { color:#d4608a; }
 
 /* MODE TABS */
 .mode-section { max-width:900px; margin:0 auto; padding:20px 20px 0; text-align:center; }
@@ -250,6 +262,7 @@ body.chaos-mode footer span { color:var(--hot-pink); }
   </header>
 
   <!-- DECK SELECTOR BANNERS -->
+  <div class="deck-banners-label">✦ &nbsp; Choose Your Deck &nbsp; ✦</div>
   <div class="deck-banners">
     <div class="deck-banner active" id="bannerNightwood" onclick="setDeck('nightwood')">
       <img src="nightwood_banner.png" onload="this.classList.add('loaded')" onerror="this.style.display='none'" alt="Nightwood Oracle">
@@ -311,9 +324,9 @@ const ORACLE_CARDS = [
   {id:"card 15",name:"The Eagle",file:"card 15.png",type:"oracle",subtitle:"Spirit & Freedom",keywords:["spirit","freedom","divine","leadership","vision"],meaning:"Eagle flies where nothing else can follow. This is a card of spiritual elevation — genuine contact with something larger than the personal. Eagle sees from a perspective that includes the sacred, the ancestral, the connected web of all things. When Eagle appears, you may be receiving a calling or a confirmation. There is a part of you that is vast and unhurried. Lead from there."},
   {id:"card 16",name:"The Mouse",file:"card 16.png",type:"oracle",subtitle:"Detail & The Small Sacred",keywords:["attention","details","scrutiny","the overlooked","focus"],meaning:"Mouse lives in the intimate scale of things. While others look at the horizon, Mouse notices the crack in the floorboard, the crumb, the forgotten corner. There may be fine print in a contract, a pattern in a relationship, a symptom you've been waving away. Mouse asks you to slow down and look closely. The small things are not small — they are the foundation of everything larger."},
   {id:"card 17",name:"The Cougar",file:"card 17.png",type:"oracle",subtitle:"Power & Decisiveness",keywords:["power","leadership","decisiveness","courage","action"],meaning:"Cougar does not second-guess itself at the moment of the leap. All of the patience, all of the watching — it comes down to this decisive instant where power is expressed cleanly. You know more than you're giving yourself credit for. You're ready for more than you're claiming. Cougar asks: what are you still waiting for permission to do?"},
-  {id:"card 18",name:"The Frog",file:"card 18.png",type:"oracle",subtitle:"Cleansing & Transition",keywords:["cleansing","rain","transition","abundance","emotion"],meaning:"Frog lives in two worlds and belongs to both. It knows water and earth, submersion and emergence. You are moving between states, between identities, between chapters. Frog also carries the energy of cleansing: what needs to be washed away? The tears you've been holding back are not weakness — they are the water that carries you to the other side."},
-  {id:"card 19",name:"The Turtle",file:"card 19.png",type:"oracle",subtitle:"Patience & Ancient Wisdom",keywords:["patience","groundedness","ancient wisdom","protection","timing"],meaning:"Turtle has been here longer than the panic you're in. This card carries the deep, unhurried wisdom of things that have survived every storm by having nowhere urgent to be. Something in your life is asking for patience: not passive waiting, but active trust in a natural timeline. You carry your home with you. You are more protected than you feel. Breathe. The earth holds you."},
-  {id:"card 20",name:"The Firefly",file:"card 20.png",type:"oracle",subtitle:"Hope & Light in Darkness",keywords:["hope","light","magic","inspiration","illumination"],meaning:"Firefly doesn't wait for the sun. It makes its own light, small and improbable and beautiful in the dark. This is the card of hope that doesn't require conditions — the light that shows up not because everything is fine but because something in you refuses to stop shining. You may not know how much your small light means to the people in your night."},
+  {id:"card 18",name:"The Turtle",file:"card 18.png",type:"oracle",subtitle:"Patience & Ancient Wisdom",keywords:["patience","groundedness","ancient wisdom","protection","timing"],meaning:"Turtle has been here longer than the panic you're in. This card carries the deep, unhurried wisdom of things that have survived every storm by having nowhere urgent to be. Something in your life is asking for patience: not passive waiting, but active trust in a natural timeline. You carry your home with you. You are more protected than you feel. Breathe. The earth holds you."},
+  {id:"card 19",name:"The Firefly",file:"card 19.png",type:"oracle",subtitle:"Hope & Light in Darkness",keywords:["hope","light","magic","inspiration","illumination"],meaning:"Firefly doesn't wait for the sun. It makes its own light, small and improbable and beautiful in the dark. This is the card of hope that doesn't require conditions — the light that shows up not because everything is fine but because something in you refuses to stop shining. You may not know how much your small light means to the people in your night."},
+  {id:"card 20",name:"The Frog",file:"card 20.png",type:"oracle",subtitle:"Cleansing & Transition",keywords:["cleansing","rain","transition","abundance","emotion"],meaning:"Frog lives in two worlds and belongs to both. It knows water and earth, submersion and emergence. You are moving between states, between identities, between chapters. Frog also carries the energy of cleansing: what needs to be washed away? The tears you've been holding back are not weakness — they are the water that carries you to the other side."},
 ];
 
 // ── CUTESY CHAOS MAJOR ARCANA ──────────────────────────────────────────────
