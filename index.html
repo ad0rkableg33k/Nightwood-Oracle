@@ -322,73 +322,153 @@ body.chaos-mode .export-btn:hover { border-color:var(--hot-pink); box-shadow:0 0
 body.cc-mode .export-btn { border-color:rgba(0,207,255,0.3); color:var(--cc-teal); }
 body.cc-mode .export-btn:hover { border-color:var(--cc-teal); box-shadow:0 0 16px rgba(0,207,255,0.2); }
 
-/* PRINT / PDF STYLES */
+/* SHARE PANEL */
+.share-panel {
+  display:none; max-width:700px; margin:20px auto 0;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(201,168,76,0.15);
+  border-radius:12px; padding:28px 32px; text-align:center; }
+.share-panel.visible { display:block; animation:fadeUp 0.4s ease forwards; }
+.share-title { font-family:var(--f-title); font-size:11px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--gold-dim); margin-bottom:18px; }
+.share-buttons { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.share-btn { display:flex; align-items:center; gap:8px; padding:10px 20px;
+  border-radius:6px; border:1px solid transparent; font-family:var(--f-title);
+  font-size:11px; letter-spacing:2px; text-transform:uppercase; cursor:pointer;
+  transition:all 0.25s; text-decoration:none; }
+.share-btn-pdf  { border-color:rgba(201,168,76,0.35); color:var(--gold-dim); background:rgba(201,168,76,0.05); }
+.share-btn-pdf:hover { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,0.1); box-shadow:0 0 14px rgba(201,168,76,0.2); }
+.share-btn-email { border-color:rgba(77,184,184,0.35); color:var(--teal-lit); background:rgba(77,184,184,0.05); }
+.share-btn-email:hover { border-color:var(--teal-lit); background:rgba(77,184,184,0.1); box-shadow:0 0 14px rgba(77,184,184,0.2); }
+.share-btn-sms   { border-color:rgba(90,100,200,0.35); color:#7a8fff; background:rgba(90,100,200,0.05); }
+.share-btn-sms:hover { border-color:#7a8fff; background:rgba(90,100,200,0.1); box-shadow:0 0 14px rgba(90,100,200,0.2); }
+.share-btn-fb    { border-color:rgba(66,103,178,0.4); color:#6b8cda; background:rgba(66,103,178,0.05); }
+.share-btn-fb:hover { border-color:#6b8cda; background:rgba(66,103,178,0.1); box-shadow:0 0 14px rgba(66,103,178,0.2); }
+.share-btn-copy  { border-color:rgba(168,159,140,0.35); color:var(--mist); background:rgba(168,159,140,0.05); }
+.share-btn-copy:hover { border-color:var(--mist); background:rgba(168,159,140,0.1); }
+.share-toast { font-family:var(--f-title); font-size:11px; letter-spacing:2px;
+  color:var(--teal-lit); margin-top:12px; height:18px; transition:opacity 0.3s; }
+body.chaos-mode .share-panel { border-color:rgba(255,45,138,0.15); }
+body.chaos-mode .share-title { color:var(--lavender); }
+body.chaos-mode .share-btn-pdf { border-color:rgba(255,45,138,0.3); color:var(--hot-pink); }
+body.chaos-mode .share-btn-pdf:hover { border-color:var(--hot-pink); box-shadow:0 0 14px rgba(255,45,138,0.2); }
+body.cc-mode .share-panel { border-color:rgba(0,207,255,0.15); }
+body.cc-mode .share-title { color:var(--cc-teal); }
+body.cc-mode .share-btn-pdf { border-color:rgba(0,207,255,0.3); color:var(--cc-teal); }
+body.cc-mode .share-btn-pdf:hover { border-color:var(--cc-teal); box-shadow:0 0 14px rgba(0,207,255,0.2); }
+
+/* NOTES AREA */
+.notes-panel {
+  display:none; max-width:700px; margin:20px auto 0;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(201,168,76,0.15);
+  border-radius:12px; padding:28px 32px; }
+.notes-panel.visible { display:block; animation:fadeUp 0.4s ease forwards; }
+.notes-title { font-family:var(--f-title); font-size:11px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--gold-dim); margin-bottom:14px; }
+.notes-textarea { width:100%; min-height:120px; background:rgba(255,255,255,0.03);
+  border:1px solid rgba(201,168,76,0.2); border-radius:8px; padding:14px 16px;
+  color:var(--cream); font-family:var(--f-body); font-size:16px; line-height:1.7;
+  resize:vertical; outline:none; transition:border-color 0.3s; }
+.notes-textarea:focus { border-color:rgba(201,168,76,0.5); }
+.notes-textarea::placeholder { color:var(--fog); font-style:italic; }
+.notes-hint { font-size:12px; color:var(--fog); font-style:italic; margin-top:8px; }
+body.chaos-mode .notes-panel { border-color:rgba(255,45,138,0.15); }
+body.chaos-mode .notes-title { color:var(--lavender); }
+body.chaos-mode .notes-textarea { border-color:rgba(255,45,138,0.2); color:var(--cream); }
+body.chaos-mode .notes-textarea:focus { border-color:rgba(255,45,138,0.5); }
+body.cc-mode .notes-panel { border-color:rgba(0,207,255,0.15); }
+body.cc-mode .notes-title { color:var(--cc-teal); }
+body.cc-mode .notes-textarea { border-color:rgba(0,207,255,0.2); }
+body.cc-mode .notes-textarea:focus { border-color:rgba(0,207,255,0.5); }
+
+/* SUGGESTIONS SECTION */
+.suggestions-section {
+  max-width:700px; margin:60px auto 20px;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(201,168,76,0.12);
+  border-radius:12px; padding:36px 40px; }
+.suggestions-title { font-family:var(--f-display); font-size:18px; color:var(--gold);
+  margin-bottom:6px; }
+.suggestions-sub { color:var(--fog); font-style:italic; font-size:14px; margin-bottom:20px; }
+.suggestions-form { display:flex; flex-direction:column; gap:12px; }
+.suggestions-input { background:rgba(255,255,255,0.03); border:1px solid rgba(201,168,76,0.2);
+  border-radius:8px; padding:12px 16px; color:var(--cream); font-family:var(--f-body);
+  font-size:15px; outline:none; transition:border-color 0.3s; }
+.suggestions-input:focus { border-color:rgba(201,168,76,0.5); }
+.suggestions-input::placeholder { color:var(--fog); font-style:italic; }
+.suggestions-textarea { min-height:100px; resize:vertical; }
+.suggestions-submit { align-self:flex-start; padding:11px 30px; background:transparent;
+  border:1px solid rgba(201,168,76,0.35); border-radius:4px; color:var(--gold-dim);
+  font-family:var(--f-title); font-size:11px; letter-spacing:3px; text-transform:uppercase;
+  cursor:pointer; transition:all 0.3s; }
+.suggestions-submit:hover { border-color:var(--gold); color:var(--gold);
+  box-shadow:0 0 14px rgba(201,168,76,0.2); }
+.suggestions-thanks { display:none; color:var(--teal-lit); font-style:italic;
+  font-size:15px; text-align:center; padding:10px 0; }
+body.chaos-mode .suggestions-section { border-color:rgba(255,45,138,0.12); }
+body.chaos-mode .suggestions-title { color:var(--hot-pink); font-family:var(--f-chaos); }
+body.chaos-mode .suggestions-input { border-color:rgba(255,45,138,0.2); }
+body.chaos-mode .suggestions-input:focus { border-color:rgba(255,45,138,0.5); }
+body.chaos-mode .suggestions-submit { border-color:rgba(255,45,138,0.35); color:var(--hot-pink); }
+body.chaos-mode .suggestions-submit:hover { border-color:var(--hot-pink); box-shadow:0 0 14px rgba(255,45,138,0.2); }
+body.cc-mode .suggestions-section { border-color:rgba(0,207,255,0.12); }
+body.cc-mode .suggestions-title { color:var(--cc-teal); font-family:'Fredoka One',cursive; }
+body.cc-mode .suggestions-input { border-color:rgba(0,207,255,0.2); }
+body.cc-mode .suggestions-input:focus { border-color:rgba(0,207,255,0.5); }
+body.cc-mode .suggestions-submit { border-color:rgba(0,207,255,0.35); color:var(--cc-teal); }
+body.cc-mode .suggestions-submit:hover { border-color:var(--cc-teal); box-shadow:0 0 14px rgba(0,207,255,0.2); }
+
+/* hide share+notes chrome in print, but show notes textarea content */
 @media print {
   @page { margin: 1.2cm 1.5cm; size: A4; }
 
-  /* hide everything except the reading */
   header, .deck-banners, .deck-banners-label, .mode-section,
   .spread-section, .draw-section, .spread-layout, .clear-btn,
   .export-btn, .forest-bg, .chaos-bg, .cc-bg,
   .fireflies, .skulls, .rainbow-sparks, footer,
+  .share-panel, .suggestions-section,
+  .notes-title, .notes-hint,
   body::before { display:none !important; }
 
   html, body { background:#fff !important; color:#111 !important;
     font-family: Georgia, serif; font-size:13pt; }
-
   .app { position:static; }
   .reading-area { max-width:100%; margin:0; padding:0; }
-
-  /* PDF header injected by JS */
   #pdfHeader { display:block !important; }
-
   .meaning-panel { display:block !important; max-width:100%; margin:0; }
   .meaning-panel.visible { animation:none; }
-
   .meaning-card {
-    background:#fff !important;
-    border:1.5pt solid #c9a84c !important;
-    border-radius:6pt;
-    padding:18pt 20pt;
-    margin-bottom:14pt;
-    page-break-inside:avoid;
-    box-shadow:none !important;
-  }
+    background:#fff !important; border:1.5pt solid #c9a84c !important;
+    border-radius:6pt; padding:18pt 20pt; margin-bottom:14pt;
+    page-break-inside:avoid; box-shadow:none !important; }
   .meaning-card::before { display:none; }
-
   .meaning-header { margin-bottom:4pt; }
   .meaning-position { font-size:8pt; letter-spacing:2pt; color:#666; text-transform:uppercase; }
-
   .meaning-card-name {
-    font-family: 'Cinzel Decorative', Georgia, serif !important;
+    font-family:'Cinzel Decorative',Georgia,serif !important;
     font-size:18pt; color:#7a5a10 !important;
     -webkit-text-fill-color:#7a5a10 !important;
     background:none !important; -webkit-background-clip:unset !important;
-    text-shadow:none !important; filter:none !important;
-  }
+    text-shadow:none !important; filter:none !important; }
   .meaning-subtitle { font-style:italic; color:#7a5a10 !important; font-size:11pt; margin-bottom:10pt; }
   .meaning-divider { border-top:0.5pt solid #c9a84c; margin-bottom:10pt; height:0; }
   .meaning-body { color:#1a1a1a !important; font-size:12pt; line-height:1.7; }
   .meaning-body em { color:#888 !important; }
   .meaning-keywords { margin-top:10pt; display:flex; flex-wrap:wrap; gap:5pt; }
-  .keyword {
-    border:0.8pt solid #c9a84c !important; border-radius:20pt;
+  .keyword { border:0.8pt solid #c9a84c !important; border-radius:20pt;
     padding:2pt 9pt; font-size:8pt; letter-spacing:1.5pt;
-    color:#7a5a10 !important; text-transform:uppercase;
-    font-family:'Cinzel',Georgia,serif;
-  }
-  .tarot-combo-note {
-    text-align:center; font-style:italic; color:#555 !important;
-    font-size:11pt; border-top:0.5pt solid #c9a84c;
-    margin-top:14pt; padding-top:10pt;
-  }
-
-  /* type tag chips */
-  .meaning-header span[style] {
-    border:0.8pt solid #aaa !important;
-    color:#555 !important;
-    background:#f5f5f5 !important;
-  }
+    color:#7a5a10 !important; text-transform:uppercase; font-family:'Cinzel',Georgia,serif; }
+  .tarot-combo-note { text-align:center; font-style:italic; color:#555 !important;
+    font-size:11pt; border-top:0.5pt solid #c9a84c; margin-top:14pt; padding-top:10pt; }
+  .meaning-header span[style] { border:0.8pt solid #aaa !important;
+    color:#555 !important; background:#f5f5f5 !important; }
+  /* Print notes if user typed something */
+  .notes-panel { display:block !important; border:none !important;
+    padding:0 !important; margin-top:16pt !important; background:none !important; }
+  .notes-panel::before { content:'My Notes'; font-family:'Cinzel',Georgia,serif;
+    font-size:9pt; letter-spacing:2pt; color:#888; text-transform:uppercase;
+    display:block; margin-bottom:6pt; }
+  .notes-textarea { border:0.5pt solid #ccc !important; color:#111 !important;
+    background:#fff !important; font-size:11pt; padding:8pt;
+    min-height:0 !important; width:100%; }
 }
 
 /* PDF header (hidden on screen, shown in print) */
@@ -454,9 +534,41 @@ body.cc-mode .export-btn:hover { border-color:var(--cc-teal); box-shadow:0 0 16p
     </div>
     <div class="spread-layout" id="spreadLayout"></div>
     <div class="meaning-panel" id="meaningPanel"></div>
-    <div style="text-align:center">
+
+    <!-- NOTES -->
+    <div class="notes-panel" id="notesPanel">
+      <div class="notes-title">✦ &nbsp; My Reading Notes &nbsp; ✦</div>
+      <textarea class="notes-textarea" id="notesArea" placeholder="What came up for you? Write anything you want to remember about this reading…" rows="5"></textarea>
+      <div class="notes-hint">Your notes stay with you — they'll be included if you save as PDF.</div>
+    </div>
+
+    <!-- SHARE & EXPORT -->
+    <div class="share-panel" id="sharePanel">
+      <div class="share-title">✦ &nbsp; Save &amp; Share Your Reading &nbsp; ✦</div>
+      <div class="share-buttons">
+        <button class="share-btn share-btn-pdf" onclick="exportReading()">📄 Save as PDF</button>
+        <button class="share-btn share-btn-email" onclick="shareEmail()">✉️ Email to Myself</button>
+        <button class="share-btn share-btn-sms" onclick="shareSMS()">💬 Send as Text</button>
+        <button class="share-btn share-btn-fb" onclick="shareFacebook()">📘 Share on Facebook</button>
+        <button class="share-btn share-btn-copy" onclick="copyReading()">🔗 Copy Reading</button>
+      </div>
+      <div class="share-toast" id="shareToast"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:16px">
       <button class="clear-btn" id="clearBtn" style="display:none" onclick="clearReading()">✦ Clear Reading ✦</button>
-      <button class="export-btn" id="exportBtn" onclick="exportReading()">⬇ Save as PDF</button>
+    </div>
+  </div>
+
+  <!-- SUGGESTIONS -->
+  <div class="suggestions-section">
+    <div class="suggestions-title">Leave a Note for the Deck Maker</div>
+    <div class="suggestions-sub">Got a card idea, a spread suggestion, or just want to share what came up? We'd love to hear it.</div>
+    <div class="suggestions-form">
+      <input class="suggestions-input" id="suggName" type="text" placeholder="Your name (optional)">
+      <textarea class="suggestions-input suggestions-textarea" id="suggText" placeholder="Your thoughts, suggestions, or a message…"></textarea>
+      <button class="suggestions-submit" onclick="submitSuggestion()">✦ Send It ✦</button>
+      <div class="suggestions-thanks" id="suggThanks">✦ Thank you — your message has been received. ✦</div>
     </div>
   </div>
 </div>
@@ -1434,12 +1546,31 @@ function showMeaning(index){
     note.innerHTML=`<strong>${msg}</strong>`;
     panel.appendChild(note);
   }
-  // Show export button once at least one card is revealed
-  document.getElementById('exportBtn').style.display='inline-block';
+  // Show share panel and notes once at least one card is revealed
+  document.getElementById('sharePanel').classList.add('visible');
+  document.getElementById('notesPanel').classList.add('visible');
+}
+
+function buildReadingText() {
+  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle'};
+  const date = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const spreadName = currentSpread ? currentSpread.name : 'Reading';
+  let text = `✦ ${deckNames[currentDeck]||'Oracle'} · ${spreadName} ✦\n${date}\n\n`;
+  drawnCards.forEach(card => {
+    text += `— ${card.position} —\n`;
+    text += `${card.name}${card.reversed?' (Reversed)':''}\n`;
+    text += `${card.subtitle||''}\n`;
+    text += `${card.meaning}\n\n`;
+    if(card.keywords && card.keywords.length) text += `Keywords: ${card.keywords.join(', ')}\n`;
+    text += '\n';
+  });
+  const notes = document.getElementById('notesArea').value.trim();
+  if(notes) text += `My Notes:\n${notes}\n`;
+  text += `\n✦ Reading from ${window.location.href}`;
+  return text;
 }
 
 function exportReading() {
-  // Build the PDF header content
   const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle'};
   const spreadName = currentSpread ? currentSpread.name : 'Reading';
   document.getElementById('pdfDeckName').textContent = (deckNames[currentDeck]||'Oracle') + ' · ' + spreadName;
@@ -1447,12 +1578,66 @@ function exportReading() {
   window.print();
 }
 
+function shareEmail() {
+  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle'};
+  const subject = encodeURIComponent(`My ${deckNames[currentDeck]||'Oracle'} Reading`);
+  const body = encodeURIComponent(buildReadingText());
+  window.open(`mailto:?subject=${subject}&body=${body}`);
+}
+
+function shareSMS() {
+  const text = encodeURIComponent(buildReadingText());
+  // sms: works on mobile; on desktop it may open default SMS app
+  window.open(`sms:?body=${text}`);
+}
+
+function shareFacebook() {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+}
+
+function copyReading() {
+  const text = buildReadingText();
+  navigator.clipboard.writeText(text).then(()=>{
+    showToast('✦ Reading copied to clipboard ✦');
+  }).catch(()=>{
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('✦ Reading copied to clipboard ✦');
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('shareToast');
+  t.textContent = msg; t.style.opacity = '1';
+  setTimeout(()=>{ t.style.opacity='0'; }, 3000);
+}
+
+function submitSuggestion() {
+  const name = document.getElementById('suggName').value.trim();
+  const text = document.getElementById('suggText').value.trim();
+  if(!text) return;
+  // Store locally (no backend needed)
+  const existing = JSON.parse(localStorage.getItem('nw_suggestions')||'[]');
+  existing.push({ name, text, date: new Date().toISOString(), deck: currentDeck });
+  localStorage.setItem('nw_suggestions', JSON.stringify(existing));
+  document.getElementById('suggText').value = '';
+  document.getElementById('suggName').value = '';
+  document.getElementById('suggThanks').style.display = 'block';
+  setTimeout(()=>{ document.getElementById('suggThanks').style.display='none'; }, 4000);
+}
+
 function clearReading(silent){
   document.getElementById('spreadLayout').innerHTML='';
   document.getElementById('meaningPanel').innerHTML='';
   document.getElementById('meaningPanel').classList.remove('visible');
+  document.getElementById('sharePanel').classList.remove('visible');
+  document.getElementById('notesPanel').classList.remove('visible');
+  document.getElementById('notesArea').value='';
   document.getElementById('clearBtn').style.display='none';
-  document.getElementById('exportBtn').style.display='none';
   drawnCards=[]; flippedCount=0;
 }
 
