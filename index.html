@@ -307,6 +307,100 @@ body.cc-mode footer span { color:var(--cc-teal); }
   .meaning-card-name{font-size:20px;}
   .spread-layout{gap:16px;}
 }
+
+/* EXPORT BUTTON */
+.export-btn {
+  display:none; margin:16px auto 0; padding:10px 28px;
+  background:transparent; border:1px solid rgba(201,168,76,0.3);
+  border-radius:4px; color:var(--gold-dim); font-family:var(--f-title);
+  font-size:11px; letter-spacing:3px; text-transform:uppercase;
+  cursor:pointer; transition:all 0.3s; }
+.export-btn:hover { border-color:var(--gold); color:var(--gold);
+  box-shadow:0 0 16px rgba(201,168,76,0.2); }
+body.chaos-mode .export-btn { border-color:rgba(255,45,138,0.3); color:var(--hot-pink); }
+body.chaos-mode .export-btn:hover { border-color:var(--hot-pink); box-shadow:0 0 16px rgba(255,45,138,0.2); }
+body.cc-mode .export-btn { border-color:rgba(0,207,255,0.3); color:var(--cc-teal); }
+body.cc-mode .export-btn:hover { border-color:var(--cc-teal); box-shadow:0 0 16px rgba(0,207,255,0.2); }
+
+/* PRINT / PDF STYLES */
+@media print {
+  @page { margin: 1.2cm 1.5cm; size: A4; }
+
+  /* hide everything except the reading */
+  header, .deck-banners, .deck-banners-label, .mode-section,
+  .spread-section, .draw-section, .spread-layout, .clear-btn,
+  .export-btn, .forest-bg, .chaos-bg, .cc-bg,
+  .fireflies, .skulls, .rainbow-sparks, footer,
+  body::before { display:none !important; }
+
+  html, body { background:#fff !important; color:#111 !important;
+    font-family: Georgia, serif; font-size:13pt; }
+
+  .app { position:static; }
+  .reading-area { max-width:100%; margin:0; padding:0; }
+
+  /* PDF header injected by JS */
+  #pdfHeader { display:block !important; }
+
+  .meaning-panel { display:block !important; max-width:100%; margin:0; }
+  .meaning-panel.visible { animation:none; }
+
+  .meaning-card {
+    background:#fff !important;
+    border:1.5pt solid #c9a84c !important;
+    border-radius:6pt;
+    padding:18pt 20pt;
+    margin-bottom:14pt;
+    page-break-inside:avoid;
+    box-shadow:none !important;
+  }
+  .meaning-card::before { display:none; }
+
+  .meaning-header { margin-bottom:4pt; }
+  .meaning-position { font-size:8pt; letter-spacing:2pt; color:#666; text-transform:uppercase; }
+
+  .meaning-card-name {
+    font-family: 'Cinzel Decorative', Georgia, serif !important;
+    font-size:18pt; color:#7a5a10 !important;
+    -webkit-text-fill-color:#7a5a10 !important;
+    background:none !important; -webkit-background-clip:unset !important;
+    text-shadow:none !important; filter:none !important;
+  }
+  .meaning-subtitle { font-style:italic; color:#7a5a10 !important; font-size:11pt; margin-bottom:10pt; }
+  .meaning-divider { border-top:0.5pt solid #c9a84c; margin-bottom:10pt; height:0; }
+  .meaning-body { color:#1a1a1a !important; font-size:12pt; line-height:1.7; }
+  .meaning-body em { color:#888 !important; }
+  .meaning-keywords { margin-top:10pt; display:flex; flex-wrap:wrap; gap:5pt; }
+  .keyword {
+    border:0.8pt solid #c9a84c !important; border-radius:20pt;
+    padding:2pt 9pt; font-size:8pt; letter-spacing:1.5pt;
+    color:#7a5a10 !important; text-transform:uppercase;
+    font-family:'Cinzel',Georgia,serif;
+  }
+  .tarot-combo-note {
+    text-align:center; font-style:italic; color:#555 !important;
+    font-size:11pt; border-top:0.5pt solid #c9a84c;
+    margin-top:14pt; padding-top:10pt;
+  }
+
+  /* type tag chips */
+  .meaning-header span[style] {
+    border:0.8pt solid #aaa !important;
+    color:#555 !important;
+    background:#f5f5f5 !important;
+  }
+}
+
+/* PDF header (hidden on screen, shown in print) */
+#pdfHeader {
+  display:none;
+  text-align:center;
+  padding-bottom:18pt;
+  margin-bottom:18pt;
+  border-bottom:1pt solid #c9a84c;
+}
+#pdfHeader h2 { font-family:'Cinzel Decorative',Georgia,serif; font-size:20pt; color:#7a5a10; margin:0 0 4pt; }
+#pdfHeader p  { font-family:'Cinzel',Georgia,serif; font-size:9pt; color:#888; letter-spacing:2pt; margin:0; }
 </style>
 </head>
 <body>
@@ -354,9 +448,16 @@ body.cc-mode footer span { color:var(--cc-teal); }
   </div>
 
   <div class="reading-area" id="readingArea">
+    <div id="pdfHeader">
+      <h2 id="pdfDeckName">Nightwood Oracle</h2>
+      <p id="pdfMeta">Reading · <span id="pdfDate"></span></p>
+    </div>
     <div class="spread-layout" id="spreadLayout"></div>
     <div class="meaning-panel" id="meaningPanel"></div>
-    <button class="clear-btn" id="clearBtn" style="display:none" onclick="clearReading()">✦ Clear Reading ✦</button>
+    <div style="text-align:center">
+      <button class="clear-btn" id="clearBtn" style="display:none" onclick="clearReading()">✦ Clear Reading ✦</button>
+      <button class="export-btn" id="exportBtn" onclick="exportReading()">⬇ Save as PDF</button>
+    </div>
   </div>
 </div>
 
@@ -1333,6 +1434,16 @@ function showMeaning(index){
     note.innerHTML=`<strong>${msg}</strong>`;
     panel.appendChild(note);
   }
+  // Show export button once at least one card is revealed
+  document.getElementById('exportBtn').style.display='inline-block';
+
+function exportReading() {
+  // Build the PDF header content
+  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle'};
+  const spreadName = currentSpread ? currentSpread.name : 'Reading';
+  document.getElementById('pdfDeckName').textContent = (deckNames[currentDeck]||'Oracle') + ' · ' + spreadName;
+  document.getElementById('pdfDate').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  window.print();
 }
 
 function clearReading(silent){
@@ -1340,6 +1451,7 @@ function clearReading(silent){
   document.getElementById('meaningPanel').innerHTML='';
   document.getElementById('meaningPanel').classList.remove('visible');
   document.getElementById('clearBtn').style.display='none';
+  document.getElementById('exportBtn').style.display='none';
   drawnCards=[]; flippedCount=0;
 }
 
