@@ -20,6 +20,7 @@
   --rainbow-1:#ff2d8a; --rainbow-2:#ff8c00; --rainbow-3:#ffe600;
   --rainbow-4:#00e676; --rainbow-5:#00cfff; --rainbow-6:#a259ff;
   --cc-pink:#ff2d8a; --cc-purple:#a259ff; --cc-teal:#00cfff;
+  --ff-purple:#7c3aed; --ff-lavender:#c084fc; --ff-pink:#f472b6; --ff-dark:#0a0010;
 }
 html { scroll-behavior:smooth; }
 body { background:var(--ink); color:var(--cream); font-family:var(--f-body);
@@ -47,10 +48,26 @@ body.chaos-mode .chaos-bg  { opacity:1; }
 body.cc-mode .forest-bg { opacity:0; }
 body.cc-mode .chaos-bg  { opacity:0; }
 body.cc-mode .cc-bg     { opacity:1; }
+.fangfluff-bg { position:fixed; inset:0; z-index:0; opacity:0; transition:opacity 0.8s;
+  background: radial-gradient(ellipse 70% 50% at 30% 20%,rgba(124,58,237,0.3) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 70% 80%,rgba(244,114,182,0.15) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 50%,rgba(60,0,100,0.4) 0%,transparent 70%),
+    linear-gradient(180deg,#060008 0%,#0a0018 50%,#040008 100%); }
+body.fangfluff-mode .forest-bg  { opacity:0; }
+body.fangfluff-mode .chaos-bg   { opacity:0; }
+body.fangfluff-mode .cc-bg      { opacity:0; }
+body.fangfluff-mode .fangfluff-bg { opacity:1; }
 .rainbow-sparks { position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0; transition:opacity 0.8s; }
 body.cc-mode .rainbow-sparks { opacity:1; }
 body.cc-mode .fireflies { opacity:0; }
 body.cc-mode .skulls    { opacity:0; }
+.bat-sparks { position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0; transition:opacity 0.8s; }
+body.fangfluff-mode .bat-sparks { opacity:1; }
+body.fangfluff-mode .fireflies  { opacity:0; }
+body.fangfluff-mode .skulls     { opacity:0; }
+body.fangfluff-mode .rainbow-sparks { opacity:0; }
+.bat-p { position:absolute; font-size:var(--sz,14px); opacity:0;
+  animation:floatUp var(--dur,8s) ease-in infinite var(--delay,0s); }
 .spark { position:absolute; width:4px; height:4px; border-radius:50%; opacity:0;
   animation:sparkDrift var(--dur,9s) ease-in-out infinite var(--delay,0s); }
 @keyframes sparkDrift {
@@ -301,6 +318,56 @@ body.cc-mode footer { border-top-color:rgba(0,207,255,0.12); }
 body.cc-mode footer span { color:var(--cc-teal); }
 .banner-cc { background:rgba(0,207,255,0.08); color:var(--cc-teal);
   font-family:'Fredoka One',cursive; font-size:18px; }
+/* FANGFLUFF MODE STYLES */
+body.fangfluff-mode header h1 {
+  font-family:'Creepster',cursive;
+  background: linear-gradient(90deg,var(--ff-lavender),var(--ff-pink),var(--ff-purple),var(--ff-lavender));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 0 20px rgba(192,132,252,0.5)); }
+body.fangfluff-mode .header-rune { color:var(--ff-lavender); font-family:'Creepster',cursive; letter-spacing:4px; }
+body.fangfluff-mode .header-divider span { color:var(--ff-pink); }
+body.fangfluff-mode .mode-tabs { border-color:rgba(192,132,252,0.25); }
+body.fangfluff-mode .mode-tab.active { background:linear-gradient(135deg,var(--ff-purple),var(--ff-pink));
+  box-shadow:0 0 20px rgba(192,132,252,0.35); color:white; }
+body.fangfluff-mode .spread-btn.active { border-color:var(--ff-lavender); color:var(--ff-lavender);
+  background:rgba(192,132,252,0.08); box-shadow:0 0 14px rgba(192,132,252,0.2); }
+body.fangfluff-mode .draw-btn { border-color:var(--ff-lavender); color:var(--ff-lavender); font-family:'Creepster',cursive; font-size:18px; }
+body.fangfluff-mode .draw-btn::before { background:linear-gradient(135deg,var(--ff-purple),var(--ff-pink)); }
+body.fangfluff-mode .draw-btn:hover { color:white; box-shadow:0 0 30px rgba(192,132,252,0.5); }
+body.fangfluff-mode .slot-label { color:var(--ff-lavender); font-family:'Creepster',cursive; font-size:14px; }
+body.fangfluff-mode .card-face { box-shadow:0 8px 32px rgba(0,0,0,0.7),0 0 0 1px rgba(192,132,252,0.25),
+  0 0 20px rgba(124,58,237,0.12); }
+body.fangfluff-mode .deck-banner.active { border-color:var(--ff-lavender);
+  box-shadow:0 0 30px rgba(192,132,252,0.4), 0 0 60px rgba(192,132,252,0.15); }
+body.fangfluff-mode .deck-banner.active::after { color:var(--ff-lavender); }
+body.fangfluff-mode .meaning-card { border-color:rgba(192,132,252,0.2); }
+body.fangfluff-mode .meaning-card::before { background:linear-gradient(90deg,transparent,var(--ff-purple),var(--ff-pink),transparent); }
+body.fangfluff-mode .meaning-card-name {
+  font-family:'Creepster',cursive; font-size:30px;
+  background:linear-gradient(90deg,var(--ff-lavender),var(--ff-pink));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+body.fangfluff-mode .meaning-subtitle { color:var(--ff-lavender); }
+body.fangfluff-mode .keyword { border-color:rgba(192,132,252,0.3); color:var(--ff-lavender); font-family:'Creepster',cursive; letter-spacing:2px; }
+body.fangfluff-mode footer { border-top-color:rgba(192,132,252,0.12); }
+body.fangfluff-mode footer span { color:var(--ff-lavender); }
+body.fangfluff-mode .share-panel { border-color:rgba(192,132,252,0.15); }
+body.fangfluff-mode .share-title { color:var(--ff-lavender); }
+body.fangfluff-mode .share-btn-pdf { border-color:rgba(192,132,252,0.3); color:var(--ff-lavender); }
+body.fangfluff-mode .share-btn-pdf:hover { border-color:var(--ff-lavender); box-shadow:0 0 14px rgba(192,132,252,0.2); }
+body.fangfluff-mode .notes-panel { border-color:rgba(192,132,252,0.15); }
+body.fangfluff-mode .notes-title { color:var(--ff-lavender); }
+body.fangfluff-mode .notes-textarea { border-color:rgba(192,132,252,0.2); }
+body.fangfluff-mode .notes-textarea:focus { border-color:rgba(192,132,252,0.5); }
+body.fangfluff-mode .suggestions-section { border-color:rgba(192,132,252,0.12); }
+body.fangfluff-mode .suggestions-title { color:var(--ff-lavender); font-family:'Creepster',cursive; }
+body.fangfluff-mode .suggestions-input { border-color:rgba(192,132,252,0.2); }
+body.fangfluff-mode .suggestions-input:focus { border-color:rgba(192,132,252,0.5); }
+body.fangfluff-mode .suggestions-submit { border-color:rgba(192,132,252,0.35); color:var(--ff-lavender); }
+body.fangfluff-mode .suggestions-submit:hover { border-color:var(--ff-lavender); box-shadow:0 0 14px rgba(192,132,252,0.2); }
+body.fangfluff-mode .export-btn { border-color:rgba(192,132,252,0.3); color:var(--ff-lavender); }
+body.fangfluff-mode .export-btn:hover { border-color:var(--ff-lavender); box-shadow:0 0 16px rgba(192,132,252,0.2); }
+.banner-fangfluff { background:rgba(124,58,237,0.1); color:var(--ff-lavender);
+  font-family:'Creepster',cursive; font-size:20px; }
 @media(max-width:600px){
   :root{--card-w:150px;--card-h:262px;}
   .meaning-card{padding:24px 20px;}
@@ -487,9 +554,11 @@ body.cc-mode .suggestions-submit:hover { border-color:var(--cc-teal); box-shadow
 <div class="forest-bg"></div>
 <div class="chaos-bg"></div>
 <div class="cc-bg"></div>
+<div class="fangfluff-bg"></div>
 <div class="fireflies" id="fireflies"></div>
 <div class="skulls" id="skulls"></div>
 <div class="rainbow-sparks" id="rainbowSparks"></div>
+<div class="bat-sparks" id="batSparks"></div>
 
 <div class="app">
   <header>
@@ -512,6 +581,10 @@ body.cc-mode .suggestions-submit:hover { border-color:var(--cc-teal); box-shadow
     <div class="deck-banner" id="bannerCC" onclick="setDeck('cc')">
       <img src="CC_banner.png" onload="this.classList.add('loaded')" onerror="this.style.display='none'" alt="Colorful Creatures Tarot">
       <div class="banner-fallback banner-cc">🦊 &nbsp; COLORFUL CREATURES &nbsp; 🌈</div>
+    </div>
+    <div class="deck-banner" id="bannerFangfluff" onclick="setDeck('fangfluff')">
+      <img src="battarot_banner.png" onload="this.classList.add('loaded')" onerror="this.style.display='none'" alt="FangFluff Tarot">
+      <div class="banner-fallback banner-fangfluff">🦇 &nbsp; FANGFLUFF TAROT &nbsp; 💜</div>
     </div>
   </div>
 
@@ -1275,10 +1348,110 @@ const CUTESY_SPREADS = [
   {id:"combo",name:"Tarot + Oracle",desc:"One Cutesy Chaos card sets the energy — one oracle card (Nightwood or Colorful Creatures, randomly chosen) brings the deeper wisdom. 🌲🐙🦊",
    positions:["Cutesy Chaos: The Energy","Oracle: The Wisdom"],combo:true,
    pools:[{src:'cutesy',count:1},{src:'oracle_random',count:1}]},
-  {id:"three_deck",name:"All Three Decks",desc:"One card from each deck — chaos sets the stage, a creature shows the way, the forest holds the truth. 🐙🦊🌲",
-   positions:["Cutesy Chaos: The Energy","Colorful Creatures: The Way","Nightwood Oracle: The Truth"],combo:true,
-   pools:[{src:'cutesy',count:1},{src:'cc',count:1},{src:'oracle',count:1}]},
+  {id:"four_deck",name:"All Four Decks",desc:"One card from each world — chaos, creature, forest, shadow. The full picture. 🐙🦊🌲🦇",
+   positions:["Cutesy Chaos: The Energy","Colorful Creatures: The Way","Nightwood Oracle: The Truth","FangFluff: The Shadow"],combo:true,
+   pools:[{src:'cutesy',count:1},{src:'cc',count:1},{src:'oracle',count:1},{src:'fangfluff',count:1}]},
 ];
+// ── FANGFLUFF TAROT ────────────────────────────────────────────────────────
+const FANGFLUFF_CARDS = [
+  // Major Arcana
+  {id:"battarot_00_the_fool",name:"The Fool",file:"battarot_00_the_fool.png",type:"fangfluff",subtitle:"🦇 Leap Into the Unknown",keywords:["new beginnings","innocence","spontaneity","free spirit","adventure"],meaning:`The little bat teeters at the edge of the branch, wings not yet spread, heart already gone ahead. The Fool doesn't calculate the fall — it simply opens and goes. You are at a beginning so new it doesn't have a name yet. Something in you wants to leap before the plan is finished, before the fear catches up, before anyone can talk you out of it. That impulse is not recklessness. It's the thing that starts journeys. You can learn to fly on the way down. Open your wings.`},
+  {id:"battarot_01_the_magician",name:"The Magician",file:"battarot_01_the_magician.png",type:"fangfluff",subtitle:"🦇 All the Tools Are Yours",keywords:["willpower","skill","resourcefulness","manifestation","focus"],meaning:`The Magician has everything needed laid out before them — every tool, every element, every gift — and the only question is whether they'll pick it all up and use it. You have more than you're giving yourself credit for right now. The skills, the resources, the spark of will — they're all present. Nothing important is missing. The magic doesn't come from acquiring something new. It comes from directing what you already have with intention and focus. Point your energy. Begin.`},
+  {id:"battarot_02_the_high_priestess",name:"The High Priestess",file:"battarot_02_the_high_priestess.png",type:"fangfluff",subtitle:"🦇 What You Already Know",keywords:["intuition","mystery","inner knowing","patience","the subconscious"],meaning:`The High Priestess sits between the columns and doesn't explain herself to anyone. She knows what she knows. She waits. The answer you're looking for is already inside you — not on the internet, not in someone else's opinion, not in the next sign. It's in the quiet that you've been drowning out. Find five minutes of actual stillness. The thing you need to know will surface. Trust the part of you that already knows.`},
+  {id:"battarot_03_the_empress",name:"The Empress",file:"battarot_03_the_empress.png",type:"fangfluff",subtitle:"🦇 Abundance & Bloom",keywords:["nurturing","abundance","creation","sensuality","growth"],meaning:`The Empress is the card of everything growing and blooming and being tended with love. Something in your life is ready to be nurtured into fullness — a creative project, a relationship, your own body and spirit. This is not a card of effort and striving. It is a card of tending. Water the things you want to grow. Create the conditions. Let the abundance come through care rather than force. You are more fertile with possibility right now than you realize.`},
+  {id:"battarot_04_the_emperor",name:"The Emperor",file:"battarot_04_the_emperor.png",type:"fangfluff",subtitle:"🦇 Build the Structure",keywords:["authority","structure","stability","discipline","leadership"],meaning:`The Emperor doesn't rule through fear — the good ones never do. They rule by building something solid enough that everyone inside it feels safe. You are being called to bring structure to something that has been too loose, too undefined, too dependent on feeling over function. This isn't about rigidity. It's about building the container that lets everything else flourish. Make the plan. Hold the boundary. Lead from a place of solidity.`},
+  {id:"battarot_05_the_hierophant",name:"The Hierophant",file:"battarot_05_the_hierophant.png",type:"fangfluff",subtitle:"🦇 Tradition & Belonging",keywords:["tradition","institutions","conformity","teaching","shared values"],meaning:`The Hierophant holds the keys to the established way — the tradition, the structure, the community that shares a set of values. There is wisdom in what has been tested by time. There is also the question of whether you're following this path because it genuinely resonates or because you were handed it. This card isn't for or against convention. It asks for honesty: what systems are you part of, and are they actually yours? Where is belonging serving you, and where is it containing you?`},
+  {id:"battarot_06_the_lovers",name:"The Lovers",file:"battarot_06_the_lovers.png",type:"fangfluff",subtitle:"🦇 The Real Choice",keywords:["love","union","alignment","values","choice"],meaning:`The Lovers is not just a romance card — it is a card about alignment. About choosing the thing, the person, the path that genuinely resonates with who you actually are rather than who you think you should be. A real choice is in front of you, and the stakes are your own wholeness. Don't choose based on what looks right from the outside. Choose based on what feels true from the inside. The heart knows before the head catches up. Listen.`},
+  {id:"battarot_07_the_chariot",name:"The Chariot",file:"battarot_07_the_chariot.png",type:"fangfluff",subtitle:"🦇 Drive It Forward",keywords:["willpower","victory","determination","control","momentum"],meaning:`The Chariot wins not because the road is easy but because the driver refuses to stop. Two forces pulling in opposite directions — and the victory is in holding them, directing them, channeling the tension into forward motion instead of stillness. You have more momentum available to you than you're using. The conflict you're navigating is not a reason to stop — it's fuel, if you can hold the reins. Keep driving. The destination is closer than the difficulty makes it feel.`},
+  {id:"battarot_08_strength",name:"Strength",file:"battarot_08_strength.png",type:"fangfluff",subtitle:"🦇 The Gentlest Power",keywords:["inner strength","courage","patience","compassion","taming"],meaning:`Strength is the figure who closes the lion's mouth not with force but with love — with a calm so profound that wildness quiets in its presence. You have this. The situation calling for power right now is not asking for aggression or hardness. It's asking for the far rarer thing: the ability to stay soft and open in the face of something difficult, to meet fear or anger with steadiness rather than matching it. That gentleness IS the strength. Don't underestimate it.`},
+  {id:"battarot_09_the_hermit",name:"The Hermit",file:"battarot_09_the_hermit.png",type:"fangfluff",subtitle:"🦇 The Lantern Within",keywords:["introspection","solitude","guidance","inner wisdom","soul-searching"],meaning:`The Hermit climbs the mountain not to isolate but to see clearly. The lantern isn't for showing others the way — it's for seeing your own. There is a season of genuine turning inward calling to you. Not hiding, not avoidance — the real kind of solitude that lets you hear yourself again after the noise. What have you not had time to think? What question needs more than a quick answer? Take the retreat. Light the lantern. The clarity you're looking for lives up there.`},
+  {id:"battarot_10_wheel_of_fortune",name:"Wheel of Fortune",file:"battarot_10_wheel_of_fortune.png",type:"fangfluff",subtitle:"🦇 The Wheel Turns",keywords:["cycles","fate","luck","turning point","change"],meaning:`The Wheel is always turning. You cannot stop it — and right now, that is good news. Whatever has felt stuck is about to move. Whatever has been heavy is about to shift. The Wheel doesn't promise only good turns — it promises that no position is permanent. If things have been hard, the Wheel is turning. If things are good, savor it fully. And in both cases, trust that change is the nature of things and you have more resilience for it than you've tested yet.`},
+  {id:"battarot_11_justice",name:"Justice",file:"battarot_11_justice.png",type:"fangfluff",subtitle:"🦇 The Truth of It",keywords:["fairness","truth","cause and effect","accountability","law"],meaning:`Justice holds the scales and does not flinch from what they show. This card is not about punishment — it is about clarity. About the honest accounting of cause and effect, of what you've put in and what you can reasonably expect, of what is actually fair versus what you wish were true. A situation in your life is calling for this kind of clear seeing. Set aside what you want the answer to be. Look at what is actually there. The truth, seen directly, is almost always more workable than the story around it.`},
+  {id:"battarot_12_the_hanged_man",name:"The Hanged Man",file:"battarot_12_the_hanged_man.png",type:"fangfluff",subtitle:"🦇 Surrender the Struggle",keywords:["surrender","new perspective","pause","letting go","sacrifice"],meaning:`The Hanged Man hangs by choice — suspended between worlds, between the old way and the new, between the doing and the being. The pause is not failure. The not-knowing is not defeat. Something can only be seen from this angle that cannot be seen from any other. Stop trying to cut yourself down and get back to the action. Be in the suspension. The perspective you gain from this uncomfortable stillness is exactly what's needed for what comes next. Let yourself hang a little longer.`},
+  {id:"battarot_13_death",name:"Death",file:"battarot_13_death.png",type:"fangfluff",subtitle:"🦇 The Necessary Ending",keywords:["endings","transition","transformation","letting go","rebirth"],meaning:`Death in the tarot is rarely literal and almost always a relief — once you stop arguing with it. Something is over. A chapter, a version of yourself, a relationship dynamic, a belief you've been carrying past its expiration date. The card is not asking you to grieve forever. It's asking you to let the ending be complete so the beginning can actually begin. You cannot carry the old thing into the new life. You have to set it down at the door. Set it down.`},
+  {id:"battarot_14_temperance",name:"Temperance",file:"battarot_14_temperance.png",type:"fangfluff",subtitle:"🦇 The Patient Blend",keywords:["balance","moderation","patience","integration","alchemy"],meaning:`Temperance pours between vessels with absolute unhurried precision — not too much, not too fast, not forcing the blend. You are in the middle of an integration process right now. Parts of yourself, aspects of your life, competing needs — they're in the process of finding a new equilibrium. This cannot be rushed. The blending IS the work. Trust the slow alchemy of finding your own balance. The patience is not delay. It is the method.`},
+  {id:"battarot_15_the_devil",name:"The Devil",file:"battarot_15_the_devil.png",type:"fangfluff",subtitle:"🦇 The Chains You're Holding",keywords:["bondage","illusion","materialism","shadow self","the exit is right there"],meaning:`Look at those chains — they're loose. The figures could step out anytime. The Devil card shows you what you're choosing to stay bound to. The habit, the dynamic, the comfort zone that stopped being comfortable. The belief that you need something that's actually draining you. Nothing is keeping you there except the part of you that gets something from staying. What are you getting from this? What would you lose if you were free? The exit has always been right there.`},
+  {id:"battarot_16_the_tower",name:"The Tower",file:"battarot_16_the_tower.png",type:"fangfluff",subtitle:"🦇 Let It Fall",keywords:["sudden change","upheaval","revelation","necessary collapse","rebuild better"],meaning:`The Tower falls because it was built on something false, and the lightning does not lie. Nobody wants to pull this card. And sometimes it's exactly the card you need. Something is collapsing — a belief, a plan, a structure, an identity — and the collapse is the correction. What was never as solid as you thought is revealing itself. What remains after the Tower is what was actually real. You will rebuild. You will build it so much better this time. Let it fall.`},
+  {id:"battarot_17_the_star",name:"The Star",file:"battarot_17_the_star.png",type:"fangfluff",subtitle:"🦇 Hope Doesn't Need Proof",keywords:["hope","renewal","inspiration","serenity","faith"],meaning:`After every Tower, a Star. After every collapse, this quiet figure pouring gentle water in the dark — no audience, no fanfare, just the ongoing act of replenishment. The Star doesn't promise that everything is fine. It promises something more durable: that renewal is possible, that you are held by something larger than your worst moment, that hope does not require conditions to exist. Let yourself be poured back into. The sky is full of light even when you can't see it.`},
+  {id:"battarot_18_the_moon",name:"The Moon",file:"battarot_18_the_moon.png",type:"fangfluff",subtitle:"🦇 Not Everything Is What It Seems",keywords:["illusion","fear","the subconscious","confusion","walk carefully"],meaning:`The Moon illuminates imperfectly and that's the whole problem. Familiar shapes become strange. The path looks clear but shifts. Something is distorting your perception right now — anxiety, wishful thinking, someone's incomplete truth — and it's genuinely hard to know what's real. Stay with what you actually know. Don't make permanent decisions from this temporarily murky place. Wait for better light. Not everything you're seeing right now is accurate.`},
+  {id:"battarot_19_the_sun",name:"The Sun",file:"battarot_19_the_sun.png",type:"fangfluff",subtitle:"🦇 Just Let It Be Good",keywords:["joy","success","vitality","clarity","warmth"],meaning:`This is just a good card. Let it be a good card. The Sun is the return of clarity and uncomplicated warmth — the kind of joy that doesn't have a catch. Something is going right. You are allowed to feel genuinely good about it without scanning the horizon for what might go wrong. The warmth is real. The success is real. Let it land. You spent enough time waiting for this — actually be here for it when it arrives.`},
+  {id:"battarot_20_judgement",name:"Judgement",file:"battarot_20_judgement.png",type:"fangfluff",subtitle:"🦇 Answer the Call",keywords:["awakening","reckoning","absolution","rise","you are being summoned"],meaning:`The horn has sounded and the call is for you. Not a future version of you, not a fixed version, not a ready version. You, right now. Judgement is not a verdict — it is a summons. Something in you is being called to rise, to answer, to step into the version of yourself you've been putting off. What have you been waiting for permission to do? The permission isn't coming from outside. It never was. The answer the horn is looking for is you saying yes.`},
+  {id:"battarot_21_the_world",name:"The World",file:"battarot_21_the_world.png",type:"fangfluff",subtitle:"🦇 You Actually Did It",keywords:["completion","achievement","wholeness","integration","begin again"],meaning:`The World is the card of completion — not an ending but a fulfillment, a cycle arriving at its full expression. Take a moment to actually feel this. You traveled a long way to get here. Something is genuinely, beautifully complete. Let yourself arrive in this for a moment before the next thing begins. Acknowledge what you did. The full circle is real. You made it. And when you're ready — really ready, not just restless — the next cycle begins from this whole and integrated place.`},
+  // Minor Arcana — Bones (Pentacles/Earth)
+  {id:"battarot_bones_1",name:"Ace of Bones",file:"battarot_bones_1.png",type:"fangfluff",subtitle:"🦴 New Material Potential",keywords:["opportunity","abundance","prosperity","foundation","manifestation"],meaning:`A new seed of material potential has arrived — financial, physical, practical. An Ace of Bones is a real opportunity, not a fantasy. It has weight. It takes up space. It grows if you plant it properly and tend it. The question is whether you'll recognize it as the real thing it is, or dismiss it because it doesn't look the way you imagined. Plant the thing.`},
+  {id:"battarot_bones_2",name:"Two of Bones",file:"battarot_bones_2.png",type:"fangfluff",subtitle:"🦴 The Juggle",keywords:["balance","adaptability","juggling","priorities","multitasking"],meaning:`You are managing two things at once and making it work, which is genuinely impressive. The Two of Bones just asks: is this sustainable? Not to stress you out — just the honest audit. What can be set down without real consequence? What has to stay in the air? Impressive juggling and sustainable balance are different things. You're capable of both. Choose the one that actually serves you.`},
+  {id:"battarot_bones_3",name:"Three of Bones",file:"battarot_bones_3.png",type:"fangfluff",subtitle:"🦴 Build Together",keywords:["teamwork","collaboration","skill","mastery","contribution"],meaning:`No one had to do it alone. The Three of Bones is the card of collaboration — the point where individual skills combine into something none of you could have made separately. You don't need to have every capability yourself. Who in your world has what you're missing? Ask. Work together. The thing you're building is bigger than one set of hands.`},
+  {id:"battarot_bones_4",name:"Four of Bones",file:"battarot_bones_4.png",type:"fangfluff",subtitle:"🦴 Hold vs Hoard",keywords:["security","stability","control","possessiveness","conserving"],meaning:`Security is worth protecting. It's also worth actually enjoying rather than just clutching defensively. The Four of Bones is the card of hard-won stability asking what you're doing with yours. You built something solid. You're allowed to sit in it without holding on so tightly you can't feel it. What are you protecting yourself from that no longer poses the threat it once did?`},
+  {id:"battarot_bones_5",name:"Five of Bones",file:"battarot_bones_5.png",type:"fangfluff",subtitle:"🦴 The Door Is Open",keywords:["hardship","isolation","poverty","help is available","don't stay outside"],meaning:`The warmth is right there. The door is open, the light is on — and the figures outside haven't gone in yet. The Five of Bones appears in seasons of real struggle and reminds you that isolation is often a choice made unconsciously in difficulty. Help exists. Asking for it isn't failure. The hardest part of hard times isn't the circumstances — it's believing you have to go through them alone. The door is open. Knock.`},
+  {id:"battarot_bones_6",name:"Six of Bones",file:"battarot_bones_6.png",type:"fangfluff",subtitle:"🦴 Give and Receive",keywords:["generosity","charity","giving","receiving","balance of resources"],meaning:`Resources flowing from abundance to need — and the question this card asks is where you are in that flow. Are you the one with something to give? Are you the one who needs to receive without shame? Both positions are honorable. The Six of Bones asks for honesty about which one is yours right now, and the willingness to play it fully. Generosity flows in both directions.`},
+  {id:"battarot_bones_7",name:"Seven of Bones",file:"battarot_bones_7.png",type:"fangfluff",subtitle:"🦴 Assess What's Growing",keywords:["patience","investment","assessment","hard work","vision"],meaning:`You planted something and now you're standing back looking at it — seeing what grew, what didn't, where the effort paid off and where it didn't. The Seven of Bones is the honest mid-project assessment. Not everything you invested in is yielding what you hoped. Some things exceeded expectation. This isn't failure — it's information. What gets more water? What gets pruned? Be honest about what's actually growing.`},
+  {id:"battarot_bones_8",name:"Eight of Bones",file:"battarot_bones_8.png",type:"fangfluff",subtitle:"🦴 The Work Is the Way",keywords:["diligence","mastery","skill","repetition","craftsmanship"],meaning:`The Eight of Bones is the craftsperson at the bench, doing the same careful work again and again — not because it's exciting but because mastery lives on the other side of repetition. You are in a season of development. This is not glamorous. It is also exactly what it looks like to build something real. The work IS the way. Keep going. The skill you're developing now is the foundation of everything that comes after.`},
+  {id:"battarot_bones_9",name:"Nine of Bones",file:"battarot_bones_9.png",type:"fangfluff",subtitle:"🦴 You Earned This",keywords:["independence","luxury","self-sufficiency","abundance","refinement"],meaning:`The Nine of Bones is the card of self-made abundance — the good life built by your own hands, enjoyed on your own terms. You have earned what you have. You didn't inherit it or stumble into it. The solitary satisfaction of this card is real and worth feeling fully. Let yourself enjoy the fruits of your own work without immediately looking to the next thing. This is yours. You built it.`},
+  {id:"battarot_bones_10",name:"Ten of Bones",file:"battarot_bones_10.png",type:"fangfluff",subtitle:"🦴 Legacy & Wealth",keywords:["legacy","inheritance","family wealth","long-term security","generational stability"],meaning:`The Ten of Bones is the full, generational picture — the wealth and security that extends beyond one person, that becomes something passed down and built upon. Whether that's literal family wealth or a legacy of love, craft, or community — something you're building now has the potential to outlast you. What are you creating that will matter beyond the immediate? What roots are you laying down?`},
+  {id:"battarot_bones_page",name:"Page of Bones",file:"battarot_bones_page.png",type:"fangfluff",subtitle:"🦴 Curious & Grounded",keywords:["opportunity","learning","practical curiosity","new skills","study"],meaning:`The Page of Bones is eager and earnest and ready to learn everything. There's something new you're beginning to understand — a skill, a practical path, a way of working in the world — and the Page's energy asks you to approach it with genuine curiosity rather than the need to already look like you know. You're allowed to be a beginner. That's actually how you become good at things.`},
+  {id:"battarot_bones_11",name:"Knight of Bones",file:"battarot_bones_11.png",type:"fangfluff",subtitle:"🦴 Steady and Reliable",keywords:["reliability","routine","hard work","patience","thoroughness"],meaning:`The Knight of Bones moves slowly and finishes everything it starts. It is not flashy. It does not hurry. And it always, reliably arrives. You are being called to embody this energy: the steady, methodical pursuit of a goal without drama or shortcuts. Not every path has to be exciting. Sometimes the most important quality is showing up consistently over a long time. Be reliable. Be thorough. Finish what you started.`},
+  {id:"battarot_bones_12",name:"Queen of Bones",file:"battarot_bones_12.png",type:"fangfluff",subtitle:"🦴 The Grounded Nurturer",keywords:["nurturing","practicality","abundance","security","down-to-earth"],meaning:`The Queen of Bones has built something good and tends it with steady, grounded love. She knows how things work. She knows what is needed and provides it without drama or fanfare. Bring this energy to what you're caring for right now — whether that's your work, your home, your people, or yourself. Practical love. Consistent tending. The garden grows because someone shows up to water it every day.`},
+  {id:"battarot_bones_13",name:"King of Bones",file:"battarot_bones_13.png",type:"fangfluff",subtitle:"🦴 Master of the Material",keywords:["abundance","security","stability","discipline","leadership in the material world"],meaning:`The King of Bones has mastered the material world without being mastered by it. Wealth, security, and practical power used wisely and generously. Lead from this place — from genuine capability and solid ground, not performance or anxiety. The people around you can feel the difference between real security and the performance of it. Build the real thing. Lead from the place of having actually figured it out.`},
+  // Minor Arcana — Hearts (Cups/Water)
+  {id:"battarot_hearts_1",name:"Ace of Hearts",file:"battarot_hearts_1.png",type:"fangfluff",subtitle:"💜 A New Feeling Opens",keywords:["new love","emotional beginning","compassion","creativity","overflow"],meaning:`A new emotional beginning is here — an opening of the heart, a surge of feeling, a relationship or creative outpouring that is arriving fresh and full. The Ace of Hearts is the purest form of emotional potential. It doesn't promise ease — emotional openings rarely are. It promises something real, something that matters, something that will require you to actually feel it. Let yourself be moved.`},
+  {id:"battarot_hearts_2",name:"Two of Hearts",file:"battarot_hearts_2.png",type:"fangfluff",subtitle:"💜 True Connection",keywords:["partnership","mutual love","connection","balance","union"],meaning:`Two beings in genuine, equal recognition of each other — that is the Two of Hearts. Whatever form this takes in your life right now, the energy is one of true partnership. Not the imbalanced kind, not the dependent kind — the kind where both people see each other clearly and choose each other anyway. Honor what this is. Nurture it. Real reciprocity is rarer than it should be.`},
+  {id:"battarot_hearts_3",name:"Three of Hearts",file:"battarot_hearts_3.png",type:"fangfluff",subtitle:"💜 Celebrate Together",keywords:["friendship","celebration","community","joy","abundance"],meaning:`Raise a cup. You deserve to celebrate, and the best celebrations happen with people who genuinely love you. The Three of Hearts is the card of real friendship, community, and shared joy. When did you last let yourself be fully celebratory with people you love? Not performative, not polished — just genuinely joyful in good company. Make that happen.`},
+  {id:"battarot_hearts_4",name:"Four of Hearts",file:"battarot_hearts_4.png",type:"fangfluff",subtitle:"💜 Look Up",keywords:["apathy","contemplation","missing the opportunity","introspection","dissatisfaction"],meaning:`There is something being offered right now that the figure in this card is too deep in their own head to notice. The Four of Hearts is the card of introspective withdrawal — valuable in its own right, but sometimes the inner focus means you miss what's being extended toward you. Look up. Something real is being offered. It might not look like what you expected. It's still real.`},
+  {id:"battarot_hearts_5",name:"Five of Hearts",file:"battarot_hearts_5.png",type:"fangfluff",subtitle:"💜 What Remains",keywords:["loss","grief","focusing on the negative","what still stands","partial loss"],meaning:`Three spilled cups and two still standing — and the figure can only see the three. The Five of Hearts is the card of grief and loss, and the grief is real. Let it be real. And then, when you're ready: there are two cups still standing. There is still something here. The loss doesn't negate what remains. When the mourning has had its time, turn and see what hasn't been taken.`},
+  {id:"battarot_hearts_6",name:"Six of Hearts",file:"battarot_hearts_6.png",type:"fangfluff",subtitle:"💜 Sweet Memory",keywords:["nostalgia","childhood","innocence","past kindness","simpler times"],meaning:`The Six of Hearts carries the gentle warmth of genuine nostalgia — the sweetness of a past that was actually good, of simpler times, of kindness given and received without complication. Let yourself feel that warmth. Visit the memory. Just don't live there. The past is a gift to be visited, not a home to retreat to. Carry the sweetness forward.`},
+  {id:"battarot_hearts_7",name:"Seven of Hearts",file:"battarot_hearts_7.png",type:"fangfluff",subtitle:"💜 Which Dream Is Real?",keywords:["choices","fantasy","illusion","wishful thinking","which feeling is real"],meaning:`So many beautiful options floating before you — and the question is which one is actually real versus which ones are wishful projection. The Seven of Hearts appears when your desires are outpacing your discernment. All these possibilities can't all be pursued. Some of them aren't even real. Ground yourself and check: which one connects to something true? Which one are you willing to do the actual work for?`},
+  {id:"battarot_hearts_8",name:"Eight of Hearts",file:"battarot_hearts_8.png",type:"fangfluff",subtitle:"💜 Walking Away",keywords:["walking away","abandonment","withdrawal","seeking deeper meaning","it's time"],meaning:`Walking away from something you've invested in is the hardest kind of courage. The Eight of Hearts shows the figure turning their back on what is built, not because it failed spectacularly, but because something deeper is missing. If you've been in the feeling of "something isn't right here even though nothing is technically wrong" — this card sees you. Walking toward something unknown is terrifying. Walking toward something true is worth it.`},
+  {id:"battarot_hearts_9",name:"Nine of Hearts",file:"battarot_hearts_9.png",type:"fangfluff",subtitle:"💜 The Wish Card",keywords:["wishes fulfilled","contentment","satisfaction","emotional completion","it came true"],meaning:`The wish has been granted. The Nine of Hearts is the moment when what you actually wanted arrives and you get to feel it landing. Don't rush past this. Don't immediately catalog what's still missing. Something you hoped for is here. Let it be here. Contentment is not settling. It is the genuine feeling of enough. Sit in it.`},
+  {id:"battarot_hearts_10",name:"Ten of Hearts",file:"battarot_hearts_10.png",type:"fangfluff",subtitle:"💜 Full Happiness",keywords:["family","emotional fulfillment","harmony","joy","this is it"],meaning:`This is the fullness card — the emotional completion, the family and love and belonging you built and chose, all of it aligned and present at once. The Ten of Hearts is the "this is it" moment. Let yourself feel how full this actually is. You built this. You chose these people and this life. The whole picture, right now, is worth everything it cost.`},
+  {id:"battarot_hearts_page",name:"Page of Hearts",file:"battarot_hearts_page.png",type:"fangfluff",subtitle:"💜 Feel Everything",keywords:["emotional curiosity","sensitivity","new feelings","creative intuition","openness"],meaning:`The Page of Hearts is feeling everything and not apologizing for any of it. Emotional openness. The willingness to be moved. Curiosity about your own inner world. You're in a phase of emotional discovery — let it be messy and genuine. The feelings are information. Let them tell you something instead of managing them into silence.`},
+  {id:"battarot_hearts_11",name:"Knight of Hearts",file:"battarot_hearts_11.png",type:"fangfluff",subtitle:"💜 Chase the Feeling",keywords:["romance","following the heart","emotional pursuit","idealism","leap for love"],meaning:`The Knight of Hearts is in pursuit with full emotional commitment and zero chill — and the card endorses this completely. Chase the feeling. Follow where the love points. Act from your heart rather than your fear. Not recklessly — but not carefully either. Some things are worth the leap. Your heart is currently pointing at one of them.`},
+  {id:"battarot_hearts_12",name:"Queen of Hearts",file:"battarot_hearts_12.png",type:"fangfluff",subtitle:"💜 Emotional Wisdom",keywords:["emotional intelligence","compassion","empathy","care","loving authority"],meaning:`The Queen of Hearts holds both feeling deeply and leading wisely — she doesn't choose between them. Everyone brings her their real feelings because she can hold them without judgment and offer something true in return. Bring this energy to the relationships around you. Feel fully. And lead from that feeling. Emotional intelligence is not softness — it is precision.`},
+  {id:"battarot_hearts_13",name:"King of Hearts",file:"battarot_hearts_13.png",type:"fangfluff",subtitle:"💜 Steady Heart",keywords:["emotional maturity","calm authority","leading with love","compassion","steady"],meaning:`The King of Hearts leads from genuine emotional maturity — not sentimentally, but with real steady care. Strength and love are not opposites in this figure. Lead the people around you with this kind of warmth. The people you're responsible for — at work, at home, in your community — need someone who can be both solid and kind. You can be that. Hold both.`},
+  // Minor Arcana — Spiderweb (Swords/Air)
+  {id:"battarot_spiderweb_1",name:"Ace of Spiderwebs",file:"battarot_spiderweb_1.png",type:"fangfluff",subtitle:"🕸️ A New Truth Cuts Through",keywords:["clarity","truth","new idea","breakthrough","mental force"],meaning:`A new truth is cutting through the fog — a realization, a decision, a clarity of mind that arrives like a blade and changes everything it touches. The Ace of Spiderwebs is not comfortable. It is precise. Whatever understanding has just arrived or is trying to arrive — let it. The truth that hurts is still better than the comfortable lie. Name what you know. Act from that.`},
+  {id:"battarot_spiderweb_2",name:"Two of Spiderwebs",file:"battarot_spiderweb_2.png",type:"fangfluff",subtitle:"🕸️ Blocked Out",keywords:["indecision","stalemate","avoiding information","blocked perception","denial"],meaning:`The figure is blindfolded, balancing two truths they can't quite look at directly. The Two of Spiderwebs is the card of avoidance — of the decision you're not making by making no decision, of the information you're not taking in because it would force a choice. Taking off the blindfold is scary. It is also the only way forward. What do you already know that you haven't let yourself fully know?`},
+  {id:"battarot_spiderweb_3",name:"Three of Spiderwebs",file:"battarot_spiderweb_3.png",type:"fangfluff",subtitle:"🕸️ The Heart Pierced",keywords:["heartbreak","sorrow","grief","betrayal","painful truth"],meaning:`The Three of Spiderwebs is the card of real heartbreak — the kind that doesn't have a silver lining immediately available, the kind that just hurts. What happened hurt. That is true and it is allowed to be true. Let the grief be what it is without rushing it toward a lesson or a reframe. The pain you're in is real. It will not last forever. You don't have to be okay right now.`},
+  {id:"battarot_spiderweb_4",name:"Four of Spiderwebs",file:"battarot_spiderweb_4.png",type:"fangfluff",subtitle:"🕸️ Rest the Mind",keywords:["rest","recovery","contemplation","mental retreat","gathering strength"],meaning:`The Four of Spiderwebs is the card of deliberate, necessary rest — the mind quieting after conflict or effort. You've been going at something hard and your mental energy needs to restore. This is not giving up. This is the intelligent move of recognizing that you cannot fight or think or decide your way out of exhaustion. Rest is not a reward. It is a requirement. Give yourself the pause.`},
+  {id:"battarot_spiderweb_5",name:"Five of Spiderwebs",file:"battarot_spiderweb_5.png",type:"fangfluff",subtitle:"🕸️ The Hollow Win",keywords:["conflict","defeat","winning at a cost","loss","tension"],meaning:`Someone won and someone lost and the figure holding the swords doesn't look that triumphant about it. The Five of Spiderwebs is the card of conflict — of battles that leave everyone somewhat diminished, of victories that come at a real cost. What are you fighting for right now, and is it worth what this is costing? Sometimes the bravest thing is to pick up your swords and walk away. Not every fight deserves your best effort.`},
+  {id:"battarot_spiderweb_6",name:"Six of Spiderwebs",file:"battarot_spiderweb_6.png",type:"fangfluff",subtitle:"🕸️ Moving Toward Calmer Water",keywords:["transition","moving on","mental recovery","new shores","leaving trouble behind"],meaning:`The boat is moving. The rough water is behind and the calmer water is ahead, and the figure is being carried forward. The Six of Spiderwebs is a transition card — a movement away from difficulty toward something quieter. You're not there yet. But you're moving. The turbulent chapter is ending. Let yourself be carried. The new shore exists.`},
+  {id:"battarot_spiderweb_7",name:"Seven of Spiderwebs",file:"battarot_spiderweb_7.png",type:"fangfluff",subtitle:"🕸️ The Sneaky Strategy",keywords:["strategy","cunning","avoidance","deception","getting away with something"],meaning:`The figure is sneaking off with the swords and looking very pleased about it. The Seven of Spiderwebs is the card of strategy, cunning, and — let's be honest — sometimes avoidance. Is there a situation you're trying to get around rather than through? Is the clever approach actually clever, or is it a more elegant form of not dealing with it? Strategy is brilliant. Running is still running.`},
+  {id:"battarot_spiderweb_8",name:"Eight of Spiderwebs",file:"battarot_spiderweb_8.png",type:"fangfluff",subtitle:"🕸️ You're Not as Trapped as You Think",keywords:["restriction","self-imposed limitation","victim mentality","the trap is in your mind","you could walk away"],meaning:`The figure is bound and blindfolded — but look at the stance, look at the space around them. The Eight of Spiderwebs is the card of the self-imposed prison. The story you're telling yourself about having no options is the trap, not the circumstances. The bindings are looser than they look. The path out exists. What would you do if you stopped believing you were stuck?`},
+  {id:"battarot_spiderweb_9",name:"Nine of Spiderwebs",file:"battarot_spiderweb_9.png",type:"fangfluff",subtitle:"🕸️ 3am Thoughts",keywords:["anxiety","worry","nightmares","mental anguish","worst case thinking"],meaning:`The Nine of Spiderwebs is the card of 3am — when the thoughts are loudest and everything feels most catastrophic and the mind will not stop running scenarios. The anxiety is real even when the threats aren't. You are not okay right now and that's okay. The morning will come. The thoughts in the dark are not prophecy. They are just thoughts, amplified by exhaustion and fear. You don't have to solve everything tonight.`},
+  {id:"battarot_spiderweb_10",name:"Ten of Spiderwebs",file:"battarot_spiderweb_10.png",type:"fangfluff",subtitle:"🕸️ The Very Bottom",keywords:["painful ending","rock bottom","betrayal","crisis","it is done"],meaning:`This is the very bottom. The Ten of Spiderwebs is the card of reaching the end of something in the most difficult possible way. If you're here, you know it. The collapse is complete and you are still here, which matters more than it might feel like right now. The only way from the bottom is up. Not immediately. Not easily. But the direction is clear. You survived the worst of it.`},
+  {id:"battarot_spiderweb_page",name:"Page of Spiderwebs",file:"battarot_spiderweb_page.png",type:"fangfluff",subtitle:"🕸️ Curious & Watchful",keywords:["curiosity","mental agility","new ideas","observation","learning"],meaning:`The Page of Spiderwebs is watching everything very carefully and learning quickly. Sharp, curious, maybe a little bit of a gossip, definitely paying more attention than anyone realizes. Bring this watchful energy to a situation that needs more information before action. Observe before you speak. Think before you decide. You'll be glad you waited to learn more.`},
+  {id:"battarot_spiderweb_11",name:"Knight of Spiderwebs",file:"battarot_spiderweb_11.png",type:"fangfluff",subtitle:"🕸️ Think Before You Strike",keywords:["direct action","sharp mind","intellectual force","hasty","ambition"],meaning:`The Knight of Spiderwebs is fast and brilliant and absolutely certain they're right — which is both the gift and the problem. The cutting truth delivered without care for landing is just a cut. The brilliant plan executed without checking in with anyone is just stubbornness. You have real mental clarity right now. Use it with some awareness of how it lands on the people around you.`},
+  {id:"battarot_spiderweb_12",name:"Queen of Spiderwebs",file:"battarot_spiderweb_12.png",type:"fangfluff",subtitle:"🕸️ Clear-Eyed & Honest",keywords:["clear thinking","honesty","independence","sharp perception","hard truth with kindness"],meaning:`The Queen of Spiderwebs sees through pretense without cruelty. She is the person who will tell you the truth no one else will — not to hurt you, but because she respects you enough not to lie. Bring this energy to a situation that needs clear seeing. You know more than you're saying. The honest assessment, delivered with care, is the most loving thing available right now.`},
+  {id:"battarot_spiderweb_13",name:"King of Spiderwebs",file:"battarot_spiderweb_13.png",type:"fangfluff",subtitle:"🕸️ Intellectual Authority",keywords:["analytical thinking","authority","logic","clear communication","strategic planning"],meaning:`The King of Spiderwebs is the master of the mind — analytical, precise, fair, and formidable. This is not cold intelligence; it is intelligence paired with genuine authority and the wisdom to know when to speak and when to be still. Bring this energy to a complex problem. Think it through completely. Communicate with precision. Lead from clarity rather than feeling.`},
+  // Minor Arcana — Stars (Wands/Fire)
+  {id:"battarot_stars_1",name:"Ace of Stars",file:"battarot_stars_1.png",type:"fangfluff",subtitle:"⭐ Ignition",keywords:["inspiration","new passion","creative spark","potential","enthusiasm"],meaning:`Something has just been lit. The Ace of Stars is pure creative fire — the first spark of a passion, a project, a vision, an identity. It doesn't come with instructions. It comes with heat and light and the wild feeling of something beginning. Don't wait to know where it's going before you start moving toward it. The direction becomes clear through movement. Start from the fire.`},
+  {id:"battarot_stars_2",name:"Two of Stars",file:"battarot_stars_2.png",type:"fangfluff",subtitle:"⭐ The World is Yours to Plan",keywords:["planning","future vision","boldness","ambition","deciding direction"],meaning:`The figure holds the world and looks toward the horizon. The Two of Stars is the card of bold future-thinking — of standing in what you've built and planning for something bigger. The vision is real. The ambition is valid. Now: what is the actual first step? Vision without direction is just daydreaming. Turn the horizon into a plan.`},
+  {id:"battarot_stars_3",name:"Three of Stars",file:"battarot_stars_3.png",type:"fangfluff",subtitle:"⭐ Looking Ahead",keywords:["expansion","foresight","long-term planning","enterprise","exploration"],meaning:`The ships are in motion. The Three of Stars is the card of expansion — of something already launched now moving outward into new territory. You've built the foundation. Now it's time to let the work extend beyond what you can personally hold or control. Let it go further. Trust what you've built enough to let it move without you managing every inch.`},
+  {id:"battarot_stars_4",name:"Four of Stars",file:"battarot_stars_4.png",type:"fangfluff",subtitle:"⭐ Rest & Celebrate",keywords:["celebration","rest","community","joy","taking a pause"],meaning:`The Four of Stars is the pause between efforts — the moment to celebrate what's been built before launching into the next thing. You've worked hard. Something has been accomplished. Let yourself mark it. Gather the people who matter. Rest deliberately. The next chapter will be better for having actually stopped and honored this one.`},
+  {id:"battarot_stars_5",name:"Five of Stars",file:"battarot_stars_5.png",type:"fangfluff",subtitle:"⭐ Competing Energies",keywords:["conflict","competition","disagreement","ego","scattered energy"],meaning:`Five fires all pulling in different directions — the Five of Stars is the card of scattered energy and competing forces. There's a conflict or competition here that's burning more than it's building. Not every fight needs your full flame. Where are you spending creative fire on friction that isn't productive? Pick your battles. Focus the fire. Not every challenger deserves your best energy.`},
+  {id:"battarot_stars_6",name:"Six of Stars",file:"battarot_stars_6.png",type:"fangfluff",subtitle:"⭐ Victory Well Earned",keywords:["success","recognition","victory","pride","achievement"],meaning:`The Six of Stars is public recognition of something real — a victory that is genuinely yours, acknowledged and celebrated. Let yourself receive this. Don't deflect, don't minimize, don't immediately look for the catch. You did something worth recognizing and someone is recognizing it. That is allowed to feel good. Stand in it.`},
+  {id:"battarot_stars_7",name:"Seven of Stars",file:"battarot_stars_7.png",type:"fangfluff",subtitle:"⭐ Hold Your Ground",keywords:["defensiveness","perseverance","protecting your position","standing firm","resilience"],meaning:`The Seven of Stars is the card of holding ground when things push back. You've built something real and it's being challenged — by doubt, by competition, by other people's opinions of what you should be doing. Hold your position. You don't owe anyone a defense of your creative path. You do owe yourself the courage to keep going anyway. Stand firm.`},
+  {id:"battarot_stars_8",name:"Eight of Stars",file:"battarot_stars_8.png",type:"fangfluff",subtitle:"⭐ Fast Work",keywords:["speed","momentum","focused effort","mastery","repetition"],meaning:`The Eight of Stars is all focused motion — the work coming quickly, the effort landing with precision, the momentum you get when everything clicks into alignment. You're in a productive flow right now. Or one is available to you. Clear the distractions. Protect the time. Let the work move fast while it wants to. This kind of momentum is rare and worth feeding.`},
+  {id:"battarot_stars_9",name:"Nine of Stars",file:"battarot_stars_9.png",type:"fangfluff",subtitle:"⭐ Weary but Standing",keywords:["resilience","wounded but strong","last stand","perseverance","battle-worn"],meaning:`The figure in the Nine of Stars is standing — but just barely. This is the card of resilience that has been tested to its very edge. You are still here. You have kept going through things that would have stopped someone with less fire. That matters. Rest if you can. And know that whatever this last push is asking of you — you have enough left for it.`},
+  {id:"battarot_stars_10",name:"Ten of Stars",file:"battarot_stars_10.png",type:"fangfluff",subtitle:"⭐ Too Much to Carry",keywords:["overburden","burnout","responsibility","too much fire","learn to delegate"],meaning:`The Ten of Stars is the card of carrying more than any one person should. The fire that was inspiring has become an impossible weight. You have taken on too much — or had too much placed on you — and you are burning out rather than burning bright. Something has to be set down. Not everything. But something real. The load you're carrying is not a badge of worth. Ask for help.`},
+  {id:"battarot_stars_page",name:"Page of Stars",file:"battarot_stars_page.png",type:"fangfluff",subtitle:"⭐ The Spark of New Passion",keywords:["enthusiasm","new ideas","inspiration","exploration","youthful fire"],meaning:`The Page of Stars is lit up with something new — a passion just discovered, a spark of direction, the early days of a creative obsession. This energy is real even when it's unpolished. Don't dismiss the excitement because the idea isn't fully formed. Let the Page energy carry you into the early exploration. You don't have to know where it goes yet. Just follow the spark.`},
+  {id:"battarot_stars_11",name:"Knight of Stars",file:"battarot_stars_11.png",type:"fangfluff",subtitle:"⭐ Move Fast and Believe",keywords:["action","adventure","impulsiveness","passion","charging ahead"],meaning:`The Knight of Stars charges ahead with complete conviction and a lot of fire — which is both the gift and the risk. The passion is real. The vision is real. The question is whether you're pausing long enough to aim before you launch. Fast action from genuine fire is powerful. Fast action from impatience is just exhausting. Make sure you know which one this is.`},
+  {id:"battarot_stars_12",name:"Queen of Stars",file:"battarot_stars_12.png",type:"fangfluff",subtitle:"⭐ Visionary & Magnetic",keywords:["vision","charisma","passion","creative authority","warmth"],meaning:`The Queen of Stars is magnetic because her fire is genuine — she believes in what she's doing and it shows in a way that draws people in. She leads with vision rather than authority. She inspires rather than demands. Bring this energy to your creative work and to the people around you. Your genuine passion is your most powerful leadership tool.`},
+  {id:"battarot_stars_13",name:"King of Stars",file:"battarot_stars_13.png",type:"fangfluff",subtitle:"⭐ Mastered Fire",keywords:["vision","leadership","creativity","honor","entrepreneurship"],meaning:`The King of Stars has mastered the fire without letting it master him. Creative vision, bold leadership, the ability to inspire and build something real — all in service of a genuine purpose. Lead from your vision. Build something that reflects your deepest creative truth. The King of Stars doesn't just have big ideas. He makes them real. So do you.`},
+];
+
+const FANGFLUFF_SPREADS = [
+  {id:"single",name:"One Card",desc:"One card, one spooky-cute message. 🦇",positions:["The Bat Speaks"],count:1},
+  {id:"three",name:"Past · Now · Next",desc:"Three cards through the shadows. 💜",positions:["The Past","The Present","What Comes"],count:3},
+  {id:"heart",name:"Mind · Heart · Spirit",desc:"Three aspects of your full self. 🌙",positions:["Your Mind","Your Heart","Your Spirit"],count:3},
+  {id:"five",name:"Full Spread",desc:"The whole picture, no stone unturned. 🕸️",positions:["The Foundation","The Challenge","The Gift","The Shadow","The Way Forward"],count:5},
+  {id:"combo",name:"FangFluff + Oracle",desc:"One FangFluff card sets the energy — one Nightwood Oracle card brings the forest wisdom underneath. 🦇🌲",
+   positions:["FangFluff: The Energy","Nightwood Oracle: The Wisdom"],combo:true,
+   pools:[{src:'fangfluff',count:1},{src:'oracle',count:1}]},
+  {id:"four_deck",name:"All Four Decks",desc:"One card from every deck — the full picture across all four worlds. 🦇🐙🦊🌲",
+   positions:["FangFluff: The Shadow","Cutesy Chaos: The Fire","Colorful Creatures: The Way","Nightwood Oracle: The Root"],combo:true,
+   pools:[{src:'fangfluff',count:1},{src:'cutesy',count:1},{src:'cc',count:1},{src:'oracle',count:1}]},
+];
+
 const CC_SPREADS = [
   {id:"single",name:"One Creature",desc:"One animal, one message. What spirit is with you today? 🦊",positions:["Your Creature"],count:1},
   {id:"three",name:"Past · Present · Path",desc:"Three creatures illuminate your journey. 🌈",positions:["Where You've Been","Where You Are","Where You're Going"],count:3},
@@ -1287,9 +1460,9 @@ const CC_SPREADS = [
   {id:"combo_oracle",name:"Creature + Oracle",desc:"A creature shows you the energy — a Nightwood Oracle card reveals what the forest knows underneath it. 🦊🌲",
    positions:["Colorful Creatures: The Energy","Nightwood Oracle: The Wisdom"],combo:true,
    pools:[{src:'cc',count:1},{src:'oracle',count:1}]},
-  {id:"three_deck",name:"All Three Decks",desc:"One from each world — chaos, creature, forest. The full picture. 🐙🦊🌲",
-   positions:["Cutesy Chaos: The Fire","Colorful Creatures: The Way","Nightwood Oracle: The Root"],combo:true,
-   pools:[{src:'cutesy',count:1},{src:'cc',count:1},{src:'oracle',count:1}]},
+  {id:"four_deck",name:"All Four Decks",desc:"One from each world — chaos, creature, forest, shadow. The full picture. 🐙🦊🌲🦇",
+   positions:["Cutesy Chaos: The Fire","Colorful Creatures: The Way","Nightwood Oracle: The Root","FangFluff: The Shadow"],combo:true,
+   pools:[{src:'cutesy',count:1},{src:'cc',count:1},{src:'oracle',count:1},{src:'fangfluff',count:1}]},
 ];
 const ORACLE_SPREADS_EXTRA = [
   {id:"combo_cc",name:"Forest + Creature",desc:"A Nightwood Oracle card anchors you — a Colorful Creature shows the spirit energy alongside it. 🌲🦊",
@@ -1298,6 +1471,9 @@ const ORACLE_SPREADS_EXTRA = [
   {id:"three_deck",name:"All Three Decks",desc:"The forest speaks, a creature appears, chaos adds the wildcard. The whole truth. 🌲🦊🐙",
    positions:["Nightwood Oracle: The Root","Colorful Creatures: The Path","Cutesy Chaos: The Wildcard"],combo:true,
    pools:[{src:'oracle',count:1},{src:'cc',count:1},{src:'cutesy',count:1}]},
+  {id:"four_deck",name:"All Four Decks",desc:"One card from every world — forest, creature, chaos, and shadow. The complete picture. 🌲🦊🐙🦇",
+   positions:["Nightwood Oracle: The Root","Colorful Creatures: The Path","Cutesy Chaos: The Wildcard","FangFluff: The Shadow"],combo:true,
+   pools:[{src:'oracle',count:1},{src:'cc',count:1},{src:'cutesy',count:1},{src:'fangfluff',count:1}]},
 ];
 
 // ── STATE ──────────────────────────────────────────────────────────────────
@@ -1340,10 +1516,12 @@ function setDeck(deck) {
   document.getElementById('bannerNightwood').classList.toggle('active', deck==='nightwood');
   document.getElementById('bannerCutesy').classList.toggle('active', deck==='cutesy');
   document.getElementById('bannerCC').classList.toggle('active', deck==='cc');
+  document.getElementById('bannerFangfluff').classList.toggle('active', deck==='fangfluff');
 
   if(deck==='cutesy') {
     document.body.classList.add('chaos-mode');
     document.body.classList.remove('cc-mode');
+    document.body.classList.remove('fangfluff-mode');
     document.getElementById('headerRune').textContent='✦  embrace the chaos, it\'s adorable  ✦';
     document.getElementById('headerTitle').childNodes[0].textContent='Cutesy Chaos Tarot';
     document.getElementById('headerSub').textContent='A Chaotic Little Divination Deck 🐙';
@@ -1356,6 +1534,7 @@ function setDeck(deck) {
   } else if(deck==='cc') {
     document.body.classList.add('cc-mode');
     document.body.classList.remove('chaos-mode');
+    document.body.classList.remove('fangfluff-mode');
     document.getElementById('headerRune').textContent='✦  Cute. Chaotic. Magical.  ✦';
     document.getElementById('headerTitle').childNodes[0].textContent='Colorful Creatures';
     document.getElementById('headerSub').textContent='An Oracle Deck 🌈';
@@ -1366,9 +1545,24 @@ function setDeck(deck) {
     document.querySelector('.skulls').style.opacity='';
     document.querySelector('.fireflies').style.opacity='';
     spawnRainbowSparks();
+  } else if(deck==='fangfluff') {
+    document.body.classList.add('fangfluff-mode');
+    document.body.classList.remove('chaos-mode');
+    document.body.classList.remove('cc-mode');
+    document.getElementById('headerRune').textContent='✦  The Bat Knows  ✦';
+    document.getElementById('headerTitle').childNodes[0].textContent='FangFluff Tarot';
+    document.getElementById('headerSub').textContent='A Spooky-Cute Tarot Deck 🦇';
+    document.getElementById('headerIcon').textContent='🦇';
+    document.getElementById('drawBtnText').textContent='🦇  Draw the Cards  🦇';
+    document.getElementById('footerDeck').textContent='FangFluff Tarot';
+    document.getElementById('footerTag').textContent='Even in the dark, the bat finds its way 🌙';
+    document.querySelector('.skulls').style.opacity='';
+    document.querySelector('.fireflies').style.opacity='';
+    spawnBatSparks();
   } else {
     document.body.classList.remove('chaos-mode');
     document.body.classList.remove('cc-mode');
+    document.body.classList.remove('fangfluff-mode');
     document.getElementById('headerRune').textContent='✦   The Cards Know   ✦';
     document.getElementById('headerTitle').childNodes[0].textContent='Nightwood Oracle';
     document.getElementById('headerSub').textContent='A Forest Divination Deck';
@@ -1384,7 +1578,7 @@ function setDeck(deck) {
 }
 
 function renderSpreads() {
-  const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : currentDeck==='cc' ? CC_SPREADS : [...ORACLE_SPREADS, ...ORACLE_SPREADS_EXTRA];
+  const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : currentDeck==='cc' ? CC_SPREADS : currentDeck==='fangfluff' ? FANGFLUFF_SPREADS : [...ORACLE_SPREADS, ...ORACLE_SPREADS_EXTRA];
   const container = document.getElementById('spreadOptions');
   container.innerHTML='';
   spreads.forEach((s,i)=>{
@@ -1421,12 +1615,25 @@ function spawnRainbowSparks() {
   }
 }
 
+function spawnBatSparks() {
+  const bs = document.getElementById('batSparks');
+  if(bs.children.length > 0) return;
+  const emojis=['🦇','💜','🌙','🕸️','⭐','💀','🔮','🌑','✨'];
+  for(let i=0;i<22;i++){
+    const f=document.createElement('div'); f.className='bat-p';
+    f.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    f.style.cssText=`left:${Math.random()*100}%;--sz:${10+Math.random()*16}px;
+      --dur:${8+Math.random()*10}s;--delay:${-Math.random()*14}s;opacity:0;`;
+    bs.appendChild(f);
+  }
+}
+
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function doReading() {
   try {
   if(!currentSpread || !currentSpread.positions) {
-    const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : currentDeck==='cc' ? CC_SPREADS : [...ORACLE_SPREADS, ...ORACLE_SPREADS_EXTRA];
+    const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : currentDeck==='cc' ? CC_SPREADS : currentDeck==='fangfluff' ? FANGFLUFF_SPREADS : [...ORACLE_SPREADS, ...ORACLE_SPREADS_EXTRA];
     selectSpread(spreads[0]);
   }
   clearReading(true);
@@ -1442,7 +1649,7 @@ function doReading() {
       let src = pool.src;
       // oracle_random: randomly pick nightwood or cc
       if(src==='oracle_random') src = Math.random()<0.5 ? 'oracle' : 'cc';
-      const poolCards = src==='cutesy' ? CUTESY_CARDS : src==='cc' ? CC_CARDS : ORACLE_CARDS;
+      const poolCards = src==='cutesy' ? CUTESY_CARDS : src==='cc' ? CC_CARDS : src==='fangfluff' ? FANGFLUFF_CARDS : ORACLE_CARDS;
       const reversedChance = src==='cutesy' ? 0.25 : 0.18;
       const drawn = shuffle(poolCards).slice(0, pool.count).map((c,i)=>({
         ...c,
@@ -1453,7 +1660,7 @@ function doReading() {
       posIndex+=pool.count;
     });
   } else {
-    const pool=currentDeck==='cutesy'?CUTESY_CARDS:currentDeck==='cc'?CC_CARDS:ORACLE_CARDS;
+    const pool=currentDeck==='cutesy'?CUTESY_CARDS:currentDeck==='cc'?CC_CARDS:currentDeck==='fangfluff'?FANGFLUFF_CARDS:ORACLE_CARDS;
     const shuffled=shuffle(pool);
     cards=shuffled.slice(0,currentSpread.count).map((c,i)=>({
       ...c, position:currentSpread.positions[i], reversed:Math.random()<0.22
@@ -1464,6 +1671,7 @@ function doReading() {
   const backFile = (card) => {
     if(card.type==='oracle') return card.reversed?'card 21 back of card reversed.png':'card 21 back of card.png';
     if(card.type==='cc') return card.reversed?'CC_Back.png':'CC_Back.png';
+    if(card.type==='fangfluff') return 'battarot_back.png';
     return 'tarot_cutesy_chaos_back.png';
   };
 
@@ -1476,12 +1684,12 @@ function doReading() {
         <div class="card-inner">
           <div class="card-face card-back-face">
             <img src="${backFile(card)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Card back">
-            <div class="placeholder-back" style="display:none"><span style="font-size:48px;opacity:0.6">${card.type==='oracle'?'🌿':card.type==='cc'?'🦊':'🐙'}</span><span style="font-family:var(--f-title);font-size:11px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase">${card.type==='oracle'?'Nightwood':card.type==='cc'?'Colorful Creatures':'Cutesy Chaos'}</span></div>
+            <div class="placeholder-back" style="display:none"><span style="font-size:48px;opacity:0.6">${card.type==='oracle'?'🌿':card.type==='cc'?'🦊':card.type==='fangfluff'?'🦇':'🐙'}</span><span style="font-family:var(--f-title);font-size:11px;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase">${card.type==='oracle'?'Nightwood':card.type==='cc'?'Colorful Creatures':card.type==='fangfluff'?'FangFluff':'Cutesy Chaos'}</span></div>
           </div>
           <div class="card-face card-front-face${card.reversed?' card-reversed':''}">
             <img src="${card.file}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="${card.name}">
             <div class="placeholder-front" style="display:none">
-              <div style="font-size:48px;margin-bottom:12px">${card.type==='oracle'?'🌲':'🐙'}</div>
+              <div style="font-size:48px;margin-bottom:12px">${card.type==='oracle'?'🌲':card.type==='fangfluff'?'🦇':'🐙'}</div>
               <div style="font-family:var(--f-title);font-size:14px;letter-spacing:2px;color:var(--gold);text-transform:uppercase">${card.name}</div>
             </div>
           </div>
@@ -1515,10 +1723,13 @@ function showMeaning(index){
 
   const isChaos=card.type==='cutesy';
   const isCC=card.type==='cc';
+  const isFF=card.type==='fangfluff';
   const typeTag=isChaos
     ?`<span style="background:rgba(255,45,138,0.15);border:1px solid var(--hot-pink);color:var(--hot-pink);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--f-chaos-sub);letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🐙 Cutesy Chaos</span>`
     :isCC
     ?`<span style="background:rgba(0,207,255,0.1);border:1px solid var(--cc-teal);color:var(--cc-teal);padding:3px 10px;border-radius:20px;font-size:10px;font-family:'Fredoka One',cursive;letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🦊 Colorful Creatures</span>`
+    :isFF
+    ?`<span style="background:rgba(124,58,237,0.15);border:1px solid var(--ff-lavender);color:var(--ff-lavender);padding:3px 10px;border-radius:20px;font-size:10px;font-family:'Creepster',cursive;letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🦇 FangFluff</span>`
     :`<span style="background:rgba(201,168,76,0.1);border:1px solid var(--gold-dim);color:var(--gold-dim);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--f-title);letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🌲 Oracle</span>`;
 
   const reversedNote=card.reversed
@@ -1542,7 +1753,7 @@ function showMeaning(index){
   if(flippedCount===drawnCards.length&&drawnCards.length>1){
     const note=document.createElement('div');
     note.className='tarot-combo-note';
-    const msg=currentDeck==='cutesy'?'💀 All cards have spoken. Embrace what emerged. 💕':currentDeck==='cc'?'🌈 All creatures have spoken. Carry their wisdom with you. 🦊':'✦ All cards have spoken. Sit with what has emerged. The reading is complete.';
+    const msg=currentDeck==='cutesy'?'💀 All cards have spoken. Embrace what emerged. 💕':currentDeck==='cc'?'🌈 All creatures have spoken. Carry their wisdom with you. 🦊':currentDeck==='fangfluff'?'🦇 All cards have spoken. Even in the dark, you found your way. 💜':'✦ All cards have spoken. Sit with what has emerged. The reading is complete.';
     note.innerHTML=`<strong>${msg}</strong>`;
     panel.appendChild(note);
   }
@@ -1552,7 +1763,7 @@ function showMeaning(index){
 }
 
 function buildReadingText() {
-  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle'};
+  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle', fangfluff:'FangFluff Tarot'};
   const date = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   const spreadName = currentSpread ? currentSpread.name : 'Reading';
   let text = `✦ ${deckNames[currentDeck]||'Oracle'} · ${spreadName} ✦\n${date}\n\n`;
@@ -1571,7 +1782,7 @@ function buildReadingText() {
 }
 
 function exportReading() {
-  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle'};
+  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle', fangfluff:'FangFluff Tarot'};
   const spreadName = currentSpread ? currentSpread.name : 'Reading';
   document.getElementById('pdfDeckName').textContent = (deckNames[currentDeck]||'Oracle') + ' · ' + spreadName;
   document.getElementById('pdfDate').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
@@ -1579,7 +1790,7 @@ function exportReading() {
 }
 
 function shareEmail() {
-  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle'};
+  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle', fangfluff:'FangFluff Tarot'};
   const subject = encodeURIComponent(`My ${deckNames[currentDeck]||'Oracle'} Reading`);
   const body = encodeURIComponent(buildReadingText());
   window.open(`mailto:?subject=${subject}&body=${body}`);
@@ -1621,7 +1832,7 @@ function submitSuggestion() {
   const text = document.getElementById('suggText').value.trim();
   if(!text) { showToast('Please write a message first!'); return; }
 
-  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle'};
+  const deckNames = {nightwood:'Nightwood Oracle', cutesy:'Cutesy Chaos Tarot', cc:'Colorful Creatures Oracle', fangfluff:'FangFluff Tarot'};
   const deckLabel = deckNames[currentDeck] || 'Nightwood Oracle';
 
   const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeDwIEfPweQTrjFDD84gzEf4fZCa_dU06g-baE3AgDCTTDGzQ/formResponse';
