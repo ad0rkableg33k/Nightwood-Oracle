@@ -511,7 +511,7 @@ body.cc-mode .suggestions-submit:hover { border-color:var(--cc-teal); box-shadow
 .horoscope-date { font-family:var(--f-title); font-size:11px; letter-spacing:3px;
   text-transform:uppercase; color:var(--mist); margin-bottom:6px; }
 .horoscope-sub { color:var(--fog); font-style:italic; font-size:14px; margin-bottom:24px; }
-.horoscope-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+.horoscope-grid { display:grid; grid-template-columns:repeat(6,1fr);
   gap:14px; max-width:820px; margin:0 auto; }
 .zodiac-tile { cursor:pointer; border:1px solid rgba(255,45,138,0.18); border-radius:10px;
   padding:14px 8px 12px; background:rgba(255,255,255,0.02); transition:all 0.3s; }
@@ -620,9 +620,73 @@ body.cc-mode .suggestions-submit:hover { border-color:var(--cc-teal); box-shadow
 }
 #pdfHeader h2 { font-family:'Cinzel Decorative',Georgia,serif; font-size:20pt; color:#7a5a10; margin:0 0 4pt; }
 #pdfHeader p  { font-family:'Cinzel',Georgia,serif; font-size:9pt; color:#888; letter-spacing:2pt; margin:0; }
+
+/* SITE NAV */
+nav.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 300;
+  background: rgba(10,10,15,0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--gold);
+  box-shadow: 0 0 20px rgba(232,201,106,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+nav.site-nav .nav-logo {
+  font-family: var(--f-title);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: var(--gold-glow);
+  text-shadow: 0 0 12px var(--gold);
+  text-decoration: none;
+}
+nav.site-nav .nav-links {
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+  list-style: none;
+}
+nav.site-nav .nav-links a {
+  font-family: var(--f-title);
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  color: var(--mist);
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+nav.site-nav .nav-links a:hover,
+nav.site-nav .nav-links a.active {
+  color: var(--gold-glow);
+  border-color: var(--gold);
+  text-shadow: 0 0 8px var(--gold);
+  background: rgba(232,201,106,0.08);
+}
+@media (max-width:600px) {
+  nav.site-nav { padding:0.5rem 0.8rem; }
+  nav.site-nav .nav-links a { font-size:0.68rem; padding:0.25rem 0.5rem; }
+  .horoscope-grid { grid-template-columns:repeat(3,1fr); }
+}
 </style>
 </head>
 <body>
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html">UNSOLICITED DECK PICS</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">TAROT &amp; ORACLE</a></li>
+    <li><a href="https://ad0rkableg33k.github.io/RealityIsBuffering/" target="_blank">REALITY IS BUFFERING COMIC</a></li>
+    <li><a href="https://ad0rkableg33k.github.io/FontGenerator.html" target="_blank">FANCY FONT GENERATOR</a></li>
+    <li><a href="https://github.com/ad0rkableg33k" target="_blank">GITHUB</a></li>
+    <li><a href="https://www.youtube.com/@ad0rkableg33k" target="_blank">YOUTUBE</a></li>
+  </ul>
+</nav>
 <div class="forest-bg"></div>
 <div class="chaos-bg"></div>
 <div class="cc-bg"></div>
