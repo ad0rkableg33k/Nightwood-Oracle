@@ -1,6 +1,6 @@
 # Unsolicited Deck Pics 🌲🐙🦊🦇
 
-A free, browser-based tarot & oracle reading site featuring four original decks, built and illustrated by [BabyyBat & G33KY](https://github.com/ad0rkableg33k). No sign-up, no app store, no nonsense — just open the page and pull cards.
+A free, browser-based tarot & oracle reading site featuring four original decks, built and illustrated by [G33KY](https://github.com/ad0rkableg33k). No sign-up, no app store, no nonsense — just open the page and pull cards.
 
 **Live site:** https://ad0rkableg33k.github.io/Nightwood-Oracle/
 
