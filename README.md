@@ -36,7 +36,7 @@ Switch decks anytime using the banner tiles at the top of the page — each deck
 
 ## Contributing / Editing
 
-This is a personal creative project — card art, copy, and site design are all original work by BabyyBat & G33KY. If you spot a bug or have a suggestion, open an issue on GitHub.
+This is a personal creative project — card art, copy, and site design are all original work by G33KY. If you spot a bug or have a suggestion, open an issue on GitHub.
 
 ---
 
