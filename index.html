@@ -800,7 +800,16 @@ nav.site-nav .nav-links a.active {
   <span id="footerShop">Unsolicited Deck Pics</span> &nbsp;·&nbsp;
   <span id="footerDeck">Nightwood Oracle</span> &nbsp;·&nbsp;
   <span id="footerTag">The forest speaks to those who listen</span>
+  <div style="margin-top:0.6rem;font-family:monospace;font-size:0.75rem;color:var(--mist);">
+    👁 VISITORS: <span id="visitCounter" style="color:var(--gold-glow);">······</span>
+  </div>
 </footer>
+<script>
+fetch('https://countapi.mileshilliard.com/api/v1/hit/g33ky-nightwood-oracle')
+  .then(r => r.json())
+  .then(d => { document.getElementById('visitCounter').textContent = String(d.value).padStart(6,'0'); })
+  .catch(() => { document.getElementById('visitCounter').textContent = '------'; });
+</script>
 
 <script>
 // ── ORACLE CARDS ───────────────────────────────────────────────────────────
