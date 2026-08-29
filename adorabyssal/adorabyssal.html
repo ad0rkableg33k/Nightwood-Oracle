@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>𝔸ᦔꪮ𝓻ꪖᵬყѕѕꪖꪶ ꪮ𝓻ꪖᥴꪶꫀ | 𝕌ηѕ𝕠ℓι𝕔ιтє𝕕 ᦔєᥴк 𝓅𝖎𝒸𝖘</title>
+<meta name="description" content="The Adorabyssal Oracle — 36 mythological, supernatural, and cryptozoological creatures in adorable form. Browse all cards or draw a daily pull. Art by PixelOccult.">
+<meta property="og:title" content="Adorabyssal Oracle · Unsolicited Deck Pics">
+<meta property="og:description" content="36 spooky cuties from mythology and cryptozoology. Art by PixelOccult.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Creepster&family=Fredoka+One&family=Ribeye&family=Rye&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink:#0a0a0f; --deep:#0d1117; --gold:#c9a84c; --gold-dim:#7a6230;
+  --gold-glow:#e8c96a; --teal-lit:#4db8b8; --cream:#f0e8d5;
+  --mist:#a89f8c; --fog:#5c5650; --red-dim:#6b2020;
+  --hot-pink:#c0426e; --purple:#5a2299; --lavender:#9b6fb5;
+  --abyss-teal:#2ab8b8; --abyss-deep:#0a1a1f; --abyss-glow:#3dd9d9;
+  --f-display:'Cinzel Decorative',serif; --f-title:'Cinzel',serif;
+  --f-body:'EB Garamond',serif; --f-chaos:'Rye',cursive;
+  --card-w:220px; --card-h:300px; --card-r:12px;
+}
+html { scroll-behavior:smooth; }
+body { background:var(--ink); color:var(--cream); font-family:var(--f-body);
+  font-size:17px; line-height:1.7; min-height:100vh; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:9999; opacity:0.6; }
+
+/* BACKGROUND */
+.abyss-bg { position:fixed; inset:0; z-index:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, #0a1f1f 0%, transparent 60%),
+    radial-gradient(ellipse 80% 40% at 20% 80%, #050d1a 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 80% 20%, #0d0d1a 0%, transparent 60%),
+    linear-gradient(180deg, #060a0a 0%, #080a0f 40%, #050508 100%); }
+
+/* PARTICLES */
+.abyss-particles { position:fixed; inset:0; z-index:1; pointer-events:none; }
+.abyss-p { position:absolute; opacity:0; animation:abyssFloat var(--dur,9s) ease-in infinite var(--delay,0s); }
+@keyframes abyssFloat {
+  0%{opacity:0;transform:translateY(100vh) rotate(0deg)} 10%{opacity:0.35}
+  90%{opacity:0.15} 100%{opacity:0;transform:translateY(-20vh) rotate(360deg)} }
+
+.app { position:relative; z-index:2; min-height:100vh; }
+
+/* NAV — matches index.html exactly */
+nav.site-nav {
+  position:sticky; top:0; z-index:300;
+  background:rgba(10,10,15,0.94); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--gold);
+  box-shadow:0 0 20px rgba(232,201,106,0.35);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0.6rem 1.5rem; flex-wrap:wrap; gap:0.5rem; }
+nav.site-nav .nav-logo {
+  font-family:var(--f-title); font-size:1.1rem; letter-spacing:2px;
+  color:var(--gold-glow); text-shadow:0 0 12px var(--gold); text-decoration:none; }
+nav.site-nav .nav-links { display:flex; gap:0.2rem; flex-wrap:wrap; list-style:none; }
+nav.site-nav .nav-links a {
+  font-family:var(--f-title); font-size:0.75rem; letter-spacing:1.5px;
+  color:var(--mist); text-decoration:none; padding:0.3rem 0.7rem;
+  border:1px solid transparent; transition:all 0.2s; white-space:nowrap; }
+nav.site-nav .nav-links a:hover, nav.site-nav .nav-links a.active {
+  color:var(--gold-glow); border-color:var(--gold);
+  text-shadow:0 0 8px var(--gold); background:rgba(232,201,106,0.08); }
+@media(max-width:600px){
+  nav.site-nav{padding:0.5rem 0.8rem;}
+  nav.site-nav .nav-links a{font-size:0.68rem;padding:0.25rem 0.5rem;}
+}
+
+/* HEADER */
+header { text-align:center; padding:60px 20px 40px; position:relative; }
+.site-brand { font-family:var(--f-chaos); font-size:clamp(18px,2.8vw,28px);
+  letter-spacing:2px; color:var(--abyss-teal); text-shadow:0 0 20px rgba(42,184,184,0.4);
+  margin-bottom:14px; }
+.site-brand-sub { display:block; font-family:var(--f-title); font-size:10px;
+  letter-spacing:4px; text-transform:uppercase; color:var(--fog); margin-top:6px; }
+.header-rune { font-size:11px; letter-spacing:6px; text-transform:uppercase;
+  color:var(--gold-dim); font-family:var(--f-title); margin-bottom:16px; display:block; }
+header h1 { font-family:var(--f-display); font-size:clamp(28px,5.5vw,58px);
+  font-weight:900; color:var(--abyss-teal);
+  text-shadow:0 0 40px rgba(42,184,184,0.5),0 0 80px rgba(42,184,184,0.2);
+  line-height:1.1; letter-spacing:2px; }
+header h1 span { display:block; font-size:0.42em; font-weight:400; color:var(--mist);
+  letter-spacing:8px; margin-top:8px; font-family:var(--f-title); }
+.header-divider { display:flex; align-items:center; gap:16px;
+  max-width:400px; margin:24px auto 0; }
+.header-divider::before,.header-divider::after { content:''; flex:1; height:1px; }
+.header-divider::before { background:linear-gradient(90deg,transparent,var(--abyss-teal)); }
+.header-divider::after  { background:linear-gradient(90deg,var(--abyss-teal),transparent); }
+.header-divider span { color:var(--abyss-teal); font-size:20px; }
+
+/* CREDIT BANNER */
+.credit-banner {
+  max-width:760px; margin:0 auto 40px; padding:0 20px;
+  display:flex; align-items:center; gap:20px;
+  background:rgba(42,184,184,0.07); border:1px solid rgba(42,184,184,0.25);
+  border-radius:12px; padding:20px 28px; }
+.credit-text { font-size:15px; color:var(--mist); line-height:1.6; }
+.credit-text strong { color:var(--abyss-teal); font-family:var(--f-title); font-size:13px;
+  letter-spacing:2px; text-transform:uppercase; display:block; margin-bottom:4px; }
+.credit-text a { color:var(--abyss-glow); text-decoration:none;
+  border-bottom:1px solid rgba(61,217,217,0.3); transition:all 0.2s; }
+.credit-text a:hover { color:white; border-color:var(--abyss-glow); }
+.credit-glyph { font-size:36px; flex-shrink:0; opacity:0.7; }
+
+/* DRAW SECTION */
+.draw-section { text-align:center; padding:10px 20px 40px; }
+.draw-section h2 { font-family:var(--f-title); font-size:13px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--fog); margin-bottom:20px; }
+.draw-btn { position:relative; padding:18px 52px; background:transparent;
+  border:1px solid var(--abyss-teal); border-radius:4px; color:var(--abyss-teal);
+  font-family:var(--f-display); font-size:14px; letter-spacing:3px;
+  text-transform:uppercase; cursor:pointer; transition:all 0.4s; overflow:hidden; }
+.draw-btn::before { content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(42,184,184,0.2),rgba(42,184,184,0.4)); opacity:0; transition:opacity 0.4s; }
+.draw-btn:hover::before { opacity:1; }
+.draw-btn:hover { color:white; box-shadow:0 0 30px rgba(42,184,184,0.5); }
+.draw-btn span { position:relative; z-index:1; }
+.spread-opts { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:20px; }
+.spread-btn { padding:9px 20px; border:1px solid rgba(42,184,184,0.2); border-radius:6px;
+  background:rgba(255,255,255,0.02); color:var(--mist); font-family:var(--f-title);
+  font-size:12px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.25s; }
+.spread-btn:hover { border-color:rgba(42,184,184,0.5); color:var(--cream); }
+.spread-btn.active { border-color:var(--abyss-teal); color:var(--abyss-teal);
+  background:rgba(42,184,184,0.08); box-shadow:0 0 14px rgba(42,184,184,0.15); }
+.spread-desc { font-style:italic; color:var(--fog); font-size:14px; margin-bottom:20px; min-height:22px; }
+
+/* PULLED CARD DISPLAY */
+.pull-area { max-width:1100px; margin:0 auto 30px; padding:0 20px; }
+.pull-layout { display:flex; flex-wrap:wrap; gap:28px; justify-content:center; margin-bottom:40px; }
+.pull-slot { display:flex; flex-direction:column; align-items:center; gap:12px; }
+.pull-slot-label { font-family:var(--f-title); font-size:11px; letter-spacing:3px;
+  text-transform:uppercase; color:rgba(42,184,184,0.7); text-align:center; }
+.pull-card-wrap { width:var(--card-w); height:var(--card-h); perspective:1000px;
+  cursor:pointer; opacity:0; transform:translateY(20px);
+  animation:dealIn 0.5s ease forwards; }
+@keyframes dealIn { to{opacity:1;transform:translateY(0)} }
+.pull-card-inner { width:100%; height:100%; position:relative; transform-style:preserve-3d;
+  transition:transform 0.7s cubic-bezier(0.4,0,0.2,1); border-radius:var(--card-r); }
+.pull-card-wrap.flipped .pull-card-inner { transform:rotateY(180deg); }
+.pull-card-face { position:absolute; inset:0; border-radius:var(--card-r);
+  backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(42,184,184,0.2),
+    0 0 20px rgba(42,184,184,0.08); }
+.pull-card-back { background:var(--deep); display:flex; align-items:center;
+  justify-content:center; flex-direction:column; gap:12px;
+  background:linear-gradient(160deg,#0a1a20,#0d0d1f); }
+.pull-card-back .back-glyph { font-size:52px; opacity:0.5; }
+.pull-card-back .back-label { font-family:var(--f-title); font-size:10px;
+  letter-spacing:4px; text-transform:uppercase; color:rgba(42,184,184,0.4); }
+.pull-card-front { transform:rotateY(180deg); background:var(--deep); }
+.pull-card-front img { width:100%; height:100%; object-fit:cover; border-radius:var(--card-r); }
+.pull-card-front .no-image { width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  gap:10px; padding:16px; text-align:center; background:linear-gradient(160deg,#0a1a20,#0d1020); }
+.pull-card-front .no-image .ni-name { font-family:var(--f-display); font-size:16px;
+  color:var(--abyss-teal); }
+.pull-card-front .no-image .ni-emoji { font-size:40px; opacity:0.6; }
+
+/* MEANING PANEL */
+.meaning-panel { max-width:700px; margin:0 auto; display:none; }
+.meaning-panel.visible { display:block; animation:fadeUp 0.5s ease forwards; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.meaning-card { background:rgba(255,255,255,0.025); border:1px solid rgba(42,184,184,0.18);
+  border-radius:12px; padding:36px 40px; margin-bottom:20px; position:relative; overflow:hidden; }
+.meaning-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--abyss-teal),transparent); }
+.meaning-header { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+.meaning-position-tag { font-family:var(--f-title); font-size:10px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--teal-lit); }
+.meaning-card-name { font-family:var(--f-display); font-size:26px; color:var(--abyss-teal); font-weight:700; }
+.meaning-meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+.meta-tag { padding:3px 12px; border:1px solid rgba(42,184,184,0.2); border-radius:20px;
+  font-family:var(--f-title); font-size:10px; letter-spacing:2px;
+  text-transform:uppercase; color:rgba(42,184,184,0.7); }
+.meta-tag.pos { border-color:rgba(60,200,60,0.25); color:rgba(120,220,120,0.8); }
+.meta-tag.neg { border-color:rgba(200,60,60,0.25); color:rgba(220,120,120,0.8); }
+.meta-tag.neu { border-color:rgba(200,200,60,0.25); color:rgba(220,200,100,0.8); }
+.meaning-divider { height:1px; background:linear-gradient(90deg,var(--abyss-teal),transparent);
+  margin-bottom:18px; opacity:0.3; }
+.meaning-body { color:var(--cream); font-size:16px; line-height:1.85; }
+.meaning-keywords { margin-top:18px; display:flex; flex-wrap:wrap; gap:8px; }
+.keyword { padding:4px 12px; border:1px solid rgba(42,184,184,0.2); border-radius:20px;
+  font-family:var(--f-title); font-size:10px; letter-spacing:2px;
+  text-transform:uppercase; color:rgba(42,184,184,0.6); }
+.clear-btn { display:block; margin:20px auto 0; padding:10px 30px; background:transparent;
+  border:1px solid rgba(255,255,255,0.1); border-radius:4px; color:var(--fog);
+  font-family:var(--f-title); font-size:11px; letter-spacing:3px;
+  text-transform:uppercase; cursor:pointer; transition:all 0.3s; }
+.clear-btn:hover { border-color:var(--fog); color:var(--mist); }
+
+/* FILTER BAR */
+.filter-section { max-width:1100px; margin:60px auto 0; padding:0 20px 20px; }
+.filter-title { font-family:var(--f-title); font-size:13px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--fog); margin-bottom:18px; text-align:center; }
+.filter-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:14px; }
+.filter-btn { padding:8px 18px; border:1px solid rgba(42,184,184,0.18); border-radius:20px;
+  background:transparent; color:var(--mist); font-family:var(--f-title);
+  font-size:11px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.25s; }
+.filter-btn:hover { border-color:rgba(42,184,184,0.5); color:var(--cream); }
+.filter-btn.active { border-color:var(--abyss-teal); color:var(--abyss-teal);
+  background:rgba(42,184,184,0.08); }
+.filter-search { width:100%; max-width:340px; display:block; margin:0 auto 10px;
+  background:rgba(255,255,255,0.03); border:1px solid rgba(42,184,184,0.2);
+  border-radius:6px; padding:10px 16px; color:var(--cream); font-family:var(--f-body);
+  font-size:15px; outline:none; transition:border-color 0.3s; }
+.filter-search:focus { border-color:rgba(42,184,184,0.5); }
+.filter-search::placeholder { color:var(--fog); font-style:italic; }
+
+/* CARD GRID */
+.card-grid { max-width:1200px; margin:0 auto; padding:10px 20px 80px;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:20px; }
+.grid-card { cursor:pointer; border:1px solid rgba(42,184,184,0.12); border-radius:12px;
+  overflow:hidden; transition:all 0.3s; background:rgba(255,255,255,0.015);
+  display:flex; flex-direction:column; }
+.grid-card:hover { border-color:rgba(42,184,184,0.5); transform:translateY(-4px);
+  box-shadow:0 8px 24px rgba(0,0,0,0.5), 0 0 20px rgba(42,184,184,0.12); }
+.grid-card img { width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top; display:block; }
+.grid-card .img-placeholder { width:100%; aspect-ratio:3/4;
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  gap:8px; background:linear-gradient(160deg,#0a1a20,#0d0d1a); }
+.grid-card .img-placeholder span { font-size:32px; opacity:0.4; }
+.grid-card .img-placeholder small { font-family:var(--f-title); font-size:9px;
+  letter-spacing:2px; color:rgba(42,184,184,0.3); text-transform:uppercase; }
+.grid-card-info { padding:12px 14px 14px; }
+.gc-name { font-family:var(--f-display); font-size:13px; color:var(--abyss-teal);
+  margin-bottom:4px; line-height:1.2; }
+.gc-theme { font-family:var(--f-title); font-size:10px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--fog); margin-bottom:6px; }
+.gc-tags { display:flex; flex-wrap:wrap; gap:4px; }
+.gc-tag { font-size:9px; padding:2px 7px; border-radius:10px; font-family:var(--f-title);
+  letter-spacing:1px; text-transform:uppercase; }
+.gc-tag.earth { background:rgba(80,140,60,0.15); color:rgba(140,200,100,0.8); }
+.gc-tag.air   { background:rgba(80,120,200,0.15); color:rgba(140,180,255,0.8); }
+.gc-tag.fire  { background:rgba(200,80,40,0.15); color:rgba(255,140,80,0.8); }
+.gc-tag.water { background:rgba(40,100,180,0.15); color:rgba(80,160,240,0.8); }
+.gc-tag.cryptid { background:rgba(120,80,180,0.15); color:rgba(180,130,240,0.8); }
+.gc-tag.supernatural { background:rgba(180,60,120,0.15); color:rgba(240,120,180,0.8); }
+.gc-tag.mythological { background:rgba(180,140,40,0.15); color:rgba(240,200,80,0.8); }
+
+/* MODAL */
+.modal-overlay { display:none; position:fixed; inset:0; z-index:500;
+  background:rgba(0,0,0,0.85); backdrop-filter:blur(6px);
+  align-items:center; justify-content:center; padding:20px; }
+.modal-overlay.open { display:flex; animation:modalFadeIn 0.3s ease; }
+@keyframes modalFadeIn { from{opacity:0} to{opacity:1} }
+.modal-box { background:#0c1215; border:1px solid rgba(42,184,184,0.3);
+  border-radius:16px; max-width:700px; width:100%; max-height:90vh;
+  overflow-y:auto; padding:0; position:relative; }
+.modal-box::before { content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--abyss-teal),transparent); }
+.modal-inner { display:flex; gap:0; }
+.modal-img-col { flex-shrink:0; width:200px; }
+.modal-img-col img { width:100%; height:100%; object-fit:cover;
+  border-radius:16px 0 0 16px; }
+.modal-img-col .modal-no-img { width:100%; height:100%; min-height:260px;
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  gap:10px; background:linear-gradient(160deg,#0a1a20,#0d0d1f);
+  border-radius:16px 0 0 16px; }
+.modal-img-col .modal-no-img span { font-size:48px; opacity:0.5; }
+.modal-content { padding:30px 28px; flex:1; }
+.modal-close { position:absolute; top:14px; right:16px; background:transparent;
+  border:none; color:var(--fog); font-size:22px; cursor:pointer; transition:color 0.2s; line-height:1; }
+.modal-close:hover { color:var(--abyss-teal); }
+.modal-classification { font-family:var(--f-title); font-size:10px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--teal-lit); margin-bottom:6px; }
+.modal-name { font-family:var(--f-display); font-size:24px; color:var(--abyss-teal);
+  margin-bottom:10px; line-height:1.2; }
+.modal-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.modal-divider { height:1px; background:linear-gradient(90deg,var(--abyss-teal),transparent);
+  margin-bottom:16px; opacity:0.3; }
+.modal-about { color:var(--cream); font-size:16px; line-height:1.85; }
+@media(max-width:600px){
+  .modal-inner { flex-direction:column; }
+  .modal-img-col { width:100%; }
+  .modal-img-col img { border-radius:16px 16px 0 0; max-height:200px; }
+  .modal-img-col .modal-no-img { border-radius:16px 16px 0 0; min-height:140px; }
+  .modal-content { padding:20px; }
+  .modal-name { font-size:20px; }
+  :root { --card-w:160px; --card-h:218px; }
+  .pull-layout { gap:16px; }
+  .meaning-card { padding:24px 20px; }
+  .card-grid { grid-template-columns:repeat(auto-fill,minmax(145px,1fr)); gap:14px; }
+}
+
+/* NO RESULTS */
+.no-results { text-align:center; padding:60px 20px; color:var(--fog);
+  font-style:italic; font-size:16px; display:none; }
+
+/* FOOTER */
+footer { text-align:center; padding:40px 20px; border-top:1px solid rgba(42,184,184,0.1);
+  color:var(--fog); font-size:13px; font-family:var(--f-title); letter-spacing:2px; }
+footer span { color:var(--abyss-teal); }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html">𝕌ηѕ𝕠ℓι𝕔ιтє𝕕 ᦔєᥴк 𝓅𝖎𝒸𝖘</a>
+  <ul class="nav-links">
+    <li><a href="index.html">𝕌ηѕ𝕠ℓι𝕔ιтє𝕕 ᦔєᥴк 𝓅𝖎𝒸𝖘|τⲇⲅⲟτ &amp; ⲟⲅⲇⲥⳑⲉ</a></li>
+    <li><a href="adorabyssal.html" class="active">𝔸ᦔꪮ𝓻ꪖᵬყѕѕꪖꪶ ꪮ𝓻ꪖᥴꪶꫀ</a></li>
+    <li><a href="https://ad0rkableg33k.github.io/realityisbuffering/" target="_blank">яєʌ𝓵ɪтყ ɪѕ вuƒƒєяɪηｇs</a></li>
+    <li><a href="https://ad0rkableg33k.github.io/FontGenerator.html" target="_blank">𝔽𝖆𝖓𝖈𝕪 𝔽𝖔𝖓𝕥 𝕲𝖊𝖓𝖊𝖗𝕒𝕥𝖔𝖗</a></li>
+    <li><a href="https://github.com/ad0rkableg33k" target="_blank">ＧｉｔＨＵＢ</a></li>
+    <li><a href="https://www.youtube.com/@ad0rkableg33k" target="_blank">ყoυtυbᥱ</a></li>
+  </ul>
+</nav>
+
+<div class="abyss-bg"></div>
+<div class="abyss-particles" id="abyssParticles"></div>
+
+<div class="app">
+
+  <header>
+    <div class="site-brand">𝕌ηѕ𝕠ℓι𝕔ιтє𝕕 ᦔєᥴк 𝓅𝖎𝒸𝖘<span class="site-brand-sub">τⲇⲅⲟτ &amp; ⲟⲅⲇⲥⳑⲉ ⲅⲉⲇ𝖽ⳕⲛⳋ⳽</span></div>
+    <span class="header-rune">✦ &nbsp; ⲥu𝕥ⲉ⳽ⲩ ⲥ𝓻ყρ𝕥ɪᦔ⳽ &amp; ⲙy𝕥ꫝꪶꪮɢɪᥴꪖꪶ ᵴρ𝓸ꪮку &nbsp; ✦</span>
+    <h1>The Adorabyssal Oracle<span>36 Creatures · Art by PixelOccult</span></h1>
+    <div class="header-divider"><span>🦑</span></div>
+  </header>
+
+  <!-- CREDIT -->
+  <div class="credit-banner">
+    <div class="credit-glyph">🎨</div>
+    <div class="credit-text">
+      <strong>Art &amp; Deck by PixelOccult</strong>
+      The Adorabyssal Oracle is a 36-card oracle &amp; card game featuring the cutest versions of mythological, supernatural, and cryptozoological creatures from around the world. All card art belongs to its creator.
+      Visit <a href="https://www.pixeloccult.com" target="_blank">pixeloccult.com</a> &nbsp;·&nbsp;
+      <a href="https://www.etsy.com/shop/PixelOccult" target="_blank">Etsy Shop</a> &nbsp;·&nbsp;
+      <a href="https://www.instagram.com/PixelOccult" target="_blank">@PixelOccult</a>
+    </div>
+  </div>
+
+  <!-- DRAW / PULL SECTION -->
+  <div class="draw-section">
+    <h2>✦ &nbsp; Draw a Card &nbsp; ✦</h2>
+    <div class="spread-opts" id="spreadOpts"></div>
+    <div class="spread-desc" id="spreadDesc"></div>
+    <button class="draw-btn" onclick="drawCards()"><span id="drawBtnText">🦑 &nbsp; Pull from the Abyss &nbsp; 🦑</span></button>
+  </div>
+
+  <div class="pull-area" id="pullArea" style="display:none">
+    <div class="pull-layout" id="pullLayout"></div>
+    <div class="meaning-panel" id="meaningPanel"></div>
+    <button class="clear-btn" id="clearBtn" onclick="clearPull()">✦ Clear Pull ✦</button>
+  </div>
+
+  <!-- BROWSE / FILTER -->
+  <div class="filter-section">
+    <div class="filter-title">✦ &nbsp; Browse All 36 Creatures &nbsp; ✦</div>
+    <div style="text-align:center;margin-bottom:12px;">
+      <input class="filter-search" type="text" id="searchInput" placeholder="Search by name or theme…" oninput="applyFilters()">
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" data-filter="cryptid" onclick="setFilter('cryptid',this)">🔍 Cryptid</button>
+      <button class="filter-btn" data-filter="supernatural" onclick="setFilter('supernatural',this)">👻 Supernatural</button>
+      <button class="filter-btn" data-filter="mythological" onclick="setFilter('mythological',this)">📜 Mythological</button>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn" data-filter="earth" onclick="setFilter('earth',this)">🌿 Earth</button>
+      <button class="filter-btn" data-filter="air" onclick="setFilter('air',this)">💨 Air</button>
+      <button class="filter-btn" data-filter="fire" onclick="setFilter('fire',this)">🔥 Fire</button>
+      <button class="filter-btn" data-filter="water" onclick="setFilter('water',this)">🌊 Water</button>
+      <button class="filter-btn" data-filter="positive" onclick="setFilter('positive',this)">✨ Positive</button>
+      <button class="filter-btn" data-filter="neutral" onclick="setFilter('neutral',this)">⚖️ Neutral</button>
+      <button class="filter-btn" data-filter="negative" onclick="setFilter('negative',this)">🌑 Negative</button>
+    </div>
+  </div>
+
+  <div class="card-grid" id="cardGrid"></div>
+  <div class="no-results" id="noResults">No creatures found in the abyss… try a different search.</div>
+
+</div><!-- .app -->
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-inner">
+      <div class="modal-img-col" id="modalImgCol"></div>
+      <div class="modal-content">
+        <div class="modal-classification" id="modalClassification"></div>
+        <div class="modal-name" id="modalName"></div>
+        <div class="modal-tags" id="modalTags"></div>
+        <div class="modal-divider"></div>
+        <div class="modal-about" id="modalAbout"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>𝕌ηѕ𝕠ℓι𝕔ιтє𝕕 ᦔєᥴк 𝓅𝖎𝒸𝖘</span> &nbsp;·&nbsp;
+  <span>The Adorabyssal Oracle</span> &nbsp;·&nbsp;
+  <span>Card Art by <a href="https://www.pixeloccult.com" target="_blank" style="color:var(--abyss-glow);text-decoration:none;">PixelOccult</a></span>
+  <div style="margin-top:0.6rem;font-family:monospace;font-size:0.75rem;color:var(--mist);">
+    👁 VISITORS: <span id="visitCounter" style="color:var(--abyss-glow);">······</span>
+  </div>
+</footer>
+
+<script>
+fetch('https://countapi.mileshilliard.com/api/v1/hit/g33ky-adorabyssal-oracle')
+  .then(r => r.json())
+  .then(d => { document.getElementById('visitCounter').textContent = String(d.value).padStart(6,'0'); })
+  .catch(() => { document.getElementById('visitCounter').textContent = '------'; });
+
+// ── CARD DATA ───────────────────────────────────────────────────────────────
+const CARDS = [
+  {name:"Alkonost", file:"adorabyssal/alkonost.png", classification:"Mythological", theme:"Distraction", positivity:"Neutral", element:"Air",
+   about:"The Alkonost is a Slavic/Russian half-bird half-woman with a spellbinding voice that enamors those that hear it to the point that they forget and abandon anything else. She is able to cause thunderstorms by laying her eggs and rolling them into the ocean where they lay dormant until they hatch after seven days."},
+  {name:"Anansi", file:"adorabyssal/anansi.png", classification:"Mythological", theme:"Story", positivity:"Positive", element:"Earth",
+   about:"Anansi is a trickster spider god that often appears as or has characteristics of a man. He is a centrally important character from Akan folktales and is considered to be the spirit of all stories and knowledge. He is associated with skill at speechcraft, and seen as a symbol of slave resistance and survival."},
+  {name:"Bækhest", file:"adorabyssal/baekhest.png", classification:"Supernatural", theme:"Glamour", positivity:"Positive", element:"Water",
+   about:"The Bækhest or brook horse is a Scandinavian creature similar to a Kelpie. It is described as an unnaturally glamorous white horse that appears near rivers in foggy weather. It was said that anyone who climbed on the horse would then be stuck on its back as it jumped back into the river, taking them with it."},
+  {name:"Bake-Kujira", file:"adorabyssal/bake_kujira.png", classification:"Supernatural", theme:"Misfortune", positivity:"Negative", element:"Water",
+   about:"Bake-Kujira is a floating western Japanese ghost whale which cannot be caught and brings a curse and misfortune wherever it goes. It is accompanied by strange birds and unknown fish and appears as the skeleton of a great baleen whale."},
+  {name:"Bigfoot", file:"adorabyssal/bigfoot.png", classification:"Cryptid", theme:"Solitude", positivity:"Neutral", element:"Earth",
+   about:"Bigfoot is from North American Folklore, particularly the Pacific Northwest. One of the most popular cryptids, many have claimed to see it as a hairy, upright-walking ape creature between six and nine feet tall. It wanders the forests, leaving behind massive footprints."},
+  {name:"Black Shuck", file:"adorabyssal/black_shuck.png", classification:"Cryptid", theme:"Omen", positivity:"Neutral", element:"Fire",
+   about:"Black Shuck is a ghostly black dog from the countryside of East Anglia. In some accounts its size is massive and it has one fiery evil eye. Its most notorious appearance was at the churches of Bungay and Blythburgh in Suffolk — it burst through the doors with a clap of thunder, leaving scorch marks and causing the steeple to collapse. Its presence is considered an omen."},
+  {name:"Cadejo", file:"adorabyssal/cadejo.png", classification:"Mythological", theme:"Duality", positivity:"Neutral", element:"Earth",
+   about:"The Cadejo are a pair of spirits from Central American Folklore. They appear at night to travellers, with one acting as a protector and the other as a malevolent being which lures people to make bad choices. They are sometimes depicted dragging a chain. Which dog is evil and which is good swaps depending on the source, but together they represent duality."},
+  {name:"Cait Sidhe", file:"adorabyssal/cait_sidhe.png", classification:"Mythological", theme:"Theft", positivity:"Negative", element:"Air",
+   about:"Cait Sidhe is a spectral Celtic fairie creature that haunts the Scottish highlands. It appears as a large black cat with a white spot on its chest. Some stories say that it is actually a witch who is able to transform into a cat. It was rumored to steal the souls of people by crossing over their corpse before burial."},
+  {name:"Cerberus", file:"adorabyssal/cerberus.png", classification:"Mythological", theme:"Duty", positivity:"Neutral", element:"Fire",
+   about:"Usually described as having three heads, Cerberus was also said to have a serpent for a tail and snakes protruding from its body. Cerberus comes from Greek mythology and is a dog that guards the gates of the underworld to prevent the dead from leaving."},
+  {name:"Chupacabra", file:"adorabyssal/chupacabra.png", classification:"Cryptid", theme:"Consume", positivity:"Negative", element:"Fire",
+   about:"Chupacabra is a cryptid with claimed sightings including Puerto Rico, Chile, and across the southern US and Mexico. It was reported to prey on livestock and drain them of blood and occasionally even organs, leaving behind three puncture wounds as evidence."},
+  {name:"Demon", file:"adorabyssal/demon.png", classification:"Supernatural", theme:"Chaos", positivity:"Neutral", element:"Fire",
+   about:"A demon is originally a divine Greek being but has come to be recognized as a malevolent entity and a byproduct of human sin. Their appearance has become heavily associated with satyrs, or goat-men, and they are said to corrupt and lead astray the souls of men."},
+  {name:"Dullahan", file:"adorabyssal/dullahan.png", classification:"Supernatural", theme:"Inevitability", positivity:"Neutral", element:"Air",
+   about:"Dullahan comes from Irish mythology and is depicted as a headless rider on a black horse who holds his own head under one arm. Its eyes move about and have unnaturally accurate vision. All gates open before it and when it stops, a human dies. It is only permitted to speak once per journey, which it uses to call the name of the person whose death is impending."},
+  {name:"Fairie", file:"adorabyssal/fairie.png", classification:"Supernatural", theme:"Trickery", positivity:"Negative", element:"Air",
+   about:"A fairie is a mythical creature from European folklore. While the term is generic for a wide representation of creatures across different folklore, it is usually depicted as a magical or enchanted being associated with trickery and the need to be warded off. Its pre-Victorian depictions were often of a diminutive and wingless creature that could change its appearance and size."},
+  {name:"Fuath", file:"adorabyssal/fuath.png", classification:"Supernatural", theme:"Malice", positivity:"Negative", element:"Water",
+   about:"Fuath is a malevolent Gaelic water spirit that resembles a gremlin. It delights in causing drownings, particularly by sabotaging boats and ships at sea. They are vulnerable to steel and sunlight, so they only come out at night. They are depicted as humanoid with webbed toes, spiky tails, and a shaggy mane."},
+  {name:"Ghost", file:"adorabyssal/ghost.png", classification:"Supernatural", theme:"Endure", positivity:"Positive", element:"Air",
+   about:"A ghost is a generic soul or spirit of the dead that appears to the living. Its depiction varies greatly but can include a translucent or glowing presence. It is associated with the afterlife and is often considered a restless spirit."},
+  {name:"Grootslang", file:"adorabyssal/grootslang.png", classification:"Cryptid", theme:"Cruelty", positivity:"Negative", element:"Earth",
+   about:"The Grootslang is said to be an ancient creature as old as the world, made by mistake before the gods were experienced with creating. Once the gods realized their error, they split it into elephants and snakes, but one original Grootslang escaped and sired others. It lives deep in a cave in South Africa filled with diamonds. It is impossibly strong, smart, and cunning, with a taste for cruelty that can only be overcome by appealing to its greed."},
+  {name:"Huginn & Muninn", file:"adorabyssal/huginn_muninn.png", classification:"Mythological", theme:"Knowledge", positivity:"Positive", element:"Air",
+   about:"Huginn and Muninn are named after thought and memory, and are a pair of ravens from Norse Mythology which fly across the world daily and report back to Odin with information from their travels. In this way, Odin is able to maintain his wisdom and knowledge."},
+  {name:"Hydra", file:"adorabyssal/hydra.png", classification:"Mythological", theme:"Struggle", positivity:"Negative", element:"Water",
+   about:"The Hydra is a multi-headed serpent from Greek mythology. Its lair was a lake reputed to be an entrance to the underworld. For every head that was cut off, the Hydra grew two in its place, and its blood was dangerously poisonous. Like Cerberus, the Hydra was said to be the offspring of Typhon and Echidna."},
+  {name:"Ifrit", file:"adorabyssal/ifrit.png", classification:"Supernatural", theme:"Power", positivity:"Neutral", element:"Fire",
+   about:"The Ifrit is a Middle Eastern Jinn. It is often depicted as being the most powerful of them, and was claimed to be wicked and ruthless. It was said to inhabit the underworld and have fiery flames leaping from its mouth."},
+  {name:"Jersey Devil", file:"adorabyssal/jersey_devil.png", classification:"Cryptid", theme:"Invulnerability", positivity:"Positive", element:"Air",
+   about:"The Jersey Devil is from the Pine Barrens of Southern New Jersey. It was the thirteenth child of Jane Leeds, and changed into the hooved, winged creature after it was born. It emits an unearthly shriek and is said to be impossible to kill."},
+  {name:"Kitsune", file:"adorabyssal/kitsune.png", classification:"Supernatural", theme:"Wisdom", positivity:"Positive", element:"Earth",
+   about:"Kitsune is a Japanese word for fox. Stories say that these foxes have the ability to shapeshift into human form and they are depicted as tricksters, guardians, friends, and lovers. The more tails a Kitsune has — and they may have up to nine — the older and wiser it is considered to be."},
+  {name:"Kraken", file:"adorabyssal/kraken.png", classification:"Cryptid", theme:"Mystery", positivity:"Neutral", element:"Water",
+   about:"The Kraken is a giant sea cephalopod said to lurk off the coasts of Norway and Greenland. Its sheer size has had it mistaken by passing ships as an island. Its depiction is often that it is large enough to lift or drag ships with its massive arms. Stories say it dwells underwater for days and when it submerges it leaves giant whirlpools that can sink ships."},
+  {name:"Lampad", file:"adorabyssal/lampad.png", classification:"Mythological", theme:"Companionship", positivity:"Positive", element:"Fire",
+   about:"The Lampad come from Greek Mythology, and are nymphs of the underworld meant to accompany Hecate and light her way. They carry torches which have the power to drive mortals into madness."},
+  {name:"Leviathan", file:"adorabyssal/leviathan.png", classification:"Mythological", theme:"Envy", positivity:"Negative", element:"Water",
+   about:"Leviathan is a giant sea monster from Jewish belief. It is said to be a monstrous serpent that will be killed at the end of time. It is claimed to live in the Mediterranean Sea and was described by St. Thomas Aquinas as the demon of Envy, corresponding to the deadly sin. Its depiction is often that of an impossibly monstrous snake or dragon."},
+  {name:"Mermaid", file:"adorabyssal/mermaid.png", classification:"Cryptid", theme:"Commitment", positivity:"Positive", element:"Water",
+   about:"A mermaid is a generic creature from the folklore of multiple cultures around the world. It is depicted as a female human, typically with the tail of a fish. Many folktales depict marriages between mermaids and humans, and it is said that if a mermaid falls in love with a man and he weds another, she will turn to sea foam. However they marry and he is unfaithful, he will die."},
+  {name:"Mothman", file:"adorabyssal/mothman.png", classification:"Cryptid", theme:"Ruin", positivity:"Negative", element:"Air",
+   about:"The Mothman is a cryptid from West Virginia folklore. It is depicted as a dark birdlike humanoid with oversized glowing red eyes and a large wingspan. It was associated with supernatural events in the mid sixties ending with the collapse of the Silver Bridge."},
+  {name:"Namazu", file:"adorabyssal/namazu.png", classification:"Supernatural", theme:"Control", positivity:"Neutral", element:"Earth",
+   about:"Namazu is a giant catfish from Japanese mythology. It is said to live in the mud under Japan and is restrained by the god Kashima with a stone. When Kashima gets distracted and is unable to control Namazu, Namazu proceeds to thrash about and cause violent earthquakes."},
+  {name:"Nessie", file:"adorabyssal/nessie.png", classification:"Cryptid", theme:"Longevity", positivity:"Positive", element:"Water",
+   about:"Nessie or the Loch Ness Monster is a popular cryptid from Scottish Folklore that inhabits Loch Ness in the Scottish Highlands. She is often depicted as a kind of plesiosaur with a long neck and small head. Sightings of the creature date back to as early as the sixth century making Nessie very long lived indeed!"},
+  {name:"Olgoi-Khorkhoi", file:"adorabyssal/olgoi_khorkhoi.png", classification:"Cryptid", theme:"Virulence", positivity:"Negative", element:"Fire",
+   about:"Olgoi-Khorkhoi, also known as the Mongolian Death Worm, is claimed to live in the most desolate areas of the Gobi Desert. It is depicted as a giant red worm between two and five feet long with a thick body. It has no head or legs and is said to be incredibly poisonous — you cannot touch any part of the worm. It is also capable of spraying venom and electricity."},
+  {name:"Olitiau", file:"adorabyssal/olitiau.png", classification:"Cryptid", theme:"Expanse", positivity:"Neutral", element:"Air",
+   about:"Olitiau are from Central Africa and are claimed to be gigantic bats that lurk in caverns. These cryptids have big black bodies with long teeth and six to twelve foot wingspans. One of the sightings had an explorer claiming it as the granddaddy of all bats."},
+  {name:"Phoenix", file:"adorabyssal/phoenix.png", classification:"Mythological", theme:"Rebirth", positivity:"Positive", element:"Fire",
+   about:"The Phoenix is a regenerative bird from Greek mythology that first dies in a combustion of flame and then is reborn again from the ash. Its appearances varied but was claimed to have red and yellow coloration and its size was anywhere from that of an eagle to an ostrich."},
+  {name:"Rusalka", file:"adorabyssal/rusalka.png", classification:"Mythological", theme:"Constrained", positivity:"Negative", element:"Water",
+   about:"The Rusalka is a female entity associated with water in Eastern Slavic folklore. Originally believed to transfer moisture that helped crops grow, they later became associated with beautiful but undead vengeful spirits that would lurk near rivers or lakes and entangle and drown young men with their long red hair."},
+  {name:"Sleipnir", file:"adorabyssal/sleipnir.png", classification:"Mythological", theme:"Swiftness", positivity:"Neutral", element:"Earth",
+   about:"Sleipnir is a horse ridden by Odin in Norse Mythology. It was depicted as having eight legs and being incredibly swift. It is an offspring of Loki and has a connection to the underworld. It is described as the best horse among gods and men."},
+  {name:"Tsuchinoko", file:"adorabyssal/tsuchinoko.png", classification:"Supernatural", theme:"Lies", positivity:"Negative", element:"Earth",
+   about:"The Tsuchinoko is a Western Japanese being resembling a hoop snake. Sometimes it will take its tail in its mouth and roll around. It is able to double jump, has an affinity for lying and a taste for alcohol."},
+  {name:"Will-O'-the-Wisp", file:"adorabyssal/will_o_wisp.png", classification:"Supernatural", theme:"Guidance", positivity:"Positive", element:"Fire",
+   about:"Will-O'-the-Wisp is a widely shared tale about a flickering orb of light said to be a spirit attempting to guide travellers, sometimes to ill fate and sometimes to good depending on the folklore. Its behavior is often associated with fairies, goblins, and hauntings."},
+  {name:"Wolpertinger", file:"adorabyssal/wolpertinger.png", classification:"Cryptid", theme:"Diversity", positivity:"Positive", element:"Earth",
+   about:"Similar to the American Jackalope, the German Wolpertinger from folklore is a diverse creature with a composite body. It is claimed to inhabit the alpine forests of Bavaria. Depictions vary but it commonly has the body of a squirrel, the wings of a pheasant, the head of a rabbit, and the antlers of a deer."},
+];
+
+// ── SPREADS ─────────────────────────────────────────────────────────────────
+const SPREADS = [
+  {id:"single", name:"Single Pull", desc:"One creature, one message from the abyss.", positions:["The Creature"], count:1},
+  {id:"three",  name:"Three Card",  desc:"Past · Present · Future — through the depths.", positions:["The Past","The Present","What Stirs Ahead"], count:3},
+  {id:"shadow", name:"Shadow & Light", desc:"Your gift · Your shadow · The bridge between.", positions:["Your Light","Your Shadow","The Bridge"], count:3},
+];
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+let activeFilter = 'all';
+let drawnCards = [];
+let flippedCount = 0;
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+function init() {
+  spawnParticles();
+  renderSpreads();
+  renderGrid(CARDS);
+}
+
+function spawnParticles() {
+  const container = document.getElementById('abyssParticles');
+  const emojis = ['🦑','🐙','🦇','🌊','💀','🔮','🌑','⭐','🧿','🐟','🦈','💫'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'abyss-p';
+    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    p.style.cssText = `left:${Math.random()*100}%;font-size:${10+Math.random()*14}px;
+      --dur:${8+Math.random()*10}s;--delay:${-Math.random()*14}s;`;
+    container.appendChild(p);
+  }
+}
+
+function renderSpreads() {
+  const opts = document.getElementById('spreadOpts');
+  opts.innerHTML = '';
+  SPREADS.forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'spread-btn' + (i === 0 ? ' active' : '');
+    btn.textContent = s.name;
+    btn.onclick = () => selectSpread(s, btn);
+    opts.appendChild(btn);
+  });
+  document.getElementById('spreadDesc').textContent = SPREADS[0].desc;
+  window._currentSpread = SPREADS[0];
+}
+
+function selectSpread(spread, btn) {
+  window._currentSpread = spread;
+  document.querySelectorAll('.spread-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('spreadDesc').textContent = spread.desc;
+}
+
+// ── DRAW ─────────────────────────────────────────────────────────────────────
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function drawCards() {
+  clearPull(true);
+  const spread = window._currentSpread || SPREADS[0];
+  const shuffled = shuffle(CARDS);
+  drawnCards = shuffled.slice(0, spread.count).map((c, i) => ({
+    ...c, position: spread.positions[i]
+  }));
+  flippedCount = 0;
+
+  const layout = document.getElementById('pullLayout');
+  layout.innerHTML = '';
+  document.getElementById('pullArea').style.display = 'block';
+  document.getElementById('clearBtn').style.display = 'block';
+
+  drawnCards.forEach((card, idx) => {
+    const slot = document.createElement('div');
+    slot.className = 'pull-slot';
+    slot.innerHTML = `
+      <div class="pull-slot-label">${card.position}</div>
+      <div class="pull-card-wrap" id="pcw-${idx}" style="animation-delay:${idx*0.14}s" onclick="flipPullCard(${idx})">
+        <div class="pull-card-inner">
+          <div class="pull-card-face pull-card-back">
+            <div class="back-glyph">🦑</div>
+            <div class="back-label">Adorabyssal</div>
+          </div>
+          <div class="pull-card-face pull-card-front">
+            ${card.file
+              ? `<img src="${card.file}" alt="${card.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+              : ''}
+            <div class="no-image" style="${card.file ? 'display:none' : 'display:flex'}">
+              <div class="ni-emoji">🎨</div>
+              <div class="ni-name">${card.name}</div>
+              <div style="font-size:11px;color:var(--fog);font-style:italic;font-family:var(--f-title);">Card coming soon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    layout.appendChild(slot);
+  });
+  setTimeout(() => layout.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 200);
+}
+
+function flipPullCard(idx) {
+  const wrap = document.getElementById(`pcw-${idx}`);
+  if (wrap.classList.contains('flipped')) return;
+  wrap.classList.add('flipped');
+  flippedCount++;
+  setTimeout(() => showPullMeaning(idx), 500);
+}
+
+function showPullMeaning(idx) {
+  const card = drawnCards[idx];
+  const panel = document.getElementById('meaningPanel');
+  for (let el of panel.querySelectorAll('.meaning-card')) {
+    if (el.dataset.cardIdx == idx) return;
+  }
+  const posTagClass = card.positivity === 'Positive' ? 'pos' : card.positivity === 'Negative' ? 'neg' : 'neu';
+  const elemClass = card.element.toLowerCase();
+
+  const mc = document.createElement('div');
+  mc.className = 'meaning-card';
+  mc.dataset.cardIdx = idx;
+  mc.innerHTML = `
+    <div class="meaning-header">
+      <span class="meaning-position-tag">${card.position}</span>
+    </div>
+    <div class="meaning-card-name">${card.name}</div>
+    <div class="meaning-meta">
+      <span class="meta-tag ${card.classification.toLowerCase()}">${card.classification}</span>
+      <span class="meta-tag ${elemClass}">${card.element}</span>
+      <span class="meta-tag ${posTagClass}">${card.theme} · ${card.positivity}</span>
+    </div>
+    <div class="meaning-divider"></div>
+    <div class="meaning-body">${card.about}</div>
+    <div class="meaning-keywords">
+      <span class="keyword">${card.classification}</span>
+      <span class="keyword">${card.element}</span>
+      <span class="keyword">${card.theme}</span>
+      <span class="keyword">${card.positivity}</span>
+    </div>
+  `;
+  panel.appendChild(mc);
+  panel.classList.add('visible');
+  setTimeout(() => mc.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+}
+
+function clearPull(silent) {
+  document.getElementById('pullLayout').innerHTML = '';
+  document.getElementById('meaningPanel').innerHTML = '';
+  document.getElementById('meaningPanel').classList.remove('visible');
+  if (!silent) document.getElementById('pullArea').style.display = 'none';
+  drawnCards = []; flippedCount = 0;
+}
+
+// ── GRID / FILTER ────────────────────────────────────────────────────────────
+function setFilter(val, btn) {
+  activeFilter = val;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const filtered = CARDS.filter(c => {
+    const matchFilter =
+      activeFilter === 'all' ? true :
+      activeFilter === 'positive' ? c.positivity === 'Positive' :
+      activeFilter === 'neutral' ? c.positivity === 'Neutral' :
+      activeFilter === 'negative' ? c.positivity === 'Negative' :
+      c.classification.toLowerCase() === activeFilter ||
+      c.element.toLowerCase() === activeFilter;
+    const matchSearch = !q ||
+      c.name.toLowerCase().includes(q) ||
+      c.theme.toLowerCase().includes(q) ||
+      c.classification.toLowerCase().includes(q) ||
+      c.element.toLowerCase().includes(q) ||
+      c.about.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderGrid(filtered);
+  document.getElementById('noResults').style.display = filtered.length === 0 ? 'block' : 'none';
+}
+
+function renderGrid(cards) {
+  const grid = document.getElementById('cardGrid');
+  grid.innerHTML = '';
+  cards.forEach(card => {
+    const div = document.createElement('div');
+    div.className = 'grid-card';
+    div.onclick = () => openModal(card);
+    const elemClass = card.element.toLowerCase();
+    const classClass = card.classification.toLowerCase();
+    const posTagClass = card.positivity === 'Positive' ? 'pos' : card.positivity === 'Negative' ? 'neg' : 'neu';
+    div.innerHTML = `
+      ${card.file
+        ? `<img src="${card.file}" alt="${card.name}" loading="lazy" onerror="this.parentElement.querySelector('.img-placeholder').style.display='flex';this.remove()">`
+        : ''}
+      <div class="img-placeholder" style="${card.file ? 'display:none' : 'display:flex'}">
+        <span>🎨</span>
+        <small>Art coming soon</small>
+      </div>
+      <div class="grid-card-info">
+        <div class="gc-name">${card.name}</div>
+        <div class="gc-theme">${card.theme}</div>
+        <div class="gc-tags">
+          <span class="gc-tag ${classClass}">${card.classification}</span>
+          <span class="gc-tag ${elemClass}">${card.element}</span>
+          <span class="gc-tag ${posTagClass}">${card.positivity}</span>
+        </div>
+      </div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+// ── MODAL ────────────────────────────────────────────────────────────────────
+function openModal(card) {
+  const overlay = document.getElementById('modalOverlay');
+  const imgCol = document.getElementById('modalImgCol');
+  const elemClass = card.element.toLowerCase();
+  const classClass = card.classification.toLowerCase();
+  const posTagClass = card.positivity === 'Positive' ? 'pos' : card.positivity === 'Negative' ? 'neg' : 'neu';
+
+  imgCol.innerHTML = card.file
+    ? `<img src="${card.file}" alt="${card.name}" onerror="this.parentElement.innerHTML='<div class=modal-no-img><span>🎨</span><small style=font-family:var(--f-title);font-size:10px;color:rgba(42,184,184,0.5);letter-spacing:2px;text-transform:uppercase>Coming Soon</small></div>'">`
+    : `<div class="modal-no-img"><span>🎨</span><small style="font-family:var(--f-title);font-size:10px;color:rgba(42,184,184,0.5);letter-spacing:2px;text-transform:uppercase">Coming Soon</small></div>`;
+
+  document.getElementById('modalClassification').textContent = card.classification;
+  document.getElementById('modalName').textContent = card.name;
+  document.getElementById('modalTags').innerHTML = `
+    <span class="gc-tag ${classClass}" style="font-size:11px;padding:3px 10px">${card.classification}</span>
+    <span class="gc-tag ${elemClass}" style="font-size:11px;padding:3px 10px">${card.element}</span>
+    <span class="gc-tag ${posTagClass}" style="font-size:11px;padding:3px 10px">${card.theme} · ${card.positivity}</span>
+  `;
+  document.getElementById('modalAbout').textContent = card.about;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+window.onload = init;
+</script>
+</body>
+</html>
