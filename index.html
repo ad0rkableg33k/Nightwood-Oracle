@@ -25,6 +25,7 @@
   --rainbow-4:#00e676; --rainbow-5:#00cfff; --rainbow-6:#a259ff;
   --cc-pink:#ff2d8a; --cc-purple:#a259ff; --cc-teal:#00cfff;
   --ff-purple:#7c3aed; --ff-lavender:#c084fc; --ff-pink:#f472b6; --ff-dark:#0a0010;
+  --ab-pink:#c0426e; --ab-teal:#2ab8b8; --ab-glow:#3dd9d9; --ab-dark:#0a1a1f;
 }
 html { scroll-behavior:smooth; }
 body { background:var(--ink); color:var(--cream); font-family:var(--f-body);
@@ -65,6 +66,23 @@ body.fangfluff-mode .fangfluff-bg { opacity:1; }
 body.cc-mode .rainbow-sparks { opacity:1; }
 body.cc-mode .fireflies { opacity:0; }
 body.cc-mode .skulls    { opacity:0; }
+.adorabyssal-bg { position:fixed; inset:0; z-index:0; opacity:0; transition:opacity 0.8s;
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, #0a1f1f 0%, transparent 60%),
+    radial-gradient(ellipse 80% 40% at 20% 80%, #050d1a 0%, transparent 60%),
+    linear-gradient(180deg,#060a0a 0%,#080a0f 40%,#050508 100%); }
+body.adorabyssal-mode .forest-bg { opacity:0; }
+body.adorabyssal-mode .chaos-bg  { opacity:0; }
+body.adorabyssal-mode .cc-bg     { opacity:0; }
+body.adorabyssal-mode .fangfluff-bg { opacity:0; }
+body.adorabyssal-mode .adorabyssal-bg { opacity:1; }
+body.adorabyssal-mode .fireflies  { opacity:0; }
+body.adorabyssal-mode .skulls     { opacity:0; }
+body.adorabyssal-mode .rainbow-sparks { opacity:0; }
+body.adorabyssal-mode .bat-sparks { opacity:0; }
+.abyss-sparks { position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0; transition:opacity 0.8s; }
+body.adorabyssal-mode .abyss-sparks { opacity:1; }
+.abyss-p { position:absolute; font-size:var(--sz,14px); opacity:0;
+  animation:floatUp var(--dur,9s) ease-in infinite var(--delay,0s); }
 .bat-sparks { position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0; transition:opacity 0.8s; }
 body.fangfluff-mode .bat-sparks { opacity:1; }
 body.fangfluff-mode .fireflies  { opacity:0; }
@@ -386,6 +404,39 @@ body.fangfluff-mode .export-btn { border-color:rgba(192,132,252,0.3); color:var(
 body.fangfluff-mode .export-btn:hover { border-color:var(--ff-lavender); box-shadow:0 0 16px rgba(192,132,252,0.2); }
 .banner-fangfluff { background:rgba(124,58,237,0.1); color:var(--ff-lavender);
   font-family:'Creepster',cursive; font-size:20px; }
+.banner-adorabyssal { background:rgba(42,184,184,0.08); color:var(--ab-teal);
+  font-family:'Cinzel',serif; font-size:16px; }
+body.adorabyssal-mode header h1 {
+  font-family:'Cinzel Decorative',serif;
+  background: linear-gradient(90deg,var(--ab-teal),var(--ab-glow),var(--ab-pink),var(--ab-teal));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 0 20px rgba(42,184,184,0.5)); }
+body.adorabyssal-mode .header-rune { color:var(--ab-teal); font-family:'Cinzel',serif; }
+body.adorabyssal-mode .header-divider span { color:var(--ab-teal); }
+body.adorabyssal-mode .mode-tabs { border-color:rgba(42,184,184,0.25); }
+body.adorabyssal-mode .mode-tab.active { background:linear-gradient(135deg,var(--ab-dark),var(--ab-teal));
+  box-shadow:0 0 20px rgba(42,184,184,0.35); color:white; }
+body.adorabyssal-mode .spread-btn.active { border-color:var(--ab-teal); color:var(--ab-teal);
+  background:rgba(42,184,184,0.08); box-shadow:0 0 14px rgba(42,184,184,0.2); }
+body.adorabyssal-mode .draw-btn { border-color:var(--ab-teal); color:var(--ab-teal); font-family:'Cinzel Decorative',serif; font-size:13px; }
+body.adorabyssal-mode .draw-btn::before { background:linear-gradient(135deg,var(--ab-dark),var(--ab-teal)); }
+body.adorabyssal-mode .draw-btn:hover { color:white; box-shadow:0 0 30px rgba(42,184,184,0.5); }
+body.adorabyssal-mode .slot-label { color:var(--ab-teal); font-family:'Cinzel',serif; font-size:12px; }
+body.adorabyssal-mode .card-face { box-shadow:0 8px 32px rgba(0,0,0,0.7),0 0 0 1px rgba(42,184,184,0.25),
+  0 0 20px rgba(42,184,184,0.1); }
+body.adorabyssal-mode .deck-banner.active { border-color:var(--ab-teal);
+  box-shadow:0 0 30px rgba(42,184,184,0.4), 0 0 60px rgba(42,184,184,0.15); }
+body.adorabyssal-mode .deck-banner.active::after { color:var(--ab-teal); }
+body.adorabyssal-mode .meaning-card { border-color:rgba(42,184,184,0.2); }
+body.adorabyssal-mode .meaning-card::before { background:linear-gradient(90deg,transparent,var(--ab-teal),var(--ab-pink),transparent); }
+body.adorabyssal-mode .meaning-card-name {
+  font-family:'Cinzel Decorative',serif; font-size:24px;
+  background:linear-gradient(90deg,var(--ab-teal),var(--ab-glow));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+body.adorabyssal-mode .meaning-subtitle { color:var(--ab-teal); }
+body.adorabyssal-mode .keyword { border-color:rgba(42,184,184,0.3); color:var(--ab-teal); font-family:'Cinzel',serif; }
+body.adorabyssal-mode footer { border-top-color:rgba(42,184,184,0.12); }
+body.adorabyssal-mode footer span { color:var(--ab-teal); }
 @media(max-width:600px){
   :root{--card-w:150px;--card-h:262px;}
   .meaning-card{padding:24px 20px;}
@@ -694,7 +745,9 @@ nav.site-nav .nav-links a.active {
 <div class="fireflies" id="fireflies"></div>
 <div class="skulls" id="skulls"></div>
 <div class="rainbow-sparks" id="rainbowSparks"></div>
+<div class="adorabyssal-bg"></div>
 <div class="bat-sparks" id="batSparks"></div>
+<div class="abyss-sparks" id="abyssSparks"></div>
 
 <div class="app">
   <header>
@@ -722,6 +775,10 @@ nav.site-nav .nav-links a.active {
     <div class="deck-banner" id="bannerFangfluff" onclick="setDeck('fangfluff')">
       <img src="battarot_banner.png" onload="this.classList.add('loaded')" onerror="this.style.display='none'" alt="FangFluff Tarot">
       <div class="banner-fallback banner-fangfluff">🦇 &nbsp; FANGFLUFF TAROT &nbsp; 💜</div>
+    </div>
+    <div class="deck-banner" id="bannerAdorabyssal" onclick="setDeck('adorabyssal')">
+      <img src="adorabyssal_banner.png" onload="this.classList.add('loaded')" onerror="this.style.display='none'" alt="Adorabyssal Oracle">
+      <div class="banner-fallback banner-adorabyssal">🦑 &nbsp; ADORABYSSAL ORACLE &nbsp; 🐙</div>
     </div>
     <div class="deck-banner feature-banner" id="bannerHoroscope" onclick="scrollToHoroscope()">
       <img src="horoscope_banner.png" onload="this.classList.add('loaded')" onerror="this.style.display='none'" alt="Daily Horoscope">
@@ -1611,6 +1668,54 @@ const FANGFLUFF_SPREADS = [
    pools:[{src:'fangfluff',count:1},{src:'cutesy',count:1},{src:'cc',count:1},{src:'oracle',count:1}]},
 ];
 
+// ── ADORABYSSAL ORACLE ────────────────────────────────────────────────────
+const ADORABYSSAL_CARDS = [
+  {id:"ab_alkonost",name:"Alkonost",file:"adorabyssal/alkonost.png",type:"adorabyssal",subtitle:"🐦 Distraction · Air · Neutral",keywords:["distraction","enchantment","forgetting","storms","spellbinding"],meaning:"The Alkonost is a Slavic half-bird, half-woman with a voice so spellbinding that those who hear it forget everything else and abandon what they were doing. She rolls her eggs into the ocean where they hatch after seven days, causing thunderstorms. When Alkonost appears, something is pulling your focus away from what matters — beautiful, compelling, and potentially costly. Are you the one distracted, or the one doing the distracting?"},
+  {id:"ab_anansi",name:"Anansi",file:"adorabyssal/anansi.png",type:"adorabyssal",subtitle:"🕷️ Story · Earth · Positive",keywords:["story","knowledge","trickster","speech","survival"],meaning:"Anansi is a trickster spider god from Akan folktales, considered the spirit of all stories and knowledge. Associated with skill at speechcraft and seen as a symbol of resistance and survival. When Anansi appears, the power is in the telling — how you frame your story shapes reality. What narrative are you holding? Whose stories are you carrying? The right words at the right moment can change everything."},
+  {id:"ab_baekhest",name:"Bækhest",file:"adorabyssal/baekhest.png",type:"adorabyssal",subtitle:"🐴 Glamour · Water · Positive",keywords:["glamour","illusion","beauty","danger","fog"],meaning:"The Bækhest or brook horse is a Scandinavian creature — an unnaturally glamorous white horse appearing near rivers in foggy weather. Anyone who climbs on finds themselves stuck as it leaps back into the river. When Bækhest appears, something beautiful is also potentially dangerous. The glamour is real, but so is the current underneath. Look before you mount."},
+  {id:"ab_bake_kujira",name:"Bake-Kujira",file:"adorabyssal/bake_kujira.png",type:"adorabyssal",subtitle:"🐋 Misfortune · Water · Negative",keywords:["misfortune","curse","omen","the uncatchable","dread"],meaning:"Bake-Kujira is a floating Japanese ghost whale that cannot be caught and brings curse and misfortune wherever it goes. It appears as the skeleton of a great baleen whale, accompanied by strange birds and unknown fish. When Bake-Kujira surfaces, something that cannot be stopped is passing through. Don't try to catch it — let it pass. The misfortune isn't yours to fix."},
+  {id:"ab_bigfoot",name:"Bigfoot",file:"adorabyssal/bigfoot.png",type:"adorabyssal",subtitle:"🦶 Solitude · Earth · Neutral",keywords:["solitude","the unseen","solitude","wildness","leaving traces"],meaning:"Bigfoot wanders the forests of the Pacific Northwest, witnessed but never caught, leaving massive footprints as the only proof of passage. When Bigfoot appears, you may be craving the deep solitude of the wild — or you're leaving traces of yourself everywhere without being fully seen. What evidence of your existence are you leaving behind?"},
+  {id:"ab_black_shuck",name:"Black Shuck",file:"adorabyssal/black_shuck.png",type:"adorabyssal",subtitle:"🐕 Omen · Fire · Neutral",keywords:["omen","warning","presence","the uncanny","heed the sign"],meaning:"Black Shuck is a ghostly black dog from East Anglia whose most notorious appearance brought thunder, scorch marks, and a collapsed steeple. Its presence is considered an omen. When Black Shuck appears, pay attention to what's being signaled. The warning is real even if the form is strange. Don't dismiss the uncanny thing that keeps showing up."},
+  {id:"ab_cadejo",name:"Cadejo",file:"adorabyssal/cadejo.png",type:"adorabyssal",subtitle:"🐺 Duality · Earth · Neutral",keywords:["duality","good and evil","choice","travellers","the shadow self"],meaning:"The Cadejo are a pair of spirits — one protective, one malevolent — that appear at night to travellers. Together they represent duality; which dog is which swaps depending on the source. When Cadejo appears, you are navigating forces that seem opposite but are intertwined. The guide and the threat may look identical. Trust your gut about which is which."},
+  {id:"ab_cait_sidhe",name:"Cait Sidhe",file:"adorabyssal/cait_sidhe.png",type:"adorabyssal",subtitle:"🐱 Theft · Air · Negative",keywords:["theft","soul","boundaries","the highlands","shapeshifting"],meaning:"Cait Sidhe is a spectral Celtic fairy cat that haunts the Scottish highlands and was rumored to steal souls by crossing over a corpse before burial. Some say it is a witch in disguise. When Cait Sidhe appears, something is being taken — energy, credit, peace of mind, or something more intangible. What is crossing over what belongs to you?"},
+  {id:"ab_cerberus",name:"Cerberus",file:"adorabyssal/cerberus.png",type:"adorabyssal",subtitle:"🐶 Duty · Fire · Neutral",keywords:["duty","guardianship","thresholds","the underworld","loyalty"],meaning:"Cerberus guards the gates of the underworld to prevent the dead from leaving — not as punishment but as sacred duty. When Cerberus appears, you are being called to hold a boundary or guard a threshold. What are you responsible for keeping in — or keeping out? Duty isn't glamorous, but it matters enormously."},
+  {id:"ab_chupacabra",name:"Chupacabra",file:"adorabyssal/chupacabra.png",type:"adorabyssal",subtitle:"🦎 Consume · Fire · Negative",keywords:["drain","consumption","depletion","the hidden predator","three wounds"],meaning:"The Chupacabra drains livestock of blood and organs, leaving behind three puncture wounds. When Chupacabra appears, something is draining you — a relationship, a habit, a commitment — and leaving visible marks. Find the source of the depletion. Three puncture wounds are hard to miss once you know what to look for."},
+  {id:"ab_demon",name:"Demon",file:"adorabyssal/demon.png",type:"adorabyssal",subtitle:"😈 Chaos · Fire · Neutral",keywords:["chaos","temptation","shadow","corruption","the goat-man"],meaning:"Demon has evolved from a divine Greek being to a symbol of human shadow and corruption, associated with leading souls astray. When Demon appears, something chaotic is active — inside you or around you. Not all chaos is evil, but this one has intention. What is being led astray, and by what?"},
+  {id:"ab_dullahan",name:"Dullahan",file:"adorabyssal/dullahan.png",type:"adorabyssal",subtitle:"🗣️ Inevitability · Air · Neutral",keywords:["death","inevitability","the name called","endings","no escape"],meaning:"The Dullahan rides with its head under its arm, and when it stops, someone dies. It speaks once per journey — to call the name of the person whose death is coming. All gates open before it. When Dullahan appears, something inevitable is approaching. It isn't a threat — it is simply what comes next. You know the name being called."},
+  {id:"ab_fairie",name:"Fairie",file:"adorabyssal/fairie.png",type:"adorabyssal",subtitle:"🧚 Trickery · Air · Negative",keywords:["trickery","mischief","glamour","wards","the old bargain"],meaning:"Pre-Victorian fairies were not sweet — they were diminutive, tricky creatures associated with glamour, mischief, and the need to be warded off. When Fairie appears, not everything is as charming as it appears. Someone or something is using enchantment to distract you. Look for the fine print in any bargain on offer."},
+  {id:"ab_fuath",name:"Fuath",file:"adorabyssal/fuath.png",type:"adorabyssal",subtitle:"💧 Malice · Water · Negative",keywords:["malice","sabotage","drowning","the night tide","deliberate harm"],meaning:"Fuath is a malevolent Gaelic water spirit that delights in drowning people by sabotaging boats and ships. It comes only at night, vulnerable to steel and sunlight. When Fuath appears, something malicious is actively working against you — not random misfortune but deliberate sabotage. What is being undermined? Bring steel and light to the situation."},
+  {id:"ab_ghost",name:"Ghost",file:"adorabyssal/ghost.png",type:"adorabyssal",subtitle:"👻 Endure · Air · Positive",keywords:["endurance","the past","presence","unfinished business","persistence"],meaning:"A ghost is a soul that persists beyond its expected moment — present, restless, still here. When Ghost appears, something is enduring that was expected to be gone. This could be grief, a memory, an old love, or your own resilience surprising you. The question is whether this persistence is unfinished business to resolve — or proof that some things simply don't leave."},
+  {id:"ab_grootslang",name:"Grootslang",file:"adorabyssal/grootslang.png",type:"adorabyssal",subtitle:"🐘 Cruelty · Earth · Negative",keywords:["cruelty","greed","ancient cunning","diamonds","the original mistake"],meaning:"The Grootslang is as old as the world itself — a mistake the gods made before they knew what they were doing. Impossibly strong, smart, and cruel, it can only be overcome by appealing to its greed. When Grootslang appears, you're dealing with something ancient and cunning that has no interest in fairness. Don't fight it directly. Find its greed and use it."},
+  {id:"ab_huginn_muninn",name:"Huginn & Muninn",file:"adorabyssal/huginn_muninn.png",type:"adorabyssal",subtitle:"🐦 Knowledge · Air · Positive",keywords:["thought","memory","wisdom","information","the daily report"],meaning:"Huginn and Muninn — Thought and Memory — fly across the world daily and report back to Odin. Through them, he maintains his wisdom. When Huginn & Muninn appear, you are being invited to gather information before deciding. What do thought and memory each tell you about this situation? And which one are you neglecting?"},
+  {id:"ab_hydra",name:"Hydra",file:"adorabyssal/hydra.png",type:"adorabyssal",subtitle:"🐍 Struggle · Water · Negative",keywords:["struggle","regeneration","poison","the underworld entrance","multiply"],meaning:"The Hydra grows two heads for every one cut off, and its blood is lethal poison. Its lair is a lake said to be an entrance to the underworld. When Hydra appears, the direct approach is making things worse. Every time you cut at this problem, it multiplies. Change your strategy — the head-cutting method isn't working."},
+  {id:"ab_ifrit",name:"Ifrit",file:"adorabyssal/ifrit.png",type:"adorabyssal",subtitle:"🔥 Power · Fire · Neutral",keywords:["power","the underworld","ruthlessness","djinn","fire"],meaning:"The Ifrit is considered the most powerful of the Jinn — wicked, ruthless, dwelling in the underworld with flames leaping from its mouth. When Ifrit appears, enormous power is in play — raw, barely contained, and not particularly interested in being kind about it. This is not gentle energy. Use it with full awareness of what it costs."},
+  {id:"ab_jersey_devil",name:"Jersey Devil",file:"adorabyssal/jersey_devil.png",type:"adorabyssal",subtitle:"🦇 Invulnerability · Air · Positive",keywords:["invulnerability","the impossible child","impossible to kill","the pine barrens","screaming"],meaning:"The Jersey Devil was the thirteenth child of Jane Leeds, transformed at birth and said to be impossible to kill. It emits an unearthly shriek. When Jersey Devil appears, you are more resilient than anyone expected — including you. Something that should have stopped you didn't. That's not luck. That's invulnerability earned through surviving being the unwanted, the unexpected, the thirteenth."},
+  {id:"ab_kitsune",name:"Kitsune",file:"adorabyssal/kitsune.png",type:"adorabyssal",subtitle:"🦊 Wisdom · Earth · Positive",keywords:["wisdom","shapeshifting","trickster","nine tails","the long game"],meaning:"Kitsune are Japanese foxes who can shapeshift into human form — tricksters, guardians, friends, and lovers. The more tails they have (up to nine), the older and wiser they are. When Kitsune appears, wisdom and cunning are your allies. Play the long game. The most powerful version of you has nine tails and centuries of experience — act from that place."},
+  {id:"ab_kraken",name:"Kraken",file:"adorabyssal/kraken.png",type:"adorabyssal",subtitle:"🐙 Mystery · Water · Neutral",keywords:["mystery","the deep unknown","mistaken for solid ground","whirlpools","scale"],meaning:"The Kraken is so massive it has been mistaken for an island. It creates whirlpools when it submerges. When Kraken appears, something is far larger than it first appeared — a problem, an opportunity, a feeling. You may have been standing on something you thought was solid ground. The depth of this situation is only beginning to reveal itself."},
+  {id:"ab_lampad",name:"Lampad",file:"adorabyssal/lampad.png",type:"adorabyssal",subtitle:"🔦 Companionship · Fire · Positive",keywords:["companionship","madness","the underworld","torchlight","accompaniment"],meaning:"The Lampad are nymphs of the underworld who accompany Hecate and light her way with torches that can drive mortals to madness. When Lampad appears, you are not navigating the dark alone — you have company through it. The companions you travel with in dark times shape whether you emerge sane or unraveled. Choose your torchbearers carefully."},
+  {id:"ab_leviathan",name:"Leviathan",file:"adorabyssal/leviathan.png",type:"adorabyssal",subtitle:"🐉 Envy · Water · Negative",keywords:["envy","the deadly sin","the sea monster","end times","the serpent"],meaning:"Leviathan is a monstrous sea serpent from Jewish belief, named the demon of Envy by St. Thomas Aquinas. It will be killed at the end of time. When Leviathan appears, envy is in the water — yours or someone else's. The size of what you're wanting what isn't yours is monstrous. Name it honestly. Envy this big has its own kind of power if you can transmute it."},
+  {id:"ab_mermaid",name:"Mermaid",file:"adorabyssal/mermaid.png",type:"adorabyssal",subtitle:"🧜 Commitment · Water · Positive",keywords:["commitment","love","consequence","sea foam","the binding vow"],meaning:"In many folktales, mermaids marry humans and the bond is absolute — her unfaithfulness turns her to sea foam; his unfaithfulness costs him his life. When Mermaid appears, commitment is the theme. What have you pledged, silently or aloud? The consequences of your promises are real, even the ones you made without words."},
+  {id:"ab_mothman",name:"Mothman",file:"adorabyssal/mothman.png",type:"adorabyssal",subtitle:"🦋 Ruin · Air · Negative",keywords:["disaster","the bridge","red eyes","warning","catastrophe"],meaning:"The Mothman was sighted in West Virginia in the mid-sixties, ending with the collapse of the Silver Bridge. Dark, winged, with glowing red eyes — associated with the end of something. When Mothman appears, pay attention to structural weaknesses in what you're trusting to hold. The warning comes before the collapse. The bridge you're crossing — is it sound?"},
+  {id:"ab_namazu",name:"Namazu",file:"adorabyssal/namazu.png",type:"adorabyssal",subtitle:"🐟 Control · Earth · Neutral",keywords:["control","earthquakes","the restrained force","Kashima","what happens when the guard slips"],meaning:"Namazu is a giant catfish living in the mud under Japan, restrained by the god Kashima with a stone. When Kashima is distracted, Namazu thrashes and causes earthquakes. When Namazu appears, a powerful force is being held in check — and the question is whether the restraint will hold. What are you keeping contained? What happens when the stone slips?"},
+  {id:"ab_nessie",name:"Nessie",file:"adorabyssal/nessie.png",type:"adorabyssal",subtitle:"🦕 Longevity · Water · Positive",keywords:["longevity","persistence","the long survivor","Loch Ness","ancient"],meaning:"Nessie has been sighted since the sixth century — making her extraordinarily long-lived. She endures in a Scottish loch, surfacing just enough to be known but never caught. When Nessie appears, longevity is the gift. Something ancient and persistent is with you. You've been surviving longer than people realize. That endurance is its own form of power."},
+  {id:"ab_olgoi_khorkhoi",name:"Olgoi-Khorkhoi",file:"adorabyssal/olgoi_khorkhoi.png",type:"adorabyssal",subtitle:"🪱 Virulence · Fire · Negative",keywords:["toxicity","virulence","untouchable","electricity","the Gobi"],meaning:"The Mongolian Death Worm lives in the desolate Gobi Desert — you cannot touch any part of it without dying. It sprays venom and electricity. When Olgoi-Khorkhoi appears, something in your life is genuinely toxic — not just unpleasant, but dangerous to engage with directly. You cannot handle this with bare hands. Protective distance is wisdom, not cowardice."},
+  {id:"ab_olitiau",name:"Olitiau",file:"adorabyssal/olitiau.png",type:"adorabyssal",subtitle:"🦇 Expanse · Air · Neutral",keywords:["expanse","the vast unknown","cave depths","wingspan","the unexplored"],meaning:"Olitiau are enormous bats from Central Africa lurking in caverns — one explorer called a sighting 'the granddaddy of all bats.' When Olitiau appears, something vast is lurking in the dark — not necessarily threatening, just enormous and largely unexplored. The cave system you're avoiding contains something worth finding. Bring a light."},
+  {id:"ab_phoenix",name:"Phoenix",file:"adorabyssal/phoenix.png",type:"adorabyssal",subtitle:"🔥 Rebirth · Fire · Positive",keywords:["rebirth","fire","ash","resurrection","the cycle"],meaning:"The Phoenix combusts in flame and is reborn from its own ash — not as a copy of what it was, but new. When Phoenix appears, you are in the ash phase or the rising phase of a transformation. What burned was meant to burn. What rises from this is not a restoration but a genuinely new creation. The fire wasn't the end. It was the beginning."},
+  {id:"ab_rusalka",name:"Rusalka",file:"adorabyssal/rusalka.png",type:"adorabyssal",subtitle:"💧 Constrained · Water · Negative",keywords:["constraint","vengeance","the restless dead","rivers","red hair"],meaning:"The Rusalka evolved from a spirit of moisture and growth into a vengeful undead being who entangles and drowns young men with her long red hair. When Rusalka appears, something that was once nurturing has curdled into something constrained and dangerous. An old wound has become a trap. For you or for someone you know — the grief that became rage that became the thing that drowns people."},
+  {id:"ab_sleipnir",name:"Sleipnir",file:"adorabyssal/sleipnir.png",type:"adorabyssal",subtitle:"🐴 Swiftness · Earth · Neutral",keywords:["swiftness","Odin's mount","eight legs","the underworld connection","best of all horses"],meaning:"Sleipnir is Odin's eight-legged horse — offspring of Loki, the best horse among gods and men, with a connection to the underworld. When Sleipnir appears, you have access to extraordinary speed and the ability to move between worlds. What do you need to cross quickly? The mount is ready. Don't second-guess the ride."},
+  {id:"ab_tsuchinoko",name:"Tsuchinoko",file:"adorabyssal/tsuchinoko.png",type:"adorabyssal",subtitle:"🐍 Lies · Earth · Negative",keywords:["lies","alcohol","double jump","hoop snake","deception"],meaning:"The Tsuchinoko is a hoop snake from western Japan that can double jump, loves alcohol, and has an affinity for lying. When Tsuchinoko appears, something in your situation isn't being told straight. The source might be someone else — or you might be the one with the affinity for a comforting fiction. What truth is being rolled past you?"},
+  {id:"ab_will_o_wisp",name:"Will-O'-the-Wisp",file:"adorabyssal/will_o_wisp.png",type:"adorabyssal",subtitle:"🔮 Guidance · Fire · Positive",keywords:["guidance","the flickering light","fairy light","led astray or led home","the swamp"],meaning:"Will-O'-the-Wisp is a flickering orb said to be a spirit guiding travellers — sometimes to ill fate, sometimes to good, depending on the folklore. Associated with fairies, goblins, and hauntings. When Will-O'-the-Wisp appears, you are following something uncertain. The light ahead may or may not be trustworthy. But following it is still better than standing still in the dark."},
+  {id:"ab_wolpertinger",name:"Wolpertinger",file:"adorabyssal/wolpertinger.png",type:"adorabyssal",subtitle:"🦌 Diversity · Earth · Positive",keywords:["diversity","composite","the Bavarian forests","many parts one creature","belonging"],meaning:"The Wolpertinger has the body of a squirrel, wings of a pheasant, head of a rabbit, and antlers of a deer — a composite creature from Bavarian folklore. When Wolpertinger appears, you are more than one thing, and that's exactly right. The parts of you that seem contradictory are all genuinely you. The composite is the creature. All of it belongs."},
+];
+
+const ADORABYSSAL_SPREADS = [
+  {id:"single",name:"Single Pull",desc:"One creature, one message from the abyss. 🦑",positions:["The Creature"],count:1},
+  {id:"three",name:"Three Card",desc:"Past · Present · What Stirs Ahead — through the depths. 🐙",positions:["The Past","The Present","What Stirs Ahead"],count:3},
+  {id:"shadow",name:"Shadow & Light",desc:"Your gift · Your shadow · The bridge between. 🔮",positions:["Your Light","Your Shadow","The Bridge"],count:3},
+  {id:"five",name:"Full Abyss Spread",desc:"Foundation · Challenge · Gift · Shadow · Way Forward. 💀",positions:["The Foundation","The Challenge","The Gift","The Shadow","The Way Forward"],count:5},
+  {id:"combo",name:"Abyss + Oracle",desc:"One Adorabyssal creature sets the energy — one Nightwood Oracle card brings the forest wisdom. 🦑🌲",positions:["Adorabyssal: The Creature","Nightwood Oracle: The Wisdom"],combo:true,pools:[{src:'adorabyssal',count:1},{src:'oracle',count:1}]},
+];
+
 const CC_SPREADS = [
   {id:"single",name:"One Creature",desc:"One animal, one message. What spirit is with you today? 🦊",positions:["Your Creature"],count:1},
   {id:"three",name:"Past · Present · Path",desc:"Three creatures illuminate your journey. 🌈",positions:["Where You've Been","Where You Are","Where You're Going"],count:3},
@@ -1858,6 +1963,7 @@ function setDeck(deck) {
   document.getElementById('bannerCutesy').classList.toggle('active', deck==='cutesy');
   document.getElementById('bannerCC').classList.toggle('active', deck==='cc');
   document.getElementById('bannerFangfluff').classList.toggle('active', deck==='fangfluff');
+  document.getElementById('bannerAdorabyssal').classList.toggle('active', deck==='adorabyssal');
 
   if(deck==='cutesy') {
     document.body.classList.add('chaos-mode');
@@ -1900,10 +2006,24 @@ function setDeck(deck) {
     document.querySelector('.skulls').style.opacity='';
     document.querySelector('.fireflies').style.opacity='';
     spawnBatSparks();
+  } else if(deck==='adorabyssal') {
+    document.body.classList.add('adorabyssal-mode');
+    document.body.classList.remove('chaos-mode');
+    document.body.classList.remove('cc-mode');
+    document.body.classList.remove('fangfluff-mode');
+    document.getElementById('headerRune').textContent='✦  36 Creatures from the Depths  ✦';
+    document.getElementById('headerTitle').childNodes[0].textContent='Adorabyssal Oracle';
+    document.getElementById('headerSub').textContent='Art by PixelOccult 🦑';
+    document.getElementById('headerIcon').textContent='🦑';
+    document.getElementById('drawBtnText').textContent='🦑  Pull from the Abyss  🦑';
+    document.getElementById('footerDeck').textContent='Adorabyssal Oracle';
+    document.getElementById('footerTag').textContent='Art by PixelOccult · pixeloccult.com 🐙';
+    spawnAbyssSparks();
   } else {
     document.body.classList.remove('chaos-mode');
     document.body.classList.remove('cc-mode');
     document.body.classList.remove('fangfluff-mode');
+    document.body.classList.remove('adorabyssal-mode');
     document.getElementById('headerRune').textContent='✦   The Cards Know   ✦';
     document.getElementById('headerTitle').childNodes[0].textContent='Nightwood Oracle';
     document.getElementById('headerSub').textContent='A Forest Divination Deck';
@@ -1911,6 +2031,7 @@ function setDeck(deck) {
     document.getElementById('drawBtnText').textContent='✦  Draw the Cards  ✦';
     document.getElementById('footerDeck').textContent='Nightwood Oracle';
     document.getElementById('footerTag').textContent='The forest speaks to those who listen';
+    document.body.classList.remove('adorabyssal-mode');
     document.querySelector('.skulls').style.opacity='';
     document.querySelector('.fireflies').style.opacity='';
   }
@@ -1919,7 +2040,7 @@ function setDeck(deck) {
 }
 
 function renderSpreads() {
-  const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : currentDeck==='cc' ? CC_SPREADS : currentDeck==='fangfluff' ? FANGFLUFF_SPREADS : [...ORACLE_SPREADS, ...ORACLE_SPREADS_EXTRA];
+  const spreads = currentDeck==='cutesy' ? CUTESY_SPREADS : currentDeck==='cc' ? CC_SPREADS : currentDeck==='fangfluff' ? FANGFLUFF_SPREADS : currentDeck==='adorabyssal' ? ADORABYSSAL_SPREADS : [...ORACLE_SPREADS, ...ORACLE_SPREADS_EXTRA];
   const container = document.getElementById('spreadOptions');
   container.innerHTML='';
   spreads.forEach((s,i)=>{
@@ -1969,6 +2090,19 @@ function spawnBatSparks() {
   }
 }
 
+function spawnAbyssSparks() {
+  const as = document.getElementById('abyssSparks');
+  if(as.children.length > 0) return;
+  const emojis=['🦑','🐙','🦇','💀','🔮','🌊','🐟','💫','🧿','👁️','🦈','⭐'];
+  for(let i=0;i<22;i++){
+    const f=document.createElement('div'); f.className='abyss-p';
+    f.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    f.style.cssText=`left:${Math.random()*100}%;--sz:${10+Math.random()*16}px;
+      --dur:${8+Math.random()*10}s;--delay:${-Math.random()*14}s;opacity:0;`;
+    as.appendChild(f);
+  }
+}
+
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function doReading() {
@@ -1990,7 +2124,7 @@ function doReading() {
       let src = pool.src;
       // oracle_random: randomly pick nightwood or cc
       if(src==='oracle_random') src = Math.random()<0.5 ? 'oracle' : 'cc';
-      const poolCards = src==='cutesy' ? CUTESY_CARDS : src==='cc' ? CC_CARDS : src==='fangfluff' ? FANGFLUFF_CARDS : ORACLE_CARDS;
+      const poolCards = src==='cutesy' ? CUTESY_CARDS : src==='cc' ? CC_CARDS : src==='fangfluff' ? FANGFLUFF_CARDS : src==='adorabyssal' ? ADORABYSSAL_CARDS : ORACLE_CARDS;
       const reversedChance = src==='cutesy' ? 0.25 : 0.18;
       const drawn = shuffle(poolCards).slice(0, pool.count).map((c,i)=>({
         ...c,
@@ -2001,7 +2135,7 @@ function doReading() {
       posIndex+=pool.count;
     });
   } else {
-    const pool=currentDeck==='cutesy'?CUTESY_CARDS:currentDeck==='cc'?CC_CARDS:currentDeck==='fangfluff'?FANGFLUFF_CARDS:ORACLE_CARDS;
+    const pool=currentDeck==='cutesy'?CUTESY_CARDS:currentDeck==='cc'?CC_CARDS:currentDeck==='fangfluff'?FANGFLUFF_CARDS:currentDeck==='adorabyssal'?ADORABYSSAL_CARDS:ORACLE_CARDS;
     const shuffled=shuffle(pool);
     cards=shuffled.slice(0,currentSpread.count).map((c,i)=>({
       ...c, position:currentSpread.positions[i], reversed:Math.random()<0.22
@@ -2011,8 +2145,9 @@ function doReading() {
 
   const backFile = (card) => {
     if(card.type==='oracle') return card.reversed?'card 21 back of card reversed.png':'card 21 back of card.png';
-    if(card.type==='cc') return card.reversed?'CC_Back.png':'CC_Back.png';
+    if(card.type==='cc') return 'CC_Back.png';
     if(card.type==='fangfluff') return 'battarot_back.png';
+    if(card.type==='adorabyssal') return 'adorabyssal/wolpertinger.png'; // use a card as back fallback
     return 'tarot_cutesy_chaos_back.png';
   };
 
@@ -2030,7 +2165,7 @@ function doReading() {
           <div class="card-face card-front-face${card.reversed?' card-reversed':''}">
             <img src="${card.file}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="${card.name}">
             <div class="placeholder-front" style="display:none">
-              <div style="font-size:48px;margin-bottom:12px">${card.type==='oracle'?'🌲':card.type==='fangfluff'?'🦇':'🐙'}</div>
+              <div style="font-size:48px;margin-bottom:12px">${card.type==='oracle'?'🌲':card.type==='fangfluff'?'🦇':card.type==='adorabyssal'?'🦑':'🐙'}</div>
               <div style="font-family:var(--f-title);font-size:14px;letter-spacing:2px;color:var(--gold);text-transform:uppercase">${card.name}</div>
             </div>
           </div>
@@ -2065,7 +2200,10 @@ function showMeaning(index){
   const isChaos=card.type==='cutesy';
   const isCC=card.type==='cc';
   const isFF=card.type==='fangfluff';
-  const typeTag=isChaos
+  const isAB=card.type==='adorabyssal';
+  const typeTag=isAB
+    ?`<span style="background:rgba(42,184,184,0.1);border:1px solid var(--ab-teal);color:var(--ab-teal);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--f-title);letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🦑 Adorabyssal</span>`
+    :isChaos
     ?`<span style="background:rgba(255,45,138,0.15);border:1px solid var(--hot-pink);color:var(--hot-pink);padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--f-chaos-sub);letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🐙 Cutesy Chaos</span>`
     :isCC
     ?`<span style="background:rgba(0,207,255,0.1);border:1px solid var(--cc-teal);color:var(--cc-teal);padding:3px 10px;border-radius:20px;font-size:10px;font-family:'Fredoka One',cursive;letter-spacing:2px;text-transform:uppercase;margin-right:10px;">🦊 Colorful Creatures</span>`
